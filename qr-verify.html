@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .info-row {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .name{
+            color: Black;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .info-label {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .logo {
+      width:auto; height:54px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .first-head{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 15px;
+        
+        
+    }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <div class="container">
+        <div class="first-head">
+             <img class="logo" src="img/remove-bg.png">
+             <div>
+                 <h1 style="margin: auto;"> Valid Entry Pass</h1>
+             </div>
+        </div>
+        
+        <div class="info-row">
+            <div class="info-label name">Name</div>
+            <div class="name" id="userName">John Doe</div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-row">
+                <div class="info-label">Phone Number</div>
+                <div class="info-value" id="userNumber">+91 98765 43210</div>
+            </div>
+            <div class="info-row">
+                    <div class="info-label">Number of People</div>
+                    <div class="info-value" id="howManyPeople">2</div>
+            </div>
+
+        </div>
+
+
+        <div class="info-row">
+            <div class="info-label">Email</div>
+            <div class="info-value" id="userEmail">john.doe@example.com</div>
+        </div>
+
+
+        <div class="info-row">
+            <div class="info-label">Address</div>
+            <div class="info-value" id="address">123 Main Street, Apartment 4B, Near Central Park</div>
+        </div>
+
+
+
+        <div class="info-grid">
+            <div class="info-row">
+                <div class="info-label">City</div>
+                <div class="info-value" id="city">Mumbai</div>
+            </div>
+            
+        </div>
+
+        <div class="info-grid">
+            <!-- <div class="info-row">
+                <div class="info-label">Attending with Someone?</div>
+                <div class="info-value" id="attendSomeone">Yes - Jane Doe</div>
+            </div> -->
+            <!-- <div class="info-row">
+                <div class="info-label">Aadhaar Number</div>
+                <div class="info-value" id="adhaar">1234 5678 9012</div>
+            </div> -->
+
+            
+        </div>
+    </div>
+
+    <script>
+        
+        const params = new URLSearchParams(window.location.search);
+
+        // Populate the data
+        document.getElementById('userName').textContent = params.get('name');
+        document.getElementById('userNumber').textContent = params.get('number')
+        document.getElementById('userEmail').textContent = params.get('email');
+        document.getElementById('address').textContent = params.get('address')
+        document.getElementById('city').textContent = params.get('city')
+        
+        document.getElementById('howManyPeople').textContent = params.get('no-people')
+    </script>
+</body>
+</html>

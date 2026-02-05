@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Jaipurian Re-union Pass</title>
+
+    <style>
+      :root {
+        --bg: #071022;
+        --accent-cyan: #00f3ff;
+        --accent-blue: #3b82f6;
+        --card: #0f1724;
+        --accent1: #00d4ff; /* cyan */
+        --accent2: #ff4db8; /* pink */
+        --muted: rgba(255, 255, 255, 0.12);
+        --glass: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.01)
+        );
+      }
+
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        font-family:
+          Inter,
+          Poppins,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto;
+        background:
+          radial-gradient(
+            600px 300px at 10% 20%,
+            rgba(0, 212, 255, 0.06),
+            transparent
+          ),
+          radial-gradient(
+            600px 300px at 90% 80%,
+            rgba(255, 77, 184, 0.04),
+            transparent
+          ),
+          var(--bg);
+        color: #e6eef8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .page-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+      }
+
+      .pay-success {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px 0;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 980px;
+        background-color: #ff4db8;
+        display: flex;
+        gap: 24px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .header {
+        text-align: center;
+        margin: 20px;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+      }
+
+      .header p {
+        margin: 6px 0 0;
+        color: rgba(230, 238, 248, 0.75);
+        font-size: 0.92rem;
+      }
+
+      .ticket-wrap {
+        width: 100%;
+        height: 80%;
+        margin: auto;
+        gap: 20px;
+      }
+
+      .ticket {
+        background-color: yellow;
+        background: var(--glass);
+        border-radius: 18px;
+        padding: 22px;
+        border: 1px solid var(--muted);
+        box-shadow: 0 20px 40px rgba(3, 8, 18, 0.6);
+        position: relative;
+        overflow: hidden;
+      }
+      .ticket::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(
+          90deg,
+          rgba(0, 212, 255, 0.06) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba(255, 77, 184, 0.04) 100%
+        );
+      }
+      .ticket-main {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        position: relative;
+      }
+      .title-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .event-badge {
+        min-width: 78px;
+        height: 78px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent1), var(--accent2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        color: #051426;
+        font-size: 0.85rem;
+      }
+      .event-info {
+        flex: 1;
+      }
+      .event-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin: 0;
+        text-transform: uppercase;
+        line-height: 1;
+      }
+      .tagline {
+        margin-top: 10px;
+        color: rgba(230, 238, 248, 0.8);
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 6px;
+      }
+
+      .detail {
+        background: rgba(255, 255, 255, 0.02);
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .label {
+        font-size: 0.7rem;
+        color: rgba(230, 238, 248, 0.6);
+      }
+
+      .detail {
+        font-size: 0.9rem;
+        color: white;
+      }
+      .detail .value {
+        margin-top: 2px;
+        font-weight: 500;
+        font-size: 0.7rem;
+      }
+      .footer-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 8px;
+      }
+      .count-pill {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        font-weight: 700;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+      }
+      .btn {
+        background: linear-gradient(90deg, var(--accent1), var(--accent2));
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        color: #051426;
+      }
+      .btn:hover {
+        transform: scale(1.05);
+        transition: ease-in-out;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: rgba(230, 238, 248, 0.9);
+      }
+
+      .details-grid h1 {
+        text-align: end;
+      }
+
+      .back-btn {
+        background: linear-gradient(
+          90deg,
+          var(--accent-cyan),
+          var(--accent-blue)
+        );
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        color: #051426;
+      }
+
+      .back-btn:hover {
+        transform: scale(1.05);
+        transition: ease-in-out;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn:active {
+        transform: scale(0.97);
+      }
+
+      .stub {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border-radius: 14px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--muted);
+      }
+      .stub .qr {
+        width: 140px;
+        height: 140px;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      /* simple css QR placeholder */
+      .qr::before {
+        content: "";
+        width: 90px;
+        height: 90px;
+        background-image:
+          linear-gradient(
+            45deg,
+            #000 25%,
+            transparent 25%,
+            transparent 75%,
+            #000 75%,
+            #000
+          ),
+          linear-gradient(
+            45deg,
+            #000 25%,
+            transparent 25%,
+            transparent 75%,
+            #000 75%,
+            #000
+          );
+        background-size: 10px 10px;
+        background-position:
+          0 0,
+          5px 5px;
+      }
+      .stub .ticket-no {
+        margin-top: 14px;
+        font-family: Orbitron, monospace;
+        color: var(--accent2);
+        font-weight: 800;
+      }
+
+      /* Notch effect */
+      .notch {
+        position: absolute;
+        right: 320px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 24px;
+        height: 48px;
+        background: transparent;
+        border-radius: 999px;
+        box-shadow: inset 8px 0 0 var(--bg);
+      }
+
+      /* Responsive */
+      @media (max-width: 880px) {
+        .ticket-wrap {
+          grid-template-columns: 1fr 260px;
+        }
+        .notch {
+          right: 260px;
+        }
+      }
+      @media (max-width: 720px) {
+        .page-container {
+          padding: 20px;
+          gap: 30px;
+        }
+
+        .ticket-wrap {
+          grid-template-columns: 1fr;
+          padding: 0 0px;
+        }
+        .notch {
+          display: none;
+        }
+        .ticket {
+          padding: 18px;
+        }
+        .title-row {
+          flex-direction: row;
+          gap: 12px;
+        }
+        .event-badge {
+          width: 64px;
+          height: 64px;
+        }
+        .details-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .stub {
+          order: 2;
+          width: 100%;
+        }
+      }
+      @media (max-width: 420px) {
+        .header h1 {
+          font-size: 0.98rem;
+        }
+        .event-title {
+          font-size: 0.7rem;
+        }
+        .tagline {
+          font-size: 0.4rem;
+        }
+        .value {
+          font-size: 0.2rem;
+        }
+        .label {
+          font-size: 0.5rem;
+        }
+        #name-local {
+          font-size: 0.7rem;
+        }
+        /* .details-grid {
+          grid-template-columns: 2fr;
+        } */
+        .event-badge {
+          width: 56px;
+          height: 56px;
+        }
+      }
+
+      /* Print */
+      @media print {
+        body {
+          background: white;
+          color: black;
+        }
+        .btn {
+          display: none;
+        }
+        .stub .qr {
+          background: #eee;
+        }
+      }
+
+      .loader {
+        width: 18px;
+        height: 18px;
+        border: 3px solid #fff;
+        border-top-color: transparent;
+        border-radius: 50%;
+        display: none;
+        animation: spin 0.7s linear infinite;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="ticket-wrap">
+        <div class="ticket" role="article">
+          <div class="ticket-main">
+            <div class="title-row">
+              <div
+                style="
+                  display: flex;
+                  align-items: start;
+                  justify-content: start;
+                  gap: 50px;
+                "
+              >
+                <div class="event-info" style="padding-top: 10px">
+                  <div class="event-title">
+                    Ultimate Jaipurian
+                    <br />
+                    <div style="padding-top: 10px">Reunion Pass</div>
+                  </div>
+                  <div class="tagline">
+                    Official Batch 2001 · March 28, 2026
+                  </div>
+                </div>
+                <div style="height: 90px; width: 90px">
+                  <img
+                    src="img/bg-logo.png"
+                    alt="No Img"
+                    style="height: 100%; width: 100%"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              Serial No.
+              <span
+                id="serial-no"
+                style="color: rgb(180, 178, 178); font-size: 12px"
+              ></span>
+            </div>
+
+            <div class="detail">
+              <div class="label">DATE</div>
+              <div id="pass-name" class="value">March 28, 2026</div>
+            </div>
+
+            <div class="details-grid">
+              <div class="detail">
+                <div class="label">LUNCH TIME</div>
+                <div class="value">12:00 to 3:00 PM</div>
+              </div>
+              <div class="detail">
+                <div class="label">DINNER TIME</div>
+                <div class="value">8:00 PM Onwards</div>
+              </div>
+            </div>
+
+            <div class="detail">
+              <div class="label">VENUE</div>
+              <div class="value">
+                Cranberry Lawn, <br />
+                <p style="padding: 6px 0">Mainawati Marg, Kanpur, U.P 208017</p>
+                <!-- <br>Uttar Pradesh 208017 -->
+              </div>
+            </div>
+
+            <div style="margin: auto">
+              <h1 id="name-local">XXXXX XXXXX</h1>
+            </div>
+
+            <div
+              class="qr-box"
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <canvas id="partyQR" style="text-align: center"></canvas>
+              <!-- <h4 id="qr-text-show"></h4> -->
+            </div>
+
+            <div class="details-grid">
+              <div class="detail">
+                <div class="label">No. Of People</div>
+                <div id="noPeople-local" class="value">X</div>
+              </div>
+              <div class="detail">
+                <div class="label">City</div>
+                <div id="city-local" class="value">XXXXX</div>
+              </div>
+              <div class="detail">
+                <div class="label">Phone Number</div>
+                <div id="phone-local" class="value">XXXXXXXXXX</div>
+              </div>
+              <div class="detail">
+                <div class="label">Email</div>
+                <div id="email-local" class="value"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-row">
+        <!-- <div class="count-pill">Admit: 1 Person</div> -->
+        <div class="actions">
+          <a href="index.html"
+            ><button class="back-btn">Back To Home</button></a
+          >
+        </div>
+        <div class="actions">
+          <button
+            type="button"
+            class="btn"
+            id="downloadBtn"
+            onclick="downloadTicketClicked()"
+          >
+            Download PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+    <script>
+      const BACKEND_URL_OF_SUCCESS = "https://api.ultimatejaipurians.in";
+      //const BACKEND_URL_OF_SUCCESS = "http://localhost:8000";
+
+      //--------------------------------------
+      //        Manipulate pass value
+      //--------------------------------------
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+
+        const userData = {
+          user_name: params.get("user_name"),
+          user_number: params.get("user_number"),
+          city: params.get("city"),
+          serialNo: params.get("serialNo"),
+          how_many_people: params.get("how_many_people"),
+          user_email: params.get("user_email"),
+          qr_code: params.get("qr_code"),
+          bookId: params.get("bookId"),
+        };
+
+        localStorage.setItem("no-people", userData.how_many_people);
+        localStorage.setItem("city", userData.city);
+        localStorage.setItem("phone", userData.user_number);
+        localStorage.setItem("email", userData.user_email);
+        localStorage.setItem("name", userData.user_name);
+        localStorage.setItem("serialNo", userData.serialNo);
+        localStorage.setItem("qr-code", userData.qr_code);
+        localStorage.setItem("userSerial", userData.bookId);
+
+        document.getElementById("phone-local").textContent =
+          localStorage.getItem("phone");
+        document.getElementById("noPeople-local").textContent =
+          localStorage.getItem("no-people");
+        document.getElementById("city-local").textContent =
+          localStorage.getItem("city");
+        document.getElementById("email-local").textContent =
+          localStorage.getItem("email");
+        document.getElementById("name-local").textContent =
+          localStorage.getItem("name");
+
+        //-----------------pass serial no. manipulation-------------
+        const paySerial = localStorage.getItem("serialNo");
+        const userSerial = localStorage.getItem("userSerial");
+
+        const index = 8;
+        const result =
+          paySerial.slice(0, index + 1) +
+          `S` +
+          userSerial +
+          `N` +
+          paySerial.slice(index + 1);
+        console.log(result);
+
+        document.getElementById("serial-no").textContent = result;
+      });
+
+      //---------------------------------------------------
+      //             QR Generator
+      //---------------------------------------------------
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        const qrCode = localStorage.getItem("qr-code");
+
+        QRCode.toCanvas(document.getElementById("partyQR"), qrCode, {
+          width: 100,
+        });
+      });
+
+      //-------------------------------------------------------------
+      //             Download PDF
+      //-------------------------------------------------------------
+
+      const downloadBtn = document.getElementById("downloadBtn");
+
+      async function generatePdfBlobFromNode() {
+        console.log("Function Button Clicked....");
+        const node = document.querySelector(".ticket-wrap");
+        if (!node) throw new Error("Ticket element not found");
+        // temporarily remove transition if any
+        const prevTransition = node.style.transition;
+        node.style.transition = "none";
+
+        const canvas = await html2canvas(node, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: "#14192D",
+          scrollY: -window.scrollY,
+        });
+
+        node.style.transition = prevTransition;
+
+        const imgData = canvas.toDataURL("image/png");
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+          orientation: "portrait",
+          unit: "pt",
+          format: "a4",
+        });
+
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+
+        // center and size (adjust as needed)
+        const passWidth = 350;
+        const passHeight = 700;
+        const x = (pageWidth - passWidth) / 2;
+        const y = (pageHeight - passHeight) / 2;
+
+        pdf.addImage(imgData, "PNG", x, y, passWidth, passHeight);
+
+        const blob = pdf.output("blob");
+        return blob;
+      }
+
+      async function downloadTicketClicked() {
+        console.log("download function reached out...");
+
+        try {
+          downloadBtn.classList.add("loading");
+          const pdfBlob = await generatePdfBlobFromNode();
+
+          const filename = `ticket-${new Date()
+            .toISOString()
+            .slice(0, 10)}.pdf`;
+          const url = URL.createObjectURL(pdfBlob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = filename;
+          document.body.appendChild(link);
+
+          // trigger download
+          link.click();
+
+          // cleanup after small delay so browser had time to start download
+          setTimeout(() => {
+            link.remove();
+            URL.revokeObjectURL(url);
+          }, 500);
+        } catch (err) {
+          console.error("Download error:", err);
+          alert("Could not create/download ticket: " + (err.message || err));
+        } finally {
+          downloadBtn.classList.remove("loading");
+        }
+      }
+
+      // Auto-send on page load (upload only, no download)
+
+      if (!localStorage.getItem("fromLogin")) {
+        window.addEventListener("load", () => {
+          setTimeout(sendEmailPDF, 200);
+        });
+      }
+
+      async function sendEmailPDF() {
+        const emailReceiver = localStorage.getItem("email");
+
+        try {
+          const pdfBlob = await generatePdfBlobFromNode();
+          const file = new File(
+            [pdfBlob],
+            `ticket-${new Date().toISOString().slice(0, 10)}.pdf`,
+            { type: "application/pdf" },
+          );
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("to", emailReceiver);
+          formData.append("subject", "Your Event Ticket");
+          formData.append("text", "Please find your ticket attached.");
+
+          const resp = await fetch(`${BACKEND_URL_OF_SUCCESS}/api/upload-pdf`, {
+            method: "POST",
+            body: formData,
+          });
+
+          if (!resp.ok) {
+            const json = await resp.json().catch(() => ({}));
+            console.error("Upload failed", json);
+          } else {
+            console.log("Uploaded & emailed successfully");
+          }
+        } catch (err) {
+          console.error("sendEmailPDF error:", err);
+        }
+      }
+    </script>
+  </body>
+</html>

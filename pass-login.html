@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login — Example</title>
+
+    <style>
+      :root {
+        --bg1: #0f172a;
+        --bg2: #0b1221;
+        --card: #0f172a;
+        --accent: #7c5cff;
+        --muted: #94a3b8;
+        --glass: rgba(255, 255, 255, 0.04);
+        --radius: 14px;
+        --max-width: 420px;
+        --gap: 14px;
+      }
+
+      html {
+        background:
+          radial-gradient(
+            1000px 400px at 10% 10%,
+            rgba(124, 92, 255, 0.12),
+            transparent 60%
+          ),
+          linear-gradient(180deg, #0f172a, #0b1221);
+      }
+
+      body {
+        background: transparent !important;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+        background: #0f172a;
+      }
+
+      .page {
+        min-height: 100%;
+      }
+
+      .card {
+        background: rgba(15, 23, 42, 0.96);
+      }
+
+      /* Page layout */
+
+      .brand {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+
+      .logo {
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--accent), #35c5ff);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        color: white;
+        box-shadow: 0 6px 18px rgba(124, 92, 255, 0.18);
+        flex-shrink: 0;
+      }
+
+      h1 {
+        font-size: 18px;
+        margin: 0;
+        line-height: 1;
+      }
+
+      p.lead {
+        margin: 6px 0 18px 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      form {
+        display: grid;
+        gap: var(--gap);
+      }
+
+      label {
+        display: block;
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .field {
+        display: flex;
+        position: relative;
+        align-items: center;
+      }
+
+      input[type="email"],
+      input[type="tel"] {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        background: var(--glass);
+        color: inherit;
+        outline: none;
+        font-size: 15px;
+        transition:
+          box-shadow 0.15s,
+          transform 0.08s;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset;
+      }
+
+      input:focus {
+        box-shadow: 0 6px 30px rgba(124, 92, 255, 0.12);
+        border-color: rgba(124, 92, 255, 0.9);
+        transform: translateY(-1px);
+      }
+
+      .show-pass {
+        position: absolute;
+        right: 10px;
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        font-size: 13px;
+        cursor: pointer;
+        padding: 6px;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .remember {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .btn {
+        display: inline-block;
+        width: 100%;
+        padding: 12px 14px;
+        text-align: center;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(90deg, var(--accent), #35c5ff);
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+        box-shadow: 0 8px 22px rgba(124, 92, 255, 0.18);
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .alt {
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 8px;
+      }
+
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      /* error message */
+      .error {
+        color: #ffb4b4;
+        font-size: 13px;
+        background: rgba(255, 180, 180, 0.03);
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 180, 180, 0.06);
+      }
+
+      /* responsive small screens */
+      @media (max-width: 420px) {
+        .card {
+          padding: 20px;
+          border-radius: 12px;
+        }
+        .logo {
+          width: 42px;
+          height: 42px;
+        }
+      }
+
+      .btn {
+        position: relative;
+        padding: 12px 22px;
+        border: none;
+        background: #4a6cf7;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .loader {
+        width: 18px;
+        height: 18px;
+        border: 3px solid #fff;
+        border-top-color: transparent;
+        border-radius: 50%;
+        display: none;
+        animation: spin 0.7s linear infinite;
+      }
+
+      .btn.loading .btn-text {
+        opacity: 0.5;
+      }
+
+      .btn.loading .loader {
+        display: inline-block;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <main class="card" aria-labelledby="loginTitle">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">PP</div>
+          <div>
+            <h1 id="loginTitle">PartyPass — Sign in</h1>
+          </div>
+        </div>
+        <div id="error" class="error" role="alert" style="display: none"></div>
+
+        <form id="loginForm" novalidate>
+          <div style="padding-top: 10px">
+            <label for="email">Email</label>
+            <div class="field">
+              <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="Phone Number">Phone Number</label>
+            <div class="field">
+              <input
+                id="phone"
+                type="tel"
+                placeholder="Enter your phone number"
+                autocomplete="current-password"
+                required
+                minlength="6"
+              />
+            </div>
+          </div>
+
+          <div style="padding: 20px 0">
+            <button id="login" class="btn pay-button">
+              <span class="btn-text">Login</span>
+              <span class="loader"></span>
+            </button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script>
+      //const BACKEND_URL_OF_PASS_LOGIN = "https://api.ultimatejaipurians.in";
+      const BACKEND_URL_OF_PASS_LOGIN = "http://localhost:8000";
+
+      const button = document.getElementById("login");
+
+      document.getElementById("login").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        button.classList.add("loading");
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+
+        const response = await fetch(`${BACKEND_URL_OF_PASS_LOGIN}/user/pass`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            phone,
+          }),
+        });
+
+        const result = await response.json();
+        const { status, data } = result;
+        console.log(data);
+
+        if (status === true) {
+          const params = new URLSearchParams({
+            user_name: result.data.user_name,
+            user_number: result.data.user_number,
+            city: result.data.city,
+            serialNo: result.data.serialNo,
+            how_many_people: result.data.how_many_people,
+            user_email: result.data.user_email,
+            qr_code: result.data.qr_code,
+            bookId: result.data.bookId,
+          });
+
+          window.location.href = result.redirectUrl + "?" + params.toString();
+        } else {
+          console.log("Something Error.....");
+        }
+      });
+    </script>
+  </body>
+</html>

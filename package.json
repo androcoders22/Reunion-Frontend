@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "eslint": "^9.39.2"
+  },
+  "dependencies": {
+    "pdfkit": "^0.17.2",
+    "razorpay": "^2.9.6"
+  }
+}

@@ -1,0 +1,367 @@
+
+/* 
+        change this from make one card clear show in mobile version */
+
+    .production-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px 20px;
+    /* background: #000000; */
+    text-align: center;
+}
+
+.production-wrapper {
+    position: relative;
+    width: 90vw;
+    max-width: 1500px;
+    /* padding: 10px 80px; */
+     padding: 10px 80px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.production-container {
+    width: 90%;
+    overflow: hidden;
+    gap: 40px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.production-wrapper h1 {
+    margin-bottom: 3rem;
+    font-size: clamp(1rem, 3vw, 3.5rem);
+    color: white;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+@media(max-width: 786px){
+    .production-wrapper h1{
+        font-size: 3rem;
+    }
+}
+
+.production-track {
+    width: 100%;
+    display: flex;
+    padding: 0 ;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 30px;
+}
+
+.production-carousel-card {
+    flex: 0 0 auto;
+    height: 50vh;
+    width: 20vw;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 0, 0, 0.05));
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    border-radius: 18px;
+    overflow: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+
+.production-in-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.cross-icon{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.685);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 2px 7px;
+    z-index: 20;
+    right: 0%;
+    top: 0%;
+    display: none;
+}
+
+.production-in-card:hover .cross-icon{
+        display: flex;
+}
+
+.production-img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.production-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    pointer-events: none;
+}
+
+.production-in-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Navigation Buttons */
+.prev-btn,
+.next-btn {
+    position: absolute;
+    top: 60%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #f472b6, #fa2d97);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 1.8rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5),
+                0 0 0 4px rgba(255, 0, 0, 0.1);
+}
+
+
+
+.prev-btn:hover,
+.next-btn:hover {
+    background: linear-gradient(135deg, #fa2d97, #f30881);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 8px 30px #f472b6,
+                0 0 0 6px rgba(255, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.prev-btn:active,
+.next-btn:active {
+    transform: translateY(-50%) scale(1.05);
+}
+
+.prev-btn {
+    left: 100px;
+}
+
+.next-btn {
+    right: 100px;
+}
+
+
+
+@media (max-width: 768px) {
+  .production-wrapper {
+    padding: 10px 20px;
+  }
+
+
+  .production-carousel-card {
+    height: 30vh;
+    width: 17vw;
+  }
+
+
+  .prev-btn,
+  .next-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+    top: 60%;
+  }
+
+  .prev-btn {
+    left: 5px;
+  }
+
+  .next-btn {
+    right: 5px;
+  }
+}
+
+
+
+
+
+/* Tablet: 2 cards visible (521px - 900px) */
+@media (max-width: 900px) and (min-width: 521px) {
+    .production-carousel {
+        min-height: auto;
+        padding: 40px 20px;
+    }
+
+    .production-wrapper {
+        width: 95vw;
+        padding: 10px 60px;
+    }
+
+    .production-carousel-card {
+        height: 400px;
+        width: calc(50vw - 80px);
+        min-width: 280px;
+        max-width: 350px;
+    }
+
+    .prev-btn,
+    .next-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+}
+
+/* Mobile: 1 card visible (max 520px) */
+@media (max-width: 520px) {
+    .production-carousel {
+        min-height: auto;
+        padding: 40px 0;
+    }
+
+    .production-wrapper {
+        width: 100%;
+        padding: 10px 60px;
+        gap: 10px;
+    }
+
+    .production-container {
+        padding: 0 10px;
+    }
+
+    .production-carousel-card {
+        height: 420px;
+        width: calc(100vw - 100px);
+        min-width: 280px;
+        max-width: 320px;
+    }
+
+    .production-container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 4rem;
+    }
+
+    .prev-btn,
+    .next-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+    }
+
+    .prev-btn {
+        left: 85px;
+    }
+
+    .next-btn {
+        right: 85px;
+    }
+
+    
+}
+
+/* Very small mobile screens (390px and below) */
+@media (max-width: 400px) {
+    .production-wrapper {
+        padding: 10px 45px;
+    }
+
+    .production-carousel-card {
+        height: 400px;
+        width: calc(100vw - 100px);
+        min-width: 260px;
+        max-width: 300px;
+    }
+
+    .production-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 3.5rem;
+    }
+
+    .prev-btn,
+    .next-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
+    }
+
+    .production-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .production-content p {
+        font-size: 0.9rem;
+        padding: 0 8px;
+    }
+}
+
+/* Extra small screens (360px and below) */
+@media (max-width: 360px) {
+    .production-wrapper {
+        padding: 10px 40px;
+    }
+
+    .production-carousel-card {
+        height: 380px;
+        width: calc(100vw - 100px);
+        min-width: 240px;
+        max-width: 280px;
+    }
+
+    .production-container h1 {
+        font-size: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .prev-btn,
+    .next-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+
+    .prev-btn {
+        left: 3px;
+    }
+
+    .next-btn {
+        right: 3px;
+    }
+}
