@@ -1629,6 +1629,53 @@ nav.site-nav { z-index: 100;}
           
           </div>
 
+          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+
+
+          <div style="padding-top: 8px;">
+            <label class="field-label">We are handing out jackets as souvenirs, please tell us your preferred size.</label>
+          
+            <div class="mobile-size">
+              <div>
+               <ul class="checkbox-list spouse">
+
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <li class="checkbox-row">
+                <label class="round-check">
+                  <input type="checkbox" value="M" class="size-check">
+                  <span class="circle">M</span>
+                </label>
+              </li>
+
+              <li class="checkbox-row">
+                <label class="round-check">
+                  <input type="checkbox" value="L" class="size-check">
+                  <span class="circle">L</span>
+                </label>
+              </li>
+
+              <li class="checkbox-row">
+                <label class="round-check">
+                  <input type="checkbox" value="XL" class="size-check">
+                  <span class="circle">XL</span>
+                </label>
+              </li>
+
+              <li class="checkbox-row">
+                <label class="round-check">
+                  <input type="checkbox" value="XXL" class="size-check">
+                  <span class="circle">XXL</span>
+                </label>
+              </li>
+              </div>
+
+               </ul>
+
+              </div>
+            </div>
+          
+          </div>
+
 
           <!-- donation part here -->
 
@@ -2029,6 +2076,8 @@ openPop.addEventListener("click", function (e) {
   const support = document.querySelector(".support-check:checked")?.value || "";
   const donationCheckboxes = document.querySelectorAll(".donation-check");
 
+  const size = document.querySelector(".size-check:checked")?.value || "";
+
   if (
     !name ||
     !phone ||
@@ -2037,7 +2086,8 @@ openPop.addEventListener("click", function (e) {
     !city ||
     !adhaar ||
     !someone ||
-    !support
+    !support ||
+    !size
   ) {
     alert("Please fill the form");
     e.preventDefault();

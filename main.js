@@ -271,6 +271,7 @@ async function paymentRazorpay() {
 
   const someone = document.querySelector(".someone-check:checked")?.value || "";
   const support = document.querySelector(".support-check:checked")?.value || "";
+  const size = document.querySelector(".size-check:checked")?.value || "";
 
   const donateAmt = getDonationTotal();
   function getDonationTotal() {
@@ -310,11 +311,14 @@ async function paymentRazorpay() {
     donateAmt,
     someone,
     support,
+    size,
     passValue,
     totalPayPrice,
   };
 
   // console.log(formData);
+  // we are handing out jackets as souvenirs, please tell us your preferred size. 
+  // M, L, XL, XXL. 
   // console.log(totalPayPrice);
 
   async function initiatePayment() {
@@ -496,6 +500,7 @@ function allowOnlyOne(className) {
 
 // allowOnlyOne("someone-check");
 allowOnlyOne("support-check");
+allowOnlyOne("size-check");
 
 // Mobile Menu controls
 document.addEventListener("DOMContentLoaded", () => {

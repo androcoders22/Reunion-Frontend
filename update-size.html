@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Jacket Size</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --text: #ffffff;
+            --panel-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-cyan: #00f3ff;
+            --accent-blue: #3b82f6;
+            --card-radius: 20px;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--card-radius);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: var(--accent-cyan);
+        }
+
+        .user-info {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .info-label {
+            color: #9ca3af;
+        }
+
+        .info-value {
+            font-weight: 600;
+        }
+
+        .size-selection {
+            margin-bottom: 30px;
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #9ca3af;
+            text-align: center;
+        }
+
+        .size-pills {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .size-pill {
+            position: relative;
+        }
+
+        .size-pill input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .size-pill span {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .size-pill input:checked + span {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            color: #000;
+            border-color: transparent;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+        }
+
+        .update-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .update-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .update-btn:active {
+            transform: scale(0.98);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--accent-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <div id="loading" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+        <h1>Update Your Jacket Size</h1>
+
+        <div id="userInfo" class="user-info" style="display: none;">
+            <div class="info-item">
+                <span class="info-label">Name</span>
+                <span id="name" class="info-value"></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Phone</span>
+                <span id="phone" class="info-value"></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email</span>
+                <span id="email" class="info-value"></span>
+            </div>
+        </div>
+
+        <div class="size-selection">
+            <span class="label">Choose your preferred souvenir size:</span>
+            <div class="size-pills">
+                <label class="size-pill">
+                    <input type="radio" name="size" value="M">
+                    <span>M</span>
+                </label>
+                <label class="size-pill">
+                    <input type="radio" name="size" value="L">
+                    <span>L</span>
+                </label>
+                <label class="size-pill">
+                    <input type="radio" name="size" value="XL">
+                    <span>XL</span>
+                </label>
+                <label class="size-pill">
+                    <input type="radio" name="size" value="XXL">
+                    <span>XXL</span>
+                </label>
+            </div>
+        </div>
+
+        <button id="updateBtn" class="update-btn">Update Size</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const BACKEND_URL = "https://api.ultimatejaipurians.in";
+        const loading = document.getElementById('loading');
+        const updateBtn = document.getElementById('updateBtn');
+        const message = document.getElementById('message');
+        
+        // Extract ID from URL
+        function getUserId() {
+            const params = new URLSearchParams(window.location.search);
+            const idParam = params.get('id');
+            if (idParam) return idParam;
+
+            const pathSegments = window.location.pathname.split('/');
+            const lastSegment = pathSegments.pop() || pathSegments.pop(); // handle trailing slash
+            if (lastSegment && !lastSegment.includes('.html')) return lastSegment;
+            
+            return null;
+        }
+
+        const userId = getUserId();
+
+        async function fetchUserDetails() {
+            if (!userId) {
+                showError("Invalid user ID in URL");
+                loading.style.display = 'none';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/user/${userId}`);
+                if (!response.ok) throw new Error("User not found or ID invalid");
+                
+                const user = await response.json();
+                
+                // Handle different possible field names from backend
+                document.getElementById('name').textContent = user.name || user.user_name || "N/A";
+                document.getElementById('phone').textContent = user.phone || user.user_number || user.number || "N/A";
+                document.getElementById('email').textContent = user.email || user.user_email || "N/A";
+                
+                const currentSize = user.size || "";
+                if (currentSize) {
+                    const radio = document.querySelector(`input[name="size"][value="${user.size}"]`);
+                    if (radio) radio.checked = true;
+                }
+                
+                document.getElementById('userInfo').style.display = 'block';
+            } catch (err) {
+                showError(err.message);
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        async function updateSize() {
+            const selectedSize = document.querySelector('input[name="size"]:checked')?.value;
+            
+            if (!selectedSize) {
+                showError("Please select a size first");
+                return;
+            }
+
+            updateBtn.disabled = true;
+            updateBtn.textContent = "Updating...";
+            message.className = '';
+            message.textContent = '';
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/user/size/${userId}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ size: selectedSize })
+                });
+
+                if (!response.ok) throw new Error("Failed to update size");
+
+                message.className = 'success';
+                message.textContent = "Size updated successfully!";
+                
+                // Optional: redirect back to home after 2 seconds
+                // setTimeout(() => window.location.href = 'index.html', 2000);
+            } catch (err) {
+                showError(err.message);
+            } finally {
+                updateBtn.disabled = false;
+                updateBtn.textContent = "Update Size";
+            }
+        }
+
+        function showError(msg) {
+            message.className = 'error';
+            message.textContent = msg;
+        }
+
+        updateBtn.addEventListener('click', updateSize);
+        window.addEventListener('load', fetchUserDetails);
+    </script>
+</body>
+</html>
