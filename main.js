@@ -318,7 +318,7 @@ async function paymentRazorpay() {
 
   // console.log(formData);
   // we are handing out jackets as souvenirs, please tell us your preferred size. 
-  // M, L, XL, XXL. 
+  // S, M, L, XL, XXL. 
   // console.log(totalPayPrice);
 
   async function initiatePayment() {
