@@ -16,6 +16,10 @@
             --card-radius: 20px;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg);
@@ -90,32 +94,44 @@
 
         .size-pill {
             position: relative;
+            background-color: #000;
+            border-radius: 999px;
         }
 
         .size-pill input {
             position: absolute;
-            opacity: 0;
-            cursor: pointer;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
         }
 
         .size-pill span {
-            display: inline-block;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--glass-border);
             border-radius: 999px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 60px;
-            text-align: center;
+            user-select: none;
         }
 
         .size-pill input:checked + span {
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            background-image: linear-gradient(to right, var(--accent-cyan), var(--accent-blue));
+            background-origin: border-box;
+            background-clip: border-box;
             color: #000;
-            border-color: transparent;
+            border: 2px solid transparent;
             font-weight: 700;
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
         .update-btn {
@@ -254,16 +270,19 @@
                 const response = await fetch(`${BACKEND_URL}/user/${userId}`);
                 if (!response.ok) throw new Error("User not found or ID invalid");
                 
-                const user = await response.json();
+                const result = await response.json();
+                const user = result.data; // Access the nested data object
+
+                if (!user) throw new Error("User data not found");
                 
                 // Handle different possible field names from backend
-                document.getElementById('name').textContent = user.name || user.user_name || "N/A";
-                document.getElementById('phone').textContent = user.phone || user.user_number || user.number || "N/A";
-                document.getElementById('email').textContent = user.email || user.user_email || "N/A";
+                document.getElementById('name').textContent = user.user_name || user.name || "N/A";
+                document.getElementById('phone').textContent = user.user_number || user.phone || user.number || "N/A";
+                document.getElementById('email').textContent = user.user_email || user.email || "N/A";
                 
                 const currentSize = user.size || "";
                 if (currentSize) {
-                    const radio = document.querySelector(`input[name="size"][value="${user.size}"]`);
+                    const radio = document.querySelector(`input[name="size"][value="${currentSize}"]`);
                     if (radio) radio.checked = true;
                 }
                 
@@ -289,7 +308,7 @@
             message.textContent = '';
 
             try {
-                const response = await fetch(`${BACKEND_URL}/user/size/${userId}`, {
+                const response = await fetch(`${BACKEND_URL}/user/${userId}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ size: selectedSize })
