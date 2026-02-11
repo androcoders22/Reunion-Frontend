@@ -398,7 +398,7 @@ async function paymentRazorpay() {
     onScriptLoad();
   }
 
-  // initiatePayment();
+  initiatePayment();
 }
 
 //======================================================================
