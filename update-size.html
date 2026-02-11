@@ -71,6 +71,9 @@
 
         .info-value {
             font-weight: 600;
+            text-align: right;
+            word-break: break-all;
+            margin-left: 10px;
         }
 
         .size-selection {
@@ -187,6 +190,50 @@
 
         .success { color: #10b981; }
         .error { color: #ef4444; }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 16px;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .user-info {
+                padding: 15px;
+                margin-bottom: 25px;
+            }
+
+            .info-item {
+                font-size: 14px;
+            }
+
+            .size-selection {
+                margin-bottom: 25px;
+            }
+
+            .label {
+                font-size: 14px;
+            }
+
+            .size-pills {
+                gap: 10px;
+            }
+
+            .size-pill span {
+                width: 50px;
+                height: 36px;
+                font-size: 14px;
+            }
+
+            .update-btn {
+                padding: 12px;
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -213,7 +260,7 @@
         </div>
 
         <div class="size-selection">
-            <span class="label">Choose your preferred souvenir size:</span>
+            <span class="label">Choose your preferred souvenir size: <span style="color: red;">*</span></span>
             <div class="size-pills">
                 <label class="size-pill">
                     <input type="radio" name="size" value="S">
@@ -238,7 +285,43 @@
             </div>
         </div>
 
-        <button id="updateBtn" class="update-btn">Update Size</button>
+        <div class="size-selection">
+            <span class="label">Select your 10th standard section <span style="color: red;">*</span></span>
+            <div class="size-pills">
+                <label class="size-pill">
+                    <input type="radio" name="section10" value="A">
+                    <span>A</span>
+                </label>
+                <label class="size-pill">
+                    <input type="radio" name="section10" value="B">
+                    <span>B</span>
+                </label>
+                <label class="size-pill">
+                    <input type="radio" name="section10" value="C">
+                    <span>C</span>
+                </label>
+                <label class="size-pill">
+                    <input type="radio" name="section10" value="D">
+                    <span>D</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="size-selection">
+            <span class="label">Select your 12th standard section (if you passed from Jaipuriya)</span>
+            <div class="size-pills">
+                <label class="size-pill">
+                    <input type="radio" name="section12" value="A">
+                    <span>A</span>
+                </label>
+                <label class="size-pill">
+                    <input type="radio" name="section12" value="B">
+                    <span>B</span>
+                </label>
+            </div>
+        </div>
+
+        <button id="updateBtn" class="update-btn">Update Details</button>
         <div id="message"></div>
     </div>
 
@@ -289,6 +372,18 @@
                     const radio = document.querySelector(`input[name="size"][value="${currentSize}"]`);
                     if (radio) radio.checked = true;
                 }
+
+                const currentSection10 = user.section10 || "";
+                if (currentSection10) {
+                    const radio = document.querySelector(`input[name="section10"][value="${currentSection10}"]`);
+                    if (radio) radio.checked = true;
+                }
+
+                const currentSection12 = user.section12 || "";
+                if (currentSection12) {
+                    const radio = document.querySelector(`input[name="section12"][value="${currentSection12}"]`);
+                    if (radio) radio.checked = true;
+                }
                 
                 document.getElementById('userInfo').style.display = 'block';
             } catch (err) {
@@ -300,9 +395,16 @@
 
         async function updateSize() {
             const selectedSize = document.querySelector('input[name="size"]:checked')?.value;
+            const selectedSection10 = document.querySelector('input[name="section10"]:checked')?.value;
+            const selectedSection12 = document.querySelector('input[name="section12"]:checked')?.value;
             
             if (!selectedSize) {
                 showError("Please select a size first");
+                return;
+            }
+
+            if (!selectedSection10) {
+                showError("Please select your 10th standard section");
                 return;
             }
 
@@ -315,13 +417,17 @@
                 const response = await fetch(`${BACKEND_URL}/user/${userId}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ size: selectedSize })
+                    body: JSON.stringify({ 
+                        size: selectedSize,
+                        section10: selectedSection10,
+                        section12: selectedSection12
+                    })
                 });
 
-                if (!response.ok) throw new Error("Failed to update size");
+                if (!response.ok) throw new Error("Failed to update details");
 
                 message.className = 'success';
-                message.textContent = "Size updated successfully!";
+                message.textContent = "Details updated successfully!";
                 
                 // Optional: redirect back to home after 2 seconds
                 // setTimeout(() => window.location.href = 'index.html', 2000);
@@ -329,7 +435,7 @@
                 showError(err.message);
             } finally {
                 updateBtn.disabled = false;
-                updateBtn.textContent = "Update Size";
+                updateBtn.textContent = "Update Details";
             }
         }
 
