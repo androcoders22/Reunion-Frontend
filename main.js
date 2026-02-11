@@ -272,6 +272,10 @@ async function paymentRazorpay() {
   const someone = document.querySelector(".someone-check:checked")?.value || "";
   const support = document.querySelector(".support-check:checked")?.value || "";
   const size = document.querySelector(".size-check:checked")?.value || "";
+  const section10 =
+    document.querySelector(".section-10-check:checked")?.value || "";
+  const section12 =
+    document.querySelector(".section-12-check:checked")?.value || "";
 
   const donateAmt = getDonationTotal();
   function getDonationTotal() {
@@ -312,11 +316,13 @@ async function paymentRazorpay() {
     someone,
     support,
     size,
+    section10,
+    section12,
     passValue,
     totalPayPrice,
   };
 
-  // console.log(formData);
+  console.log(formData);
   // we are handing out jackets as souvenirs, please tell us your preferred size. 
   // S, M, L, XL, XXL. 
   // console.log(totalPayPrice);
@@ -370,7 +376,7 @@ async function paymentRazorpay() {
     onScriptLoad();
   }
 
-  initiatePayment();
+  // initiatePayment();
 }
 
 //======================================================================
@@ -389,6 +395,11 @@ async function paymentRazorpay() {
 
 //   const someone = document.querySelector(".someone-check:checked")?.value || "";
 //   const support = document.querySelector(".support-check:checked")?.value || "";
+//   const size = document.querySelector(".size-check:checked")?.value || "";
+//   const section10 =
+//     document.querySelector(".section-10-check:checked")?.value || "";
+//   const section12 =
+//     document.querySelector(".section-12-check:checked")?.value || "";
 
 //   const donateAmt = getDonationTotal();
 //   function getDonationTotal() {
@@ -428,6 +439,9 @@ async function paymentRazorpay() {
 //     donateAmt,
 //     someone,
 //     support,
+//     size,
+//     section10,
+//     section12,
 //     passValue,
 //     totalPayPrice,
 //   };
@@ -501,6 +515,8 @@ function allowOnlyOne(className) {
 // allowOnlyOne("someone-check");
 allowOnlyOne("support-check");
 allowOnlyOne("size-check");
+allowOnlyOne("section-10-check");
+allowOnlyOne("section-12-check");
 
 // Mobile Menu controls
 document.addEventListener("DOMContentLoaded", () => {

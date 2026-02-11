@@ -1684,6 +1684,67 @@ nav.site-nav { z-index: 100;}
           </div>
 
 
+          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+
+          <div style="padding-top: 8px;">
+            <label class="field-label">Select your 10th standard section</label>
+            <div style="padding-top: 8px;">
+              <ul class="checkbox-list spouse">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                  <li class="checkbox-row">
+                    <label class="round-check">
+                      <input type="checkbox" value="A" class="section-10-check">
+                      <span class="circle">A</span>
+                    </label>
+                  </li>
+                  <li class="checkbox-row">
+                    <label class="round-check">
+                      <input type="checkbox" value="B" class="section-10-check">
+                      <span class="circle">B</span>
+                    </label>
+                  </li>
+                  <li class="checkbox-row">
+                    <label class="round-check">
+                      <input type="checkbox" value="C" class="section-10-check">
+                      <span class="circle">C</span>
+                    </label>
+                  </li>
+                  <li class="checkbox-row">
+                    <label class="round-check">
+                      <input type="checkbox" value="D" class="section-10-check">
+                      <span class="circle">D</span>
+                    </label>
+                  </li>
+                </div>
+              </ul>
+            </div>
+          </div>
+
+          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+
+          <div style="padding-top: 8px;">
+            <label class="field-label">Select your 12th standard section (if you passed from Jaipuriya)</label>
+            <div style="padding-top: 8px;">
+              <ul class="checkbox-list spouse">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                  <li class="checkbox-row">
+                    <label class="round-check">
+                      <input type="checkbox" value="A" class="section-12-check">
+                      <span class="circle">A</span>
+                    </label>
+                  </li>
+                  <li class="checkbox-row">
+                    <label class="round-check">
+                      <input type="checkbox" value="B" class="section-12-check">
+                      <span class="circle">B</span>
+                    </label>
+                  </li>
+                </div>
+              </ul>
+            </div>
+          </div>
+
+
           <!-- donation part here -->
 
           <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
@@ -2084,6 +2145,8 @@ openPop.addEventListener("click", function (e) {
   const donationCheckboxes = document.querySelectorAll(".donation-check");
 
   const size = document.querySelector(".size-check:checked")?.value || "";
+  const section10 =
+    document.querySelector(".section-10-check:checked")?.value || "";
 
   if (
     !name ||
@@ -2094,7 +2157,8 @@ openPop.addEventListener("click", function (e) {
     !adhaar ||
     !someone ||
     !support ||
-    !size
+    !size || 
+    !section10
   ) {
     alert("Please fill the form");
     e.preventDefault();
