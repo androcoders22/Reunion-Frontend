@@ -283,7 +283,9 @@ async function paymentRazorpay() {
       duration: 3000,
       gravity: "top",
       position: "center",
-      backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+      style: {
+        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+      },
     }).showToast();
     return;
   }
@@ -294,7 +296,9 @@ async function paymentRazorpay() {
       duration: 3000,
       gravity: "top",
       position: "center",
-      backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+      style: {
+        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+      },
     }).showToast();
     return;
   }
@@ -350,52 +354,65 @@ async function paymentRazorpay() {
   // console.log(totalPayPrice);
 
   async function initiatePayment() {
-    const response = await fetch(`${BACKEND_URL_OF_INDEX}/paytm/create-order`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: totalPayPrice,
-        formData: formData,
-      }),
-    });
+    try {
+      const response = await fetch(`${BACKEND_URL_OF_INDEX}/paytm/create-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: totalPayPrice,
+          formData: formData,
+        }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
+      console.log("Response from server:", data);
 
-    //----- use paytm docs code ----------------//
-
-    async function onScriptLoad() {
-      var config = {
-        root: "",
-        flow: "DEFAULT",
-        data: {
-          orderId: data.orderId,
-          token: data.txnToken,
-          tokenType: "TXN_TOKEN",
-          amount: data.amount,
-        },
-        handler: {
-          notifyMerchant: function (eventName, data) {
-            console.log("notifyMerchant handler function called");
-            console.log("eventName => ", eventName);
-            console.log("data => ", data);
-            if ("App closed from the header icon" == data.message) {
-              document
-                .getElementById("downloadBtn")
-                .classList.remove("loading");
-            }
-          },
-        },
-      };
-
-      if (window.Paytm && window.Paytm.CheckoutJS) {
-        console.log("Paytm checkout window runing start");
-
-        await window.Paytm.CheckoutJS.init(config);
-        window.Paytm.CheckoutJS.invoke();
+      if (!response.ok) {
+        alert(data.message || "Something went wrong");
+        document.getElementById("downloadBtn").classList.remove("loading");
+        return;
       }
-    }
 
-    onScriptLoad();
+      //----- use paytm docs code ----------------//
+
+      async function onScriptLoad() {
+        var config = {
+          root: "",
+          flow: "DEFAULT",
+          data: {
+            orderId: data.orderId,
+            token: data.txnToken,
+            tokenType: "TXN_TOKEN",
+            amount: data.amount,
+          },
+          handler: {
+            notifyMerchant: function (eventName, data) {
+              console.log("notifyMerchant handler function called");
+              console.log("eventName => ", eventName);
+              console.log("data => ", data);
+              if ("App closed from the header icon" == data.message) {
+                document
+                  .getElementById("downloadBtn")
+                  .classList.remove("loading");
+              }
+            },
+          },
+        };
+
+        if (window.Paytm && window.Paytm.CheckoutJS) {
+          console.log("Paytm checkout window runing start");
+
+          await window.Paytm.CheckoutJS.init(config);
+          window.Paytm.CheckoutJS.invoke();
+        }
+      }
+
+      onScriptLoad();
+    } catch (error) {
+      console.error("Payment initiation error:", error);
+      alert("Error connecting to server. Please check your internet or try again.");
+      document.getElementById("downloadBtn").classList.remove("loading");
+    }
   }
 
   initiatePayment();
