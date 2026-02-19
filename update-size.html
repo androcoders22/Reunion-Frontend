@@ -288,7 +288,7 @@
         </div>
 
         <div class="size-selection">
-            <span class="label">Select your 10th standard section <span style="color: red;">*</span></span>
+            <span class="label">Select your 10th standard section</span>
             <div class="size-pills">
                 <label class="size-pill">
                     <input type="radio" name="section10" value="A">
@@ -402,11 +402,6 @@
             
             if (!selectedSize) {
                 showError("Please select a size first");
-                return;
-            }
-
-            if (!selectedSection10) {
-                showError("Please select your 10th standard section");
                 return;
             }
 

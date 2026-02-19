@@ -290,19 +290,6 @@ async function paymentRazorpay() {
     return;
   }
 
-  if (!section10) {
-    Toastify({
-      text: "Please select your 10th standard section",
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      style: {
-        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-      },
-    }).showToast();
-    return;
-  }
-
   const donateAmt = getDonationTotal();
   function getDonationTotal() {
     let total = 0;
