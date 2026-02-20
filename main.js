@@ -352,11 +352,11 @@ async function paymentRazorpay() {
       });
 
       const data = await response.json();
-      console.log("Response from server:", data);
+      // console.log("Response from server:", data);
 
       if (!response.ok) {
-        alert(data.message || "Something went wrong");
-        document.getElementById("downloadBtn").classList.remove("loading");
+        // alert(data.message || "Something went wrong");
+        // document.getElementById("downloadBtn").classList.remove("loading");
         return;
       }
 

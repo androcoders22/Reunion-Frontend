@@ -194,19 +194,85 @@ nav.site-nav { z-index: 100;}
     /* -------------------------
        Navigation
        ------------------------- */
-    nav.site-nav {
+    .marquee-bar {
       position: fixed;
-      inset: 0 auto auto 0;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 50;
+      z-index: 101;
+      background: rgba(5, 5, 5, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      color: var(--muted);
+      padding: 0;
+      font-size: 13px;
+      font-weight: 400;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .marquee-content {
+      display: flex;
+      white-space: nowrap;
+      width: max-content;
+      animation: marquee-scroll 60s linear infinite;
+      will-change: transform;
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-right: 80px; /* Space between each message block */
+      letter-spacing: 0.5px;
+    }
+
+    .deadline-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+
+    .highlight-pink {
+      color: var(--accent-pink);
+      font-weight: 600;
+    }
+
+    @keyframes marquee-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 767px) {
+      .marquee-item:not(.deadline-only) {
+        display: none;
+      }
+      .marquee-content {
+        animation-duration: 20s;
+      }
+      .marquee-item {
+        padding-right: 50px;
+      }
+    }
+
+    nav.site-nav {
+      position: fixed;
+      inset: 36px auto auto 0;
+      top: 36px;
+      left: 0;
+      right: 0;
+      z-index: 100;
       height: var(--nav-height);
-      display:flex;
-      align-items:center;
+      display: flex;
+      align-items: center;
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       padding: 8px 0;
-      box-sizing:border-box;
+      box-sizing: border-box;
       border-bottom: 0;
     }
 
@@ -319,6 +385,34 @@ nav.site-nav { z-index: 100;}
       border:none;
       color: #cbd5e1;
       cursor:pointer;
+    }
+
+    .nav-deadline {
+      background: rgba(244, 114, 182, 0.1);
+      border: 1px solid rgba(244, 114, 182, 0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      color: var(--accent-pink);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-deadline {
+        font-size: 11px;
+        padding: 2px 8px;
+        margin: 0 4px;
+        border: none;
+        background: transparent;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-deadline {
+        display: none;
+      }
     }
 
     /* -------------------------
@@ -1220,7 +1314,24 @@ nav.site-nav { z-index: 100;}
 
 
   <!-- HTML: place this where you want the hero section -->
-<nav class="site-nav" style="background-color: rgba(10, 10, 10, 0.87); z-index: 20; position: fixed;">
+<div class="marquee-bar">
+  <div class="marquee-content">
+    <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span class="highlight-pink">Registration Deadline: 8th of March</span></div>
+    <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
+    <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
+    <!-- Duplicates for seamless loop -->
+    <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span class="highlight-pink">Registration Deadline: 8th of March</span></div>
+    <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
+    <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
+    <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span class="highlight-pink">Registration Deadline: 8th of March</span></div>
+    <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
+    <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
+    <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span class="highlight-pink">Registration Deadline: 8th of March</span></div>
+    <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
+    <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
+  </div>
+</div>
+<nav class="site-nav" style="background-color: rgba(10, 10, 10, 0.87); z-index: 20; position: fixed; top: 36px;">
   <div class="nav-inner container">
     <a class="brand" href="#">
       <span class="logo" aria-hidden="true">
@@ -1315,6 +1426,9 @@ nav.site-nav { z-index: 100;}
 
 <div id="mobile-menu" aria-hidden="true">
     <button id="close-menu" class="close" aria-label="Close menu"><i data-lucide="x" style="width:28px;height:28px;"></i></button>
+    <div style="color:var(--accent-pink); font-weight:700; margin-bottom:24px; font-size:16px; text-align:center; padding: 0 20px;">
+      The Last date of registration is 8th of March
+    </div>
     <a class="mobile-link" href="#home">Home</a>
     <a class="mobile-link" href="#details">Details</a>
     <a class="mobile-link" href="#memories">Memories</a>
