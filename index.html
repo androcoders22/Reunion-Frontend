@@ -419,28 +419,42 @@ nav.site-nav { z-index: 100;}
        Mobile menu overlay
        ------------------------- */
     #mobile-menu {
-      position:fixed;
-      inset:0;
-      z-index:40;
-      background: rgba(0,0,0,0.95);
-      display:none;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:28px;
-      transition: transform .25s ease;
+      position: fixed;
+      inset: 0;
+      z-index: 3000; /* significantly higher than everything */
+      background: rgba(0, 0, 0, 0.98);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      transition: transform 0.25s ease;
+      backdrop-filter: blur(10px);
     }
 
-    #mobile-menu.open { display:flex; }
+    #mobile-menu.open { display: flex; }
 
     #mobile-menu .close {
-      position:absolute;
-      top:18px; right:18px;
-      background:transparent;
-      border:none;
-      color:#fff;
-      cursor:pointer;
-      font-size:18px;
+      position: absolute;
+      top: 45px; /* move down to be easily clickable */
+      right: 25px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      cursor: pointer;
+      font-size: 24px;
+      transition: all 0.3s ease;
+    }
+
+    #mobile-menu .close:active {
+      transform: scale(0.9);
+      background: rgba(255, 255, 255, 0.2);
     }
 
     #mobile-menu a {
@@ -448,6 +462,11 @@ nav.site-nav { z-index: 100;}
       font-family:'Righteous', cursive;
       font-size:28px;
       text-decoration:none;
+      transition: color 0.3s ease;
+    }
+
+    #mobile-menu a:active {
+      color: var(--accent-cyan);
     }
 
     /* -------------------------
