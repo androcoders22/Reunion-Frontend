@@ -178,6 +178,45 @@ donationCheckboxes.forEach((cb) => {
 //----------------------------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ===== DEADLINE CHECK =====
+  const registrationDeadline = new Date('2026-03-08T23:59:59'); // March 8, 2026
+  const now = new Date();
+
+  if (now > registrationDeadline) {
+    const registerBtns = document.querySelectorAll('button[id="openPopup"], .btn-primary[href="#register"], .mobile-link[href="#register"], #openPopup');
+    registerBtns.forEach(btn => {
+      if (btn.tagName === 'BUTTON' || btn.classList.contains('btn-submit')) {
+        btn.disabled = true;
+        btn.textContent = "REGISTRATION CLOSED";
+        btn.style.background = "#333";
+        btn.style.color = "#666";
+        btn.style.cursor = "not-allowed";
+        btn.style.boxShadow = "none";
+        btn.style.opacity = "0.7";
+      } else {
+        btn.style.pointerEvents = "none";
+        btn.style.opacity = "0.4";
+        btn.textContent = "Closed";
+      }
+    });
+
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      const allFormElements = contactForm.querySelectorAll('input, textarea, select, checkbox, .btn-submit');
+      allFormElements.forEach(el => {
+        el.disabled = true;
+        el.style.opacity = "0.6";
+      });
+      const deadlineMsg = document.createElement('div');
+      deadlineMsg.style.color = "var(--accent-pink)";
+      deadlineMsg.style.textAlign = "center";
+      deadlineMsg.style.marginTop = "20px";
+      deadlineMsg.style.fontWeight = "bold";
+      deadlineMsg.textContent = "Registration is now closed.";
+      contactForm.prepend(deadlineMsg);
+    }
+  }
+
   // ===== ELEMENTS =====
   const attendSpan = document.getElementById("attend");
   const grandTotalEl = document.getElementById("grandTotal");
