@@ -1,51 +1,50 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="google-site-verification" content="ugj2HjgmsHuTd4B68VYdCPzIDnvdVQCXWwaqpeGEYlo" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>Reunion Event 26</title>
-    <link rel="icon" type="image/png" href="img/bg-logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com" async/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" async crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Righteous&display=swap" rel="stylesheet" async>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="ugj2HjgmsHuTd4B68VYdCPzIDnvdVQCXWwaqpeGEYlo" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Reunion Event 26</title>
+  <link rel="icon" type="image/png" href="img/bg-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" async />
+  <link rel="preconnect" href="https://fonts.gstatic.com" async crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Righteous&display=swap"
+    rel="stylesheet" async>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <link rel="stylesheet" href="production-carousel-claude.css">
-    <link rel="stylesheet" href="popup.css">
-    <link rel="stylesheet" href="contactForm.css">
-    <link rel="stylesheet" href="photoPopup.css">
-    <link rel="stylesheet" href="photoUpload.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="stylesheet" href="production-carousel-claude.css">
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="contactForm.css">
+  <link rel="stylesheet" href="photoPopup.css">
+  <link rel="stylesheet" href="photoUpload.css">
 
 
 
-     <style>
+  <style>
+    /* testing purpose color */
+    .red {
+      background-color: red;
+    }
 
-      /* testing purpose color */
-      .red{
-        background-color: red;
-      }
+    .yellow {
+      background-color: yellow;
+    }
 
-      .yellow{
-        background-color: yellow;
-      }
+    .purple {
+      background-color: purple;
+    }
 
-      .purple{
-        background-color: purple;
-      }
-    
-    :root{
+    :root {
       --bg: #050505;
       --text: #ffffff;
       --muted: #9ca3af;
-      --panel-bg: rgba(255,255,255,0.05);
-      --glass-border: rgba(255,255,255,0.1);
+      --panel-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
       --accent-cyan: #00f3ff;
       --accent-purple: #7c3aed;
       --accent-pink: #f472b6;
@@ -55,104 +54,116 @@
       --max-width: 1200px;
       --container-pad: 16px;
       --nav-height: 64px;
-      --shadow-accent: 0 0 20px rgba(0,243,255,0.2);
+      --shadow-accent: 0 0 20px rgba(0, 243, 255, 0.2);
       --glass-blur: blur(10px);
       font-synthesis: none;
     }
 
-    html,body{
+    html,
+    body {
       scroll-behavior: smooth;
-      height:100%;
-      margin:0;
-      padding:0;
+      height: 100%;
+      margin: 0;
+      padding: 0;
       background: var(--bg);
       color: var(--text);
       font-family: 'Outfit', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
     /* --------------------------
       Background Gradient
      ------------------------- */
 
-.gradient-bg {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;                /* sits at root-level (above page background) */
-  pointer-events: none;
-  overflow: hidden;
-}
+    .gradient-bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      /* sits at root-level (above page background) */
+      pointer-events: none;
+      overflow: hidden;
+    }
 
 
-.g-ball {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.95;
-  animation: float 10s infinite ease-in-out;
-  will-change: transform, opacity;
-  mix-blend-mode: screen;    /* makes the glows vivid on dark backgrounds */
-}
+    .g-ball {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.95;
+      animation: float 10s infinite ease-in-out;
+      will-change: transform, opacity;
+      mix-blend-mode: screen;
+      /* makes the glows vivid on dark backgrounds */
+    }
 
-/* stronger centers + smoother falloff */
-.g-1 {
-  width: 620px;
-  height: 620px;
-  top: -160px;
-  left: -160px;
-  background: radial-gradient(circle at 30% 30%,
-                              rgba(124,58,237,0.14) 60%,
-                              transparent 85%);
-  animation-delay: 0s;
-}
+    /* stronger centers + smoother falloff */
+    .g-1 {
+      width: 620px;
+      height: 620px;
+      top: -160px;
+      left: -160px;
+      background: radial-gradient(circle at 30% 30%,
+          rgba(124, 58, 237, 0.14) 60%,
+          transparent 85%);
+      animation-delay: 0s;
+    }
 
-.g-2 {
-  width: 520px;
-  height: 520px;
-  bottom: 6%;
-  right: -120px;
-  background: radial-gradient(circle at 60% 40%,
-                              rgba(0,243,255,0.98) 0%,
-                              rgba(0,243,255,0.55) 10%,
-                              rgba(0,243,255,0.10) 60%,
-                              transparent 88%);
-  animation-delay: 2s;
-}
+    .g-2 {
+      width: 520px;
+      height: 520px;
+      bottom: 6%;
+      right: -120px;
+      background: radial-gradient(circle at 60% 40%,
+          rgba(0, 243, 255, 0.98) 0%,
+          rgba(0, 243, 255, 0.55) 10%,
+          rgba(0, 243, 255, 0.10) 60%,
+          transparent 88%);
+      animation-delay: 2s;
+    }
 
-.g-3 {
-  width: 360px;
-  height: 360px;
-  top: 38%;
-  left: 26%;
-  background: radial-gradient(circle at 40% 50%,
-                              rgba(244,114,182,0.98) 0%,
-                              rgba(244,114,182,0.52) 30%,
-                              rgba(244,114,182,0.10) 60%,
-                              transparent 88%);
-  animation-delay: 4s;
-}
+    .g-3 {
+      width: 360px;
+      height: 360px;
+      top: 38%;
+      left: 26%;
+      background: radial-gradient(circle at 40% 50%,
+          rgba(244, 114, 182, 0.98) 0%,
+          rgba(244, 114, 182, 0.52) 30%,
+          rgba(244, 114, 182, 0.10) 60%,
+          transparent 88%);
+      animation-delay: 4s;
+    }
 
-@keyframes float {
-  0%,100% { transform: translate(0,0) scale(1); }
-  50%    { transform: translate(30px,50px) scale(1.03); }
-}
+    @keyframes float {
 
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
 
-
-body > *:not(.gradient-bg):not(.pop-register) {
-  position: relative;
-  z-index: 1;
-}
-
-
+      50% {
+        transform: translate(30px, 50px) scale(1.03);
+      }
+    }
 
 
-/* keep nav clearly on top */
-nav.site-nav { z-index: 100;}
+
+    body>*:not(.gradient-bg):not(.pop-register) {
+      position: relative;
+      z-index: 1;
+    }
+
+
+
+
+    /* keep nav clearly on top */
+    nav.site-nav {
+      z-index: 100;
+    }
 
 
 
@@ -167,7 +178,9 @@ nav.site-nav { z-index: 100;}
       box-sizing: border-box;
     }
 
-    .center { text-align:center; }
+    .center {
+      text-align: center;
+    }
 
     .glass-panel {
       background: var(--panel-bg);
@@ -186,9 +199,9 @@ nav.site-nav { z-index: 100;}
     }
 
     .text-glow {
-      text-shadow: 0 0 10px rgba(124,58,237,0.5),
-                   0 0 20px rgba(124,58,237,0.3),
-                   0 0 30px rgba(124,58,237,0.1);
+      text-shadow: 0 0 10px rgba(124, 58, 237, 0.5),
+        0 0 20px rgba(124, 58, 237, 0.3),
+        0 0 30px rgba(124, 58, 237, 0.1);
     }
 
     /* -------------------------
@@ -226,7 +239,8 @@ nav.site-nav { z-index: 100;}
       display: flex;
       align-items: center;
       gap: 12px;
-      padding-right: 80px; /* Space between each message block */
+      padding-right: 80px;
+      /* Space between each message block */
       letter-spacing: 0.5px;
     }
 
@@ -244,17 +258,24 @@ nav.site-nav { z-index: 100;}
     }
 
     @keyframes marquee-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     @media (max-width: 767px) {
       .marquee-item:not(.deadline-only) {
         display: none;
       }
+
       .marquee-content {
         animation-duration: 20s;
       }
+
       .marquee-item {
         padding-right: 50px;
       }
@@ -270,66 +291,69 @@ nav.site-nav { z-index: 100;}
       height: var(--nav-height);
       display: flex;
       align-items: center;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
       padding: 8px 0;
       box-sizing: border-box;
       border-bottom: 0;
     }
 
     .nav-inner {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      width:100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
       max-width: var(--max-width);
-      margin:0 auto;
-      padding:0 var(--container-pad);
+      margin: 0 auto;
+      padding: 0 var(--container-pad);
       gap: 12px;
     }
 
     .brand {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-      color:var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
     }
 
     .brand .logo {
-      width:auto; height:34px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      width: auto;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .logo img{
-        height: 100%;
-        width: 100%;
+    .logo img {
+      height: 100%;
+      width: 100%;
     }
 
     .brand .title {
       font-family: 'Righteous', cursive;
-      font-size:20px;
-      letter-spacing:0.6px;
+      font-size: 20px;
+      letter-spacing: 0.6px;
     }
 
-    @media(max-width: 786px){
-      .title{font-size: 20px;}      
+    @media(max-width: 786px) {
+      .title {
+        font-size: 20px;
+      }
     }
 
     /* Nav links */
     .nav-links {
-      display:flex;
-      gap:18px;
-      align-items:center;
+      display: flex;
+      gap: 18px;
+      align-items: center;
     }
 
     .nav-links a {
       color: #cbd5e1;
-      text-decoration:none;
-      padding:6px 10px;
-      border-radius:8px;
-      font-weight:600;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-weight: 600;
     }
 
     .nav-links a.active {
@@ -339,52 +363,53 @@ nav.site-nav { z-index: 100;}
 
     /* CTA and mobile menu button */
     .nav-cta {
-      display:flex;
-      gap:12px;
-      align-items:center;
+      display: flex;
+      gap: 12px;
+      align-items: center;
     }
 
     .btn-primary {
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: var(--accent-cyan);
       color: #000;
-      font-weight:700;
-      padding:8px 16px;
-      border-radius:999px;
-      text-decoration:none;
-      box-shadow: 0 0 15px rgba(0,243,255,0.5);
-      border:none;
-      cursor:pointer;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+      border: none;
+      cursor: pointer;
     }
 
-    .ticket-primary{
-        display:inline-flex;
-      align-items:center;
-      gap:8px;
+    .ticket-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: var(--accent-cyan);
       color: #000;
-      font-weight:700;
-      padding:8px 16px;
-      border-radius:999px;
-      text-decoration:none;
-      box-shadow: 0 0 15px rgba(0,243,255,0.5);
-      border:none;
-      cursor:pointer;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+      border: none;
+      cursor: pointer;
     }
 
 
     .menu-btn {
-      width:40px; height:40px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      background:transparent;
-      border-radius:8px;
-      border:none;
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border-radius: 8px;
+      border: none;
       color: #cbd5e1;
-      cursor:pointer;
+      cursor: pointer;
     }
 
     .nav-deadline {
@@ -421,7 +446,8 @@ nav.site-nav { z-index: 100;}
     #mobile-menu {
       position: fixed;
       inset: 0;
-      z-index: 3000; /* significantly higher than everything */
+      z-index: 3000;
+      /* significantly higher than everything */
       background: rgba(0, 0, 0, 0.98);
       display: none;
       flex-direction: column;
@@ -432,11 +458,14 @@ nav.site-nav { z-index: 100;}
       backdrop-filter: blur(10px);
     }
 
-    #mobile-menu.open { display: flex; }
+    #mobile-menu.open {
+      display: flex;
+    }
 
     #mobile-menu .close {
       position: absolute;
-      top: 45px; /* move down to be easily clickable */
+      top: 45px;
+      /* move down to be easily clickable */
       right: 25px;
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -458,10 +487,10 @@ nav.site-nav { z-index: 100;}
     }
 
     #mobile-menu a {
-      color:#fff;
-      font-family:'Righteous', cursive;
-      font-size:28px;
-      text-decoration:none;
+      color: #fff;
+      font-family: 'Righteous', cursive;
+      font-size: 28px;
+      text-decoration: none;
       transition: color 0.3s ease;
     }
 
@@ -474,41 +503,52 @@ nav.site-nav { z-index: 100;}
        ------------------------- */
     .hero {
       min-height: calc(100vh - var(--nav-height));
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 100px 16px 60px;
-      box-sizing:border-box;
-      position:relative;
-      text-align:center;
+      box-sizing: border-box;
+      position: relative;
+      text-align: center;
       z-index: 10;
     }
 
     .hero .label {
-      display:inline-block;
-      padding:6px 14px;
-      border-radius:999px;
-      border: 1px solid rgba(0,243,255,0.2);
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 243, 255, 0.2);
       color: var(--accent-cyan);
-      background: rgba(0,243,255,0.04);
-      font-size:12px;
+      background: rgba(0, 243, 255, 0.04);
+      font-size: 12px;
       letter-spacing: 2px;
-      text-transform:uppercase;
+      text-transform: uppercase;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: .7; transform: scale(.98); }
-      100% { opacity: 1; transform: scale(1); }
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .7;
+        transform: scale(.98);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .hero h1 {
-      margin:18px 0 10px;
-      font-family:'Righteous',cursive;
-      font-weight:800;
-      line-height:0.9;
-      font-size:56px;
+      margin: 18px 0 10px;
+      font-family: 'Righteous', cursive;
+      font-weight: 800;
+      line-height: 0.9;
+      font-size: 56px;
     }
 
     .hero h1 .gradient-text {
@@ -520,30 +560,30 @@ nav.site-nav { z-index: 100;}
 
     .hero p .lead {
       color: #cbd5e1;
-      max-width:720px;
+      max-width: 720px;
       margin: 20px auto;
-      font-size:18px;
+      font-size: 18px;
     }
 
     .hero .actions {
-      display:flex;
-      gap:14px;
-      justify-content:center;
-      margin-top:16px;
-      flex-wrap:wrap;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 16px;
+      flex-wrap: wrap;
     }
 
     .btn-secondary {
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
       color: #fff;
-      border-radius:999px;
+      border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.76);
-      background:transparent;
-      text-decoration:none;
-      font-weight:600;
+      background: transparent;
+      text-decoration: none;
+      font-weight: 600;
     }
 
     /* -------------------------
@@ -556,160 +596,180 @@ nav.site-nav { z-index: 100;}
 
     @media(max-width: 720px) {
       .section {
-      padding: 60px 0px;
-    }
+        padding: 60px 0px;
+      }
     }
 
     .section .title {
-      font-family:'Righteous', cursive;
-      font-size:36px;
-      margin-bottom:28px;
-      text-align:center;
+      font-family: 'Righteous', cursive;
+      font-size: 36px;
+      margin-bottom: 28px;
+      text-align: center;
     }
 
     .cards {
-      display:flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap:20px;
-      grid-template-columns:1fr;
-      max-width:1000px;
+      gap: 20px;
+      grid-template-columns: 1fr;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
     .card {
       width: 40%;
-      padding:28px;
-      border-radius:20px;
-      text-align:center;
+      padding: 28px;
+      border-radius: 20px;
+      text-align: center;
       transition: transform .25s ease;
-      border-top:4px solid rgba(255,255,255,0.03);
+      border-top: 4px solid rgba(255, 255, 255, 0.03);
     }
 
-    .card:hover { transform: translateY(-10px); }
+    .card:hover {
+      transform: translateY(-10px);
+    }
 
     .card .icon-wrap {
-      width:94px; height:64px;
-      border-radius:50%;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      margin-bottom:14px;
+      width: 94px;
+      height: 64px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
       opacity: .95;
     }
 
-    .card .h3 { 
-      font-size:18px; 
-      font-weight:700; 
-      margin-bottom:8px; }
+    .card .h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
 
-    .muted { 
+    .muted {
       padding: 0;
-     }
+    }
 
-    .sub-muted { 
-      color: #9ca3af; 
-      font-size:13px; 
-      margin-top:0px; }
+    .sub-muted {
+      color: #9ca3af;
+      font-size: 13px;
+      margin-top: 0px;
+    }
 
     /* -------------------------
        Registration form
        ------------------------- */
     .register-wrap {
-      max-width:720px;
+      max-width: 720px;
       margin: 0 auto;
       padding: 36px;
-      box-sizing:border-box;
-      position:relative;
+      box-sizing: border-box;
+      position: relative;
       border-radius: 28px;
-      overflow:hidden;
+      overflow: hidden;
     }
 
     .register-wrap .panel-deco {
-      position:absolute;
-      top:-30px; right:-30px;
-      width:220px; height:220px;
-      border-radius:50%;
-      background: rgba(0,243,255,0.06);
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(0, 243, 255, 0.06);
       filter: blur(30px);
-      z-index:1;
+      z-index: 1;
     }
 
-    form#contactForm { display:flex; flex-direction:column; gap:14px; }
+    form#contactForm {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
 
     label.field-label {
-      display:block;
-      margin-bottom:6px;
-      font-size:16px;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 16px;
       /* color:#cbd5e1; */
       color: #f9fafc;
-      font-weight:500;
+      font-weight: 500;
     }
 
-    .input-wrap { 
-      position:relative;
-     }
+    .input-wrap {
+      position: relative;
+    }
 
-     .input-wrap textarea {
-         font-family: 'Poppins', sans-serif;
-         font-size: 16px;
-       }
+    .input-wrap textarea {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+    }
 
     .input-icon {
-      position:absolute;
-      left:10px;
-      top:60%;
+      position: absolute;
+      left: 10px;
+      top: 60%;
       transform: translateY(-50%);
-      pointer-events:none;
-      opacity:0.7;
+      pointer-events: none;
+      opacity: 0.7;
     }
 
-    .input-icon-txtarea{
-      position:absolute;
-      left:10px;
-      top:45%;
+    .input-icon-txtarea {
+      position: absolute;
+      left: 10px;
+      top: 45%;
       transform: translateY(-50%);
-      pointer-events:none;
-      opacity:0.7;
+      pointer-events: none;
+      opacity: 0.7;
     }
 
-    input.form-input, textarea.form-input {
-      width:100%;
-      padding:12px 42px 12px 42px;
-      background: rgba(0,0,0,0.4);
-      border: 1px solid rgba(255,255,255,0.12);
-      color:var(--text);
-      border-radius:10px;
-      box-sizing:border-box;
-      font-size:14px;
+    input.form-input,
+    textarea.form-input {
+      width: 100%;
+      padding: 12px 42px 12px 42px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text);
+      border-radius: 10px;
+      box-sizing: border-box;
+      font-size: 14px;
       transition: box-shadow .2s ease, border-color .2s ease;
     }
 
-    input.form-input:focus, textarea.form-input:focus {
-      outline:none;
+    input.form-input:focus,
+    textarea.form-input:focus {
+      outline: none;
       border-color: var(--accent-cyan);
-      box-shadow: 0 0 15px rgba(0,243,255,0.12);
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.12);
     }
 
 
     /* Checkbox group visual */
-    .checkbox-list 
-    { display:flex; 
-      align-items: start; 
-      gap:10px; 
+    .checkbox-list {
+      display: flex;
+      align-items: start;
+      gap: 10px;
       padding-left: 0;
     }
-    .checkbox-row { display:flex; align-items:center; gap:10px;}
-    
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
 
 
     @media(max-width: 786px) {
-      .checkbox-list {flex-direction: row;}
+      .checkbox-list {
+        flex-direction: row;
+      }
 
-      .spouse{
+      .spouse {
         flex-direction: column;
       }
-      
+
     }
 
     /* Round custom checkbox (your original CSS reused) */
@@ -717,482 +777,730 @@ nav.site-nav { z-index: 100;}
       display: inline-flex;
       align-items: center;
       cursor: pointer;
-      position:relative;
+      position: relative;
     }
+
     .round-check input {
-      opacity:0; width:0; height:0; position:absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
     }
+
     .circle {
-      width:fit-content; height:fit-content;
-      padding:4px 8px;
+      width: fit-content;
+      height: fit-content;
+      padding: 4px 8px;
       border-radius: 999px;
-      border:2px solid #999;
-      display:inline-block;
-      box-sizing:border-box;
-      position:relative;
+      border: 2px solid #999;
+      display: inline-block;
+      box-sizing: border-box;
+      position: relative;
       transition: 0.2s;
       background: transparent;
       font-size: 13px;
     }
+
     .circle::after {
-      content:"";
-      width:fit-content; height:fit-content;
-      border-radius:50%;
+      content: "";
+      width: fit-content;
+      height: fit-content;
+      border-radius: 50%;
       background: #f472b6;
-      position:absolute;
-      top:50%; left:50%;
-      transform: translate(-50%,-50%) scale(0);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
       transition: 0.18s;
     }
-    .round-check input:checked + .circle {
+
+    .round-check input:checked+.circle {
       background-color: #f13e9b;
       border-color: #f13e9b;
     }
-    .round-check input:checked + .circle::after {
-      transform: translate(-50%,-50%) scale(1);
+
+    .round-check input:checked+.circle::after {
+      transform: translate(-50%, -50%) scale(1);
     }
 
     /* Submit button */
     .btn-submit {
-      width:100%;
-      padding:12px 18px;
-      border-radius:12px;
-      border:none;
-      font-weight:800;
-      font-size:16px;
-      cursor:pointer;
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
       background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
-      color:#000;
-      box-shadow: 0 10px 30px rgba(0,243,255,0.12);
+      color: #000;
+      box-shadow: 0 10px 30px rgba(0, 243, 255, 0.12);
     }
-    .btn-submit:disabled{ opacity: .6; cursor:default; }
 
-    .donateDesign{
+    .btn-submit:disabled {
+      opacity: .6;
+      cursor: default;
+    }
+
+    .donateDesign {
       margin: -10px 0 0px 0;
     }
 
     @media(max-width: 720px) {
-       .donateDesign{
-      margin: 3px 0 3px 0;
-    }
+      .donateDesign {
+        margin: 3px 0 3px 0;
+      }
     }
 
     /* -------------------------
        Footer & Toast
        ------------------------- */
     footer.site-footer {
-      padding:8px 16px;
-      text-align:center;
+      padding: 8px 16px;
+      text-align: center;
       background: transparent;
-      border-top:1px solid rgba(255,255,255,0.03);
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
       color: #9ca3af;
     }
 
-    .social-links a { margin:0 8px; color: #9ca3af; text-decoration:none; }
+    .social-links a {
+      margin: 0 8px;
+      color: #9ca3af;
+      text-decoration: none;
+    }
+
+    /* --- PREMIUM FOOTER STYLES --- */
+    .premium-footer {
+      background: rgba(5, 5, 5, 0.4);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 80px 0 40px;
+      margin-top: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .premium-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--accent-pink), transparent);
+      opacity: 0.3;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.5fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand .logo {
+      height: 80px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .footer-brand .logo img {
+      height: 100%;
+      width: auto;
+    }
+
+    .footer-brand p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 300px;
+    }
+
+    .footer-heading {
+      font-family: 'Righteous', cursive;
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-cyan);
+      transform: translateX(5px);
+    }
+
+    .footer-contact-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .footer-contact-item .icon {
+      color: var(--accent-pink);
+      flex-shrink: 0;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      background: var(--accent-cyan);
+      color: #000;
+      transform: translateY(-5px) rotate(8deg);
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .copyright {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 25px;
+    }
+
+    .footer-legal a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-legal a:hover {
+      color: var(--accent-cyan);
+    }
+
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-legal {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+    }
 
     /* Toast */
     #toast {
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      z-index:60;
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 60;
       transform: translateY(120px);
       transition: transform .25s ease;
     }
-    #toast.show { transform: translateY(0); }
+
+    #toast.show {
+      transform: translateY(0);
+    }
 
     .toast-inner {
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:12px 14px;
-      border-radius:10px;
-      background: rgba(31,41,55,0.95);
-      border:1px solid rgba(34,197,94,0.14);
-      color:#d1fae5;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      max-width:320px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(31, 41, 55, 0.95);
+      border: 1px solid rgba(34, 197, 94, 0.14);
+      color: #d1fae5;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      max-width: 320px;
     }
 
 
     /* -------------------------
        Responsive
        ------------------------- */
-    @media(min-width:768px){
-      .nav-links { display:flex; }
-      .menu-btn { display:none; }
+    @media(min-width:768px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: none;
+      }
+
       /* .cards { flex-direction: column; } */
-      .hero h1 { font-size:84px; }
-      .hero p.lead { font-size:20px; }
-      #mobile-menu { display:none !important; }
-      .register-wrap { padding:48px; }
-      
+      .hero h1 {
+        font-size: 84px;
+      }
+
+      .hero p.lead {
+        font-size: 20px;
+      }
+
+      #mobile-menu {
+        display: none !important;
+      }
+
+      .register-wrap {
+        padding: 48px;
+      }
+
     }
 
-    @media(max-width:767px){
-      .nav-links { display:none; }
-      .btn-primary { display:none; }
-      .brand .title { font-size:20px; }
-      .hero h1 { font-size:44px; }
-      .cards { flex-direction: column; }
-      .margin-up{margin: 0 auto 80px auto}
-      .card{ width: 80%;}
+    @media(max-width:767px) {
+      .nav-links {
+        display: none;
+      }
+
+      .btn-primary {
+        display: none;
+      }
+
+      .brand .title {
+        font-size: 20px;
+      }
+
+      .hero h1 {
+        font-size: 44px;
+      }
+
+      .cards {
+        flex-direction: column;
+      }
+
+      .margin-up {
+        margin: 0 auto 80px auto
+      }
+
+      .card {
+        width: 80%;
+      }
 
     }
 
     #hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;            /* Full screen height */
-  overflow: hidden;
-}
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      /* Full screen height */
+      overflow: hidden;
+    }
 
-#hero .hero-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -1;              /* Put behind content */
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  filter: brightness(30%);  /* Optional: darken video for text visibility */
-}
-
-
-
-.mobile-size{
-  display: flex; 
-  align-items: center;
-  justify-content: start; 
-  gap:50px
-}
-
-@media(max-width: 786px) {
-  .mobile-size{
-    flex-direction: column;
-    gap: 1px;
-    align-items: start;
-  }
-}
+    #hero .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      /* Put behind content */
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      filter: brightness(30%);
+      /* Optional: darken video for text visibility */
+    }
 
 
 
-   /* Button loader fix here */
+    .mobile-size {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      gap: 50px
+    }
 
-/* hide loader default */
-.btn {
-  position: relative;
-  padding: 12px 22px;
-  border: none;
-  background: #4A6CF7;
-  color: #fff;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.loader {
-  width: 18px;
-  height: 18px;
-  border: 3px solid #fff;
-  border-top-color: transparent;
-  border-radius: 50%;
-  display: none;
-  animation: spin 0.7s linear infinite;
-}
-
-.btn.loading .btn-text {
-  opacity: 0.5;
-}
-
-.btn.loading .loader {
-  display: inline-block;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+    @media(max-width: 786px) {
+      .mobile-size {
+        flex-direction: column;
+        gap: 1px;
+        align-items: start;
+      }
+    }
 
 
 
+    /* Button loader fix here */
 
- /* Venue Card POP */
-#eventPopupOverlay {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(6px);
-  z-index: 9999;
-}
+    /* hide loader default */
+    .btn {
+      position: relative;
+      padding: 12px 22px;
+      border: none;
+      background: #4A6CF7;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
 
-#eventPopupBox {
-  background: var(--bg, #1c1c1c);
-  padding: 14px;
-  border-radius: 14px;
-  width: 420px;
-  max-width: 90%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  text-align: center;
-  border-top: 4px solid var(--accent-purple);
-  animation: popupScale .25s ease;
-}
+    .loader {
+      width: 18px;
+      height: 18px;
+      border: 3px solid #fff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      display: none;
+      animation: spin 0.7s linear infinite;
+    }
 
-#eventPopupBox h3{
-  font-size: 80px;
-}
+    .btn.loading .btn-text {
+      opacity: 0.5;
+    }
 
-@media(max-width: 786px){
-  #eventPopupOverlay {
-    padding: 30px;
-  }
-}
+    .btn.loading .loader {
+      display: inline-block;
+    }
 
-
-@keyframes popupScale {
-  from { transform: scale(0.8); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
-}
-
-#eventPopupClose {
-  margin-top: 14px;
-  padding: 8px 16px;
-  background: var(--accent-purple);
-  border: none;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-}
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
 
-.music{
-  background-color: #222;
-  width: 23px;
-  height: 23px;
-  padding: 5px 6px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 8;
-}
-
-.music img{
-  width: 100%;
-  height: 100%;
-}
-
-.stop-music{
-  display: flex;           /* IMPORTANT */
-  position: absolute;
-  width: 25px;
-  background-color: white;
-  z-index: 10;
-  transform: rotate(45deg);
-}
 
 
-@media(max-width: 786px) {
-  .music{
-  /* position: absolute; */
-  background-color: #222;
-  padding: 5px 6px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* bottom: 10%;
+    /* Venue Card POP */
+    #eventPopupOverlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+    }
+
+    #eventPopupBox {
+      background: var(--bg, #1c1c1c);
+      padding: 14px;
+      border-radius: 14px;
+      width: 420px;
+      max-width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+      border-top: 4px solid var(--accent-purple);
+      animation: popupScale .25s ease;
+    }
+
+    #eventPopupBox h3 {
+      font-size: 80px;
+    }
+
+    @media(max-width: 786px) {
+      #eventPopupOverlay {
+        padding: 30px;
+      }
+    }
+
+
+    @keyframes popupScale {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    #eventPopupClose {
+      margin-top: 14px;
+      padding: 8px 16px;
+      background: var(--accent-purple);
+      border: none;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+
+    .music {
+      background-color: #222;
+      width: 23px;
+      height: 23px;
+      padding: 5px 6px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 8;
+    }
+
+    .music img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .stop-music {
+      display: flex;
+      /* IMPORTANT */
+      position: absolute;
+      width: 25px;
+      background-color: white;
+      z-index: 10;
+      transform: rotate(45deg);
+    }
+
+
+    @media(max-width: 786px) {
+      .music {
+        /* position: absolute; */
+        background-color: #222;
+        padding: 5px 6px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* bottom: 10%;
   right: 4%; */
-}
-}
+      }
+    }
 
 
-#openMap{
-  display: none; 
-  justify-content: center;
-  text-decoration: none;
-  color: yellow
-}
+    #openMap {
+      display: none;
+      justify-content: center;
+      text-decoration: none;
+      color: yellow
+    }
 
 
-#loader {
-  position: fixed;
-  inset: 0;
-  background: #222;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
 
-.spinner {
-  width: 56px;
-  height: 56px;
-  border: 4px solid rgba(255, 255, 255, 0.15);
-  border-top-color: #9a67f3; /* accent color */
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
+    .spinner {
+      width: 56px;
+      height: 56px;
+      border: 4px solid rgba(255, 255, 255, 0.15);
+      border-top-color: #9a67f3;
+      /* accent color */
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-.logo-section{
-  height: 100%; 
-  width: 100%; 
-  opacity: 0.3; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  padding: 40px 0 20px 0;
-}
-
-.logo-section-head{
-  height: 400px; 
-  width: auto;
-}
-
-.bg-logo-section{
-  width: 28rem; 
-  height: 28rem; 
-  opacity: 0.2;
-}
-
-.qrpay-btn{
-  font-size: 16px;
-}
-
-@media(max-width: 786px){
-  .qrpay-btn{
-  font-size: 12px;
-}
-}
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
 
-@media(max-width: 786px){
-  .logo-section-head{
-    height: 200px; 
-    width: auto;
-}
+    .logo-section {
+      height: 100%;
+      width: 100%;
+      opacity: 0.3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0 20px 0;
+    }
 
-  .bg-logo-section{
-   width: 18rem; 
-   height: 18rem; 
-   opacity: 0.2;
-}
+    .logo-section-head {
+      height: 400px;
+      width: auto;
+    }
 
-}
+    .bg-logo-section {
+      width: 28rem;
+      height: 28rem;
+      opacity: 0.2;
+    }
 
-     </style>
+    .qrpay-btn {
+      font-size: 16px;
+    }
 
-<style>
-
-.toast {
-  position: fixed;
-  width: fit-content;
-  height: fit-content;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  
-  background: #000;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 6px;
-  font-size: 14px;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 1000;
-}
-
-.toast.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%);
-}
-
-.toast.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(20px);
-}
+    @media(max-width: 786px) {
+      .qrpay-btn {
+        font-size: 12px;
+      }
+    }
 
 
-.pantoast {
-  width: 300px;
-  position: fixed;
-  height: fit-content;
-  top: 50%;
-  bottom: 50%;
-  left: 50%;
-  right: 50%;
-  /* transform: translateY(-20px); */
-  background: #000;
-  color: #fff;
-  padding: 12px 18px;
-  margin: 10px auto;
-  border-radius: 6px;
-  font-size: 14px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 1000;
-}
+    @media(max-width: 786px) {
+      .logo-section-head {
+        height: 200px;
+        width: auto;
+      }
 
-.pantoast.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(20px);
-}
+      .bg-logo-section {
+        width: 18rem;
+        height: 18rem;
+        opacity: 0.2;
+      }
 
-@media(max-width: 720px) {
-  
-.pantoast {
-  width: 50%;
-  position: fixed;
-  height: fit-content;
-  top: 50%;
-  left: 30%;
-  margin: auto;
-  background: #000;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 6px;
-  font-size: 14px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 1000;
-}
+    }
+  </style>
 
-.pantoast.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(20px);
-}
+  <style>
+    .toast {
+      position: fixed;
+      width: fit-content;
+      height: fit-content;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 
-}
+      background: #000;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%);
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(20px);
+    }
 
 
+    .pantoast {
+      width: 300px;
+      position: fixed;
+      height: fit-content;
+      top: 50%;
+      bottom: 50%;
+      left: 50%;
+      right: 50%;
+      /* transform: translateY(-20px); */
+      background: #000;
+      color: #fff;
+      padding: 12px 18px;
+      margin: 10px auto;
+      border-radius: 6px;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
 
- .thankyou-container {
+    .pantoast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(20px);
+    }
+
+    @media(max-width: 720px) {
+
+      .pantoast {
+        width: 50%;
+        position: fixed;
+        height: fit-content;
+        top: 50%;
+        left: 30%;
+        margin: auto;
+        background: #000;
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 6px;
+        font-size: 14px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+      }
+
+      .pantoast.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(20px);
+      }
+
+    }
+
+
+
+    .thankyou-container {
       background: #ffffff;
       max-width: 520px;
       width: 100%;
@@ -1248,7 +1556,7 @@ nav.site-nav { z-index: 100;}
       background: #ffffff;
       padding: 20px 24px;
       border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       max-width: 380px;
       width: 100%;
       text-align: center;
@@ -1294,22 +1602,21 @@ nav.site-nav { z-index: 100;}
     }
 
     .upi-steps {
-  color: #666;
-  font-size: 13px;
-  line-height: 1.6;
-  text-align: left; /* Mobile default */
-}
+      color: #666;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: left;
+      /* Mobile default */
+    }
 
-/* Desktop view */
-@media (min-width: 768px) {
-  .upi-steps {
-    text-align: left;
-    padding-left: 100px;
-  }
-}
-
-
-</style>
+    /* Desktop view */
+    @media (min-width: 768px) {
+      .upi-steps {
+        text-align: left;
+        padding-left: 100px;
+      }
+    }
+  </style>
 
 
 
@@ -1322,254 +1629,252 @@ nav.site-nav { z-index: 100;}
 
 
 
-<div id="loader">
-  <div class="spinner"></div>
-</div>
-
-
-<div id="app" style="display:none;">
-  <!-- Entire website -->
-  
-
-
-  <!-- HTML: place this where you want the hero section -->
-<div class="marquee-bar">
-  <div class="marquee-content">
-    <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span class="highlight-pink">Registration Deadline: 8th of March</span></div>
-    <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
-    <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
-    <!-- Duplicates for seamless loop -->
-    <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span class="highlight-pink">Registration Deadline: 8th of March</span></div>
-    <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
-    <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
-    <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span class="highlight-pink">Registration Deadline: 8th of March</span></div>
-    <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
-    <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
-    <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span class="highlight-pink">Registration Deadline: 8th of March</span></div>
-    <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
-    <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
+  <div id="loader">
+    <div class="spinner"></div>
   </div>
-</div>
-<nav class="site-nav" style="background-color: rgba(10, 10, 10, 0.87); z-index: 20; position: fixed; top: 36px;">
-  <div class="nav-inner container">
-    <a class="brand" href="#">
-      <span class="logo" aria-hidden="true">
-        <img src="img/bg-logo.png" alt="Jaipuria-Logo">
-      </span>
-      <span class="title">Ultimate Jaipurians <span style="color:var(--accent-cyan)">'2001 Batch</span></span>
-    </a>
 
-    <div class="nav-links" role="navigation" aria-label="Main navigation">
-      <a class="active" href="#home">Home</a>
-      <a href="#memories">Memories</a>
-      <a href="#details">Details</a>
 
+  <div id="app" style="display:none;">
+    <!-- Entire website -->
+
+
+
+    <!-- HTML: place this where you want the hero section -->
+    <div class="marquee-bar">
+      <div class="marquee-content">
+        <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span
+            class="highlight-pink">Registration Deadline: 8th of March</span></div>
+        <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
+        <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
+        <!-- Duplicates for seamless loop -->
+        <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span
+            class="highlight-pink">Registration Deadline: 8th of March</span></div>
+        <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
+        <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
+        <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span
+            class="highlight-pink">Registration Deadline: 8th of March</span></div>
+        <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
+        <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
+        <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span
+            class="highlight-pink">Registration Deadline: 8th of March</span></div>
+        <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
+        <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
+      </div>
     </div>
+    <nav class="site-nav" style="background-color: rgba(10, 10, 10, 0.87); z-index: 20; position: fixed; top: 36px;">
+      <div class="nav-inner container">
+        <a class="brand" href="#">
+          <span class="logo" aria-hidden="true">
+            <img src="img/bg-logo.png" alt="Jaipuria-Logo">
+          </span>
+          <span class="title">Ultimate Jaipurians <span style="color:var(--accent-cyan)">'2001 Batch</span></span>
+        </a>
 
-    <div class="nav-cta">
-      <a class="btn-primary" href="#register">Join The Re-Union</a>
-      <button id="menu-btn" class="menu-btn" aria-controls="mobile-menu" aria-expanded="false">
-        <i data-lucide="menu" style="width:20px;height:20px;"></i>
-      </button>
-    </div>
-  </div>
-</nav>
+        <div class="nav-links" role="navigation" aria-label="Main navigation">
+          <a class="active" href="#home">Home</a>
+          <a href="#memories">Memories</a>
+          <a href="#details">Details</a>
+
+        </div>
+
+        <div class="nav-cta">
+          <a class="btn-primary" href="#register">Join The Re-Union</a>
+          <button id="menu-btn" class="menu-btn" aria-controls="mobile-menu" aria-expanded="false">
+            <i data-lucide="menu" style="width:20px;height:20px;"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
 
 
 
-<section id="hero" class="hero">
+    <section id="hero" class="hero">
 
 
-  
 
 
-  <!-- VIDEO: keep this before or after content in the DOM — z-index controls stacking -->
-  <video
-  class="hero-video"
-  autoplay
-  loop
-  muted
-  playsinline
-  loading="lazy"
-  > 
-    <source src="img/party.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
 
-  <!-- <audio id="bgMusic" src="audio/jaipuria-party.mp3" loop preload="auto" >
+      <!-- VIDEO: keep this before or after content in the DOM — z-index controls stacking -->
+      <video class="hero-video" autoplay loop muted playsinline loading="lazy">
+        <source src="img/party.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- <audio id="bgMusic" src="audio/jaipuria-party.mp3" loop preload="auto" >
   </audio>
 
   <div id="music" class="music">
     <hr id="stop-music" class="stop-music">
        <img src="img/tune-speaker.png" alt="" srcset="">
   </div> -->
-  
-
-   <!-- CONTENT: placed above video -->
-
-  <div class="container margin-up">
-
-    <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; padding: 70px 0 20px 0;">
-      <div style="height: 140px; width: auto;">
-      <img style="height: 100%; width: 100%;" src="img/logo-reunion.png" alt="">
-    </div>
-    </div>
-
-    <div class="label">Official Invitation</div>
-
-    <h1 class="text-glow">
-      Gala Re-Union<br>
-      <span class="gradient-text" >Batch 2001</span>
-    </h1>
-
-    <p class="lead">A grand homecoming of memories, friendships, and the spirit of Jaipuria.</p>
-
-    <div class="actions" style="display: flex; justify-content: center; align-items: center;">
-      <a href="#register" class="ticket-primary">Get Your Ticket &nbsp;<i data-lucide="ticket" style="width:16px;height:16px;"></i></a>
-       <audio id="bgMusic" src="audio/jaipuria-party.mp3" loop preload="auto" >
-        </audio>
-
-       <div id="music" class="music">
-         <hr id="stop-music" class="stop-music">
-            <img src="img/tune-speaker.png" alt="" srcset="">
-       </div>
-
-    </div>
 
 
-  </div>
-</section>
+      <!-- CONTENT: placed above video -->
 
+      <div class="container margin-up">
 
-
-
-<div id="mobile-menu" aria-hidden="true">
-    <button id="close-menu" class="close" aria-label="Close menu"><i data-lucide="x" style="width:28px;height:28px;"></i></button>
-    <div style="color:var(--accent-pink); font-weight:700; margin-bottom:24px; font-size:16px; text-align:center; padding: 0 20px;">
-      The Last date of registration is 8th of March
-    </div>
-    <a class="mobile-link" href="#home">Home</a>
-    <a class="mobile-link" href="#details">Details</a>
-    <a class="mobile-link" href="#memories">Memories</a>
-    <a class="mobile-link" href="#register">Register Now</a>
-</div>
-
-
-  
-  <div class="gradient-bg">
-    <div class="g-ball g-1"></div>
-    <div class="g-ball g-2"></div>
-    <div id="g3" class="g-ball g-3"></div>
-  </div>
-
-  <div class="gradient-bg">
-    <div style="width: 100%; height: 100%; 
-                display: flex; align-items: center; justify-content: center;">
-      <img class="bg-logo-section" src="img/bg-logo.png" alt="">
-    </div>
-
-  </div>
-
-
-
-
-  <!-- Event Details Section -->
-  
-  <section id="details" class="section">
-    <div class="container">
-      <h2 class="title center " style="padding-bottom: 40px;"><span style="color:var(--accent-pink)">EVENT</span> INTEL</h2>
-
-
-      <div class="cards">
-
-        <div class="card glass-panel eventPopupTrigger" 
-               data-title="Lunch"
-               data-date="Saturday, 28 March 2026, 12 to 3 PM"
-               data-time="12 to 3 PM"
-               data-address="Seth Anandram Jaipuria School, Kanpur"
-               data-icon="img/lunch-break.png"
-               data-dress ="White Shirt"
-               style="border-top-color:var(--accent-purple);">
-          
-          
-          <div class="icon-wrap" style="background: rgba(255, 255, 255, 0.877); color:var(--accent-purple);">
-             <img src="img/lunch-break.png" style="width:44px;height:44px;" alt="">
+        <div
+          style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; padding: 70px 0 20px 0;">
+          <div style="height: 140px; width: auto;">
+            <img style="height: 100%; width: 100%;" src="img/logo-reunion.png" alt="">
           </div>
-          <div class="h3">Lunch</div>
-          <div class="muted">Saturday, 28 march 2026</div>
-           <div style="padding-top: 10px;">Venue & Time</div>
-          <button type="button" style="cursor: pointer; margin-top: 20px; padding: 8px 15px; border: none; border-radius: 20px; color: white; background: var(--accent-purple);">Know More</button>
+        </div>
+
+        <div class="label">Official Invitation</div>
+
+        <h1 class="text-glow">
+          Gala Re-Union<br>
+          <span class="gradient-text">Batch 2001</span>
+        </h1>
+
+        <p class="lead">A grand homecoming of memories, friendships, and the spirit of Jaipuria.</p>
+
+        <div class="actions" style="display: flex; justify-content: center; align-items: center;">
+          <a href="#register" class="ticket-primary">Get Your Ticket &nbsp;<i data-lucide="ticket"
+              style="width:16px;height:16px;"></i></a>
+          <audio id="bgMusic" src="audio/jaipuria-party.mp3" loop preload="auto">
+          </audio>
+
+          <div id="music" class="music">
+            <hr id="stop-music" class="stop-music">
+            <img src="img/tune-speaker.png" alt="" srcset="">
+          </div>
+
+        </div>
+
+
+      </div>
+    </section>
+
+
+
+
+    <div id="mobile-menu" aria-hidden="true">
+      <button id="close-menu" class="close" aria-label="Close menu"><i data-lucide="x"
+          style="width:28px;height:28px;"></i></button>
+      <div
+        style="color:var(--accent-pink); font-weight:700; margin-bottom:24px; font-size:16px; text-align:center; padding: 0 20px;">
+        The Last date of registration is 8th of March
+      </div>
+      <a class="mobile-link" href="#home">Home</a>
+      <a class="mobile-link" href="#details">Details</a>
+      <a class="mobile-link" href="#memories">Memories</a>
+      <a class="mobile-link" href="#register">Register Now</a>
+    </div>
+
+
+
+    <div class="gradient-bg">
+      <div class="g-ball g-1"></div>
+      <div class="g-ball g-2"></div>
+      <div id="g3" class="g-ball g-3"></div>
+    </div>
+
+    <div class="gradient-bg">
+      <div style="width: 100%; height: 100%; 
+                display: flex; align-items: center; justify-content: center;">
+        <img class="bg-logo-section" src="img/bg-logo.png" alt="">
+      </div>
+
+    </div>
+
+
+
+
+    <!-- Event Details Section -->
+
+    <section id="details" class="section">
+      <div class="container">
+        <h2 class="title center " style="padding-bottom: 40px;"><span style="color:var(--accent-pink)">EVENT</span>
+          INTEL</h2>
+
+
+        <div class="cards">
+
+          <div class="card glass-panel eventPopupTrigger" data-title="Lunch"
+            data-date="Saturday, 28 March 2026, 12 to 3 PM" data-time="12 to 3 PM"
+            data-address="Seth Anandram Jaipuria School, Kanpur" data-icon="img/lunch-break.png"
+            data-dress="White Shirt" style="border-top-color:var(--accent-purple);">
+
+
+            <div class="icon-wrap" style="background: rgba(255, 255, 255, 0.877); color:var(--accent-purple);">
+              <img src="img/lunch-break.png" style="width:44px;height:44px;" alt="">
+            </div>
+            <div class="h3">Lunch</div>
+            <div class="muted">Saturday, 28 march 2026</div>
+            <div style="padding-top: 10px;">Venue & Time</div>
+            <button type="button"
+              style="cursor: pointer; margin-top: 20px; padding: 8px 15px; border: none; border-radius: 20px; color: white; background: var(--accent-purple);">Know
+              More</button>
+          </div>
+
+
+
+
+          <div class="card glass-panel eventPopupTrigger" data-title="Dinner"
+            data-date="Saturday, 28 March 2026, 8 PM Onward" data-time="8 PM Onward"
+            data-address="Cranberry Lawn, Mainawati Marg, Kanpur" data-icon="img/dinner.png" data-dress="Party Dress"
+            style="border-top-color:var(--accent-pink);">
+
+
+            <div class="icon-wrap" style="background: rgba(255, 255, 255, 0.877); color:var(--accent-cyan);">
+              <img src="img/dinner.png" style="width:44px;height:44px;" alt="">
+            </div>
+            <div class="h3">Dinner</div>
+            <div class="muted">Saturday, 28 march 2026</div>
+            <div style="padding-top: 10px;">Venue & Time</div>
+            <button type="button"
+              style="cursor: pointer; margin-top: 20px; padding: 8px 15px; border: none; border-radius: 20px; color: white; background: var(--accent-pink);">Know
+              More</button>
+          </div>
+
+
+
+
+
         </div>
 
 
 
 
-        <div class="card glass-panel eventPopupTrigger" 
-              data-title="Dinner"
-              data-date="Saturday, 28 March 2026, 8 PM Onward"
-              data-time="8 PM Onward"
-              data-address="Cranberry Lawn, Mainawati Marg, Kanpur"
-              data-icon="img/dinner.png"
-              data-dress ="Party Dress"
-             style="border-top-color:var(--accent-pink);">
-          
-          
-          <div class="icon-wrap" style="background: rgba(255, 255, 255, 0.877); color:var(--accent-cyan);">
-             <img src="img/dinner.png" style="width:44px;height:44px;" alt="">
-          </div>
-          <div class="h3">Dinner</div>
-          <div class="muted">Saturday, 28 march 2026</div>
-          <div style="padding-top: 10px;">Venue & Time</div>
-          <button type="button" style="cursor: pointer; margin-top: 20px; padding: 8px 15px; border: none; border-radius: 20px; color: white; background: var(--accent-pink);">Know More</button>
-          </div>
-
-
-
 
 
       </div>
+    </section>
 
 
 
+    <div id="eventPopupOverlay">
+      <div id="eventPopupBox">
 
+        <div class="icon-wrap"
+          style="background: rgba(124,58,237,0.12); color:var(--accent-purple); display: flex; align-items: center; justify-content: center;">
+          <div
+            style="background-color: rgba(245, 245, 11, 0.87); height: 40px; width: 40px; display: flex; justify-content: center; align-items: center; border-radius: 50%;">
+            <img id="popupIcon" alt="" style="height: 70%; width: 70%;">
+          </div>
+        </div>
 
-
-    </div>
-  </section>
-
-
-
-<div id="eventPopupOverlay">
-  <div id="eventPopupBox">
-
-    <div class="icon-wrap" style="background: rgba(124,58,237,0.12); color:var(--accent-purple); display: flex; align-items: center; justify-content: center;">
-      <div style="background-color: rgba(245, 245, 11, 0.87); height: 40px; width: 40px; display: flex; justify-content: center; align-items: center; border-radius: 50%;">
-        <img id="popupIcon" alt="" style="height: 70%; width: 70%;">
-      </div>
-    </div>
-
-    <div style="font-size: 18px;" id="popupTitle"></div>
-    <div style="color: #9ca3af; 
+        <div style="font-size: 18px;" id="popupTitle"></div>
+        <div style="color: #9ca3af; 
       font-size:13px;" id="popupDate"></div>
-          
-          <div>
-            <div style="margin-bottom: 2px; font-size: 23px;">Venue</div>
-            <div style="margin-top: 5px; color: #cbd5e1; font-size: 14px;" class="sub-muted" id="event-address"></div>
-          </div>
-          
-          <div>
-            <div style="margin-bottom: 2px; font-size: 16px;">Dress Code</div>
-            <div class="sub-muted" id="dress-code"></div>
-          </div>
 
-    <a id="openMap"><i data-lucide="arrow-up-right"></i></a>
+        <div>
+          <div style="margin-bottom: 2px; font-size: 23px;">Venue</div>
+          <div style="margin-top: 5px; color: #cbd5e1; font-size: 14px;" class="sub-muted" id="event-address"></div>
+        </div>
 
-    <button id="eventPopupClose">Close</button>
+        <div>
+          <div style="margin-bottom: 2px; font-size: 16px;">Dress Code</div>
+          <div class="sub-muted" id="dress-code"></div>
+        </div>
 
-  </div>
-</div>
+        <a id="openMap"><i data-lucide="arrow-up-right"></i></a>
 
+        <button id="eventPopupClose">Close</button>
 
+      </div>
+    </div>
 
 
 
@@ -1577,27 +1882,29 @@ nav.site-nav { z-index: 100;}
 
 
 
-  <!-- //50 photos here in carousel -->
+
+
+    <!-- //50 photos here in carousel -->
 
     <section id="memories" class="production-carousel">
 
-        <div class="production-wrapper">
+      <div class="production-wrapper">
 
-            <button id="prev-pro" class="prev-btn">&#10094;</button>
+        <button id="prev-pro" class="prev-btn">&#10094;</button>
 
-            <div id="stage-pro" class="production-container">
+        <div id="stage-pro" class="production-container">
 
-                <h1>Jaipurian's <span style="color: #f472b6;">Memories</span></h1>
+          <h1>Jaipurian's <span style="color: #f472b6;">Memories</span></h1>
 
-                <div id="track-pro" class="production-track">
-                </div>
+          <div id="track-pro" class="production-track">
+          </div>
 
-            </div>
-
-            <button id="next-pro" class="next-btn">&#10095;</button>
         </div>
+
+        <button id="next-pro" class="next-btn">&#10095;</button>
+      </div>
     </section>
-    
+
 
 
 
@@ -1610,44 +1917,49 @@ nav.site-nav { z-index: 100;}
 
 
     <div class="popup-upload" id="popup-upload">
-     <div class="popup-photo-upload">
-        <span class="close-photo-btn" id="close-popup-upload" >&times;</span>
-	       <div class="upload-photo-above">
-                 
+      <div class="popup-photo-upload">
+        <span class="close-photo-btn" id="close-popup-upload">&times;</span>
+        <div class="upload-photo-above">
+
           <div>
-                <div><h1>Upload Image In Carousel</h1></div>
+            <div>
+              <h1>Upload Image In Carousel</h1>
+            </div>
 
-                    <form id="uploadForm" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap:20px">
-                      <input type="file" id="photo" accept="image/*" />
+            <form id="uploadForm"
+              style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap:20px">
+              <input type="file" id="photo" accept="image/*" />
 
-                      <input id="passKey" type="text">
-                      <button class="btn-primary" type="submit">Upload</button>
+              <input id="passKey" type="text">
+              <button class="btn-primary" type="submit">Upload</button>
 
-                    </form>
-                   
+            </form>
+
           </div>
 
 
-	    </div>
+        </div>
       </div>
-    </div>   
+    </div>
 
 
 
 
 
-<!-- Carousel Photos on PopUp -->
-<div class="popup-photo" id="popup-photo">
-  <div class="popup-photo-content glass-panel-photos">
-    <span class="close-photo-btn" id="popup-photo" >&times;</span>
-	   <div class="pop-photo-above">
-            <div class="pop-photo-content"><h1>Batch <span style="color: #00f3ff">2001</span></h1></div>
-		             <div class="pop-photo-style">
-		            	 <img id="popup-photo-img" src="" >
-	                </div>
-	</div>
-  </div>
-</div>
+    <!-- Carousel Photos on PopUp -->
+    <div class="popup-photo" id="popup-photo">
+      <div class="popup-photo-content glass-panel-photos">
+        <span class="close-photo-btn" id="popup-photo">&times;</span>
+        <div class="pop-photo-above">
+          <div class="pop-photo-content">
+            <h1>Batch <span style="color: #00f3ff">2001</span></h1>
+          </div>
+          <div class="pop-photo-style">
+            <img id="popup-photo-img" src="">
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
@@ -1657,17 +1969,16 @@ nav.site-nav { z-index: 100;}
 
 
 
-  <!-- form section -->
+    <!-- form section -->
 
-  <section id="register" class="section">
-    <div class="container">
-      <div class="register-wrap glass-panel">
-        <div class="panel-deco" aria-hidden="true"></div>
+    <section id="register" class="section">
+      <div class="container">
+        <div class="register-wrap glass-panel">
+          <div class="panel-deco" aria-hidden="true"></div>
 
-        <div class="title center" style="margin-bottom:18px;">
-          <h2 style="margin:0 0 6px;"> <span style="color:var(--accent-pink)">Secure</span> Your Spot</h2>
-          <div class="sub-muted" 
-               style="margin-top:26px;
+          <div class="title center" style="margin-bottom:18px;">
+            <h2 style="margin:0 0 6px;"> <span style="color:var(--accent-pink)">Secure</span> Your Spot</h2>
+            <div class="sub-muted" style="margin-top:26px;
                       margin-bottom: 46px;
                       margin-left: auto;
                       margin-right: auto;
@@ -1675,370 +1986,382 @@ nav.site-nav { z-index: 100;}
                 border-radius: 4px;
                  padding: 8px;
                  width: fit-content; ">Limited entries available for the 2026 Event</div>
-        </div>
-
-        <form id="contactForm">
-         
-          <div>
-            
-            <div class="input-wrap">
-              <span class="input-icon"><i data-lucide="user" style="width:16px;height:16px;color:#9ca3af;"></i></span>
-              <input id="name" type="text" class="form-input" placeholder="Full Name" required>
-            </div>
           </div>
 
-      
-          <div>
-            <div class="input-wrap">
-              <span class="input-icon"><i data-lucide="phone" style="width:16px;height:16px;color:#9ca3af;"></i></span>
-              <input id="number" type="tel" class="form-input" placeholder="Phone Number" required>
+          <form id="contactForm">
+
+            <div>
+
+              <div class="input-wrap">
+                <span class="input-icon"><i data-lucide="user" style="width:16px;height:16px;color:#9ca3af;"></i></span>
+                <input id="name" type="text" class="form-input" placeholder="Full Name" required>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <div class="input-wrap">
-              <span class="input-icon"><i data-lucide="mail" style="width:16px;height:16px;color:#9ca3af;"></i></span>
-              <input id="email" type="email" class="form-input" placeholder="Email" required>
+
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon"><i data-lucide="phone"
+                    style="width:16px;height:16px;color:#9ca3af;"></i></span>
+                <input id="number" type="tel" class="form-input" placeholder="Phone Number" required>
+              </div>
             </div>
-          </div>
 
-
-           <div>
-            <div class="input-wrap">
-              <span class="input-icon"><i data-lucide="locate-fixed" style="width:16px;height:16px;color:#9ca3af;"></i></span>
-              <input id="address" type="text" class="form-input" placeholder="Address" required>
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon"><i data-lucide="mail" style="width:16px;height:16px;color:#9ca3af;"></i></span>
+                <input id="email" type="email" class="form-input" placeholder="Email" required>
+              </div>
             </div>
-           </div>
 
-           <div>
-            <div class="input-wrap">
-              <span class="input-icon"><i data-lucide="locate-fixed" style="width:16px;height:16px;color:#9ca3af;"></i></span>
-              <input id="city" type="text" class="form-input" placeholder="City" required>
+
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon"><i data-lucide="locate-fixed"
+                    style="width:16px;height:16px;color:#9ca3af;"></i></span>
+                <input id="address" type="text" class="form-input" placeholder="Address" required>
+              </div>
             </div>
-           </div>
 
-           <div>
-            <div class="input-wrap">
-              <span class="input-icon"><i data-lucide="file-user" style="width:16px;height:16px;color:#9ca3af;"></i></span>
-              <input id="adhaar" type="text" class="form-input" placeholder="Adhaar/PAN Card" required>
-              <span class="info-icon" id="info"
-                    style="position: absolute; right: 10px; top: 60%; transform: translateY(-50%); cursor: pointer;" 
-                    title="The requirement to provide Permanent Account Number (PAN) and Aadhaar for various financial transactions and tax compliance is mandated by the Income Tax Act, 1961, specifically under Section 139AA.">
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon"><i data-lucide="locate-fixed"
+                    style="width:16px;height:16px;color:#9ca3af;"></i></span>
+                <input id="city" type="text" class="form-input" placeholder="City" required>
+              </div>
+            </div>
+
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon"><i data-lucide="file-user"
+                    style="width:16px;height:16px;color:#9ca3af;"></i></span>
+                <input id="adhaar" type="text" class="form-input" placeholder="Adhaar/PAN Card" required>
+                <span class="info-icon" id="info"
+                  style="position: absolute; right: 10px; top: 60%; transform: translateY(-50%); cursor: pointer;"
+                  title="The requirement to provide Permanent Account Number (PAN) and Aadhaar for various financial transactions and tax compliance is mandated by the Income Tax Act, 1961, specifically under Section 139AA.">
                   <img src="img/i-icon.png" style="height: 20px; width: 20px;">
-              </span>
+                </span>
+              </div>
             </div>
-           </div>
 
-      
 
-          <div style="padding-top: 8px;">
-            <label class="field-label">Will you be attending alone or with your spouse and/or kids?</label>
-          
-            <div class="mobile-size">
-              <div>
-               <ul class="checkbox-list spouse">
 
+            <div style="padding-top: 8px;">
+              <label class="field-label">Will you be attending alone or with your spouse and/or kids?</label>
+
+              <div class="mobile-size">
+                <div>
+                  <ul class="checkbox-list spouse">
+
+                    <div style="display: flex; gap: 10px;">
+                      <li class="checkbox-row">
+                        <label class="round-check">
+                          <input type="checkbox" value="stag" class="someone-check">
+                          <span class="circle">Stag</span>
+                        </label>
+                      </li>
+
+                      <li class="checkbox-row">
+                        <label class="round-check">
+                          <input type="checkbox" value="noStag" class="someone-check">
+                          <span class="circle">+1</span>
+                        </label>
+                      </li>
+                    </div>
+
+                  </ul>
+
+                </div>
+
+                <div style="font-size: 15px; ">Total No. of Attendees: <span style="padding-left: 3px;"
+                    id="attend">0</span>
+                </div>
+              </div>
+
+            </div>
+
+            <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+
+
+            <div style="padding-top: 8px;">
+              <label class="field-label">We are handing out jackets as souvenirs, please tell us your preferred size.
+                <span style="color: red;">*</span></label>
+
+              <div class="mobile-size">
+                <div>
+                  <ul class="checkbox-list spouse">
+
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                      <li class="checkbox-row">
+                        <label class="round-check">
+                          <input type="checkbox" value="S" class="size-check">
+                          <span class="circle">S</span>
+                        </label>
+                      </li>
+
+                      <li class="checkbox-row">
+                        <label class="round-check">
+                          <input type="checkbox" value="M" class="size-check">
+                          <span class="circle">M</span>
+                        </label>
+                      </li>
+
+                      <li class="checkbox-row">
+                        <label class="round-check">
+                          <input type="checkbox" value="L" class="size-check">
+                          <span class="circle">L</span>
+                        </label>
+                      </li>
+
+                      <li class="checkbox-row">
+                        <label class="round-check">
+                          <input type="checkbox" value="XL" class="size-check">
+                          <span class="circle">XL</span>
+                        </label>
+                      </li>
+
+                      <li class="checkbox-row">
+                        <label class="round-check">
+                          <input type="checkbox" value="XXL" class="size-check">
+                          <span class="circle">XXL</span>
+                        </label>
+                      </li>
+                    </div>
+
+                  </ul>
+
+                </div>
+              </div>
+
+            </div>
+
+
+            <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+
+            <div style="padding-top: 8px;">
+              <label class="field-label">Select your 10th standard section</label>
+              <div style="padding-top: 8px;">
+                <ul class="checkbox-list spouse">
+                  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <li class="checkbox-row">
+                      <label class="round-check">
+                        <input type="checkbox" value="A" class="section-10-check">
+                        <span class="circle">A</span>
+                      </label>
+                    </li>
+                    <li class="checkbox-row">
+                      <label class="round-check">
+                        <input type="checkbox" value="B" class="section-10-check">
+                        <span class="circle">B</span>
+                      </label>
+                    </li>
+                    <li class="checkbox-row">
+                      <label class="round-check">
+                        <input type="checkbox" value="C" class="section-10-check">
+                        <span class="circle">C</span>
+                      </label>
+                    </li>
+                    <li class="checkbox-row">
+                      <label class="round-check">
+                        <input type="checkbox" value="D" class="section-10-check">
+                        <span class="circle">D</span>
+                      </label>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+
+            <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+
+            <div style="padding-top: 8px;">
+              <label class="field-label">Select your 12th standard section (if you passed from Jaipuriya)</label>
+              <div style="padding-top: 8px;">
+                <ul class="checkbox-list spouse">
+                  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <li class="checkbox-row">
+                      <label class="round-check">
+                        <input type="checkbox" value="A" class="section-12-check">
+                        <span class="circle">A</span>
+                      </label>
+                    </li>
+                    <li class="checkbox-row">
+                      <label class="round-check">
+                        <input type="checkbox" value="B" class="section-12-check">
+                        <span class="circle">B</span>
+                      </label>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+
+
+            <!-- donation part here -->
+
+            <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+
+            <div style="padding-bottom: 12px;">Contributing to the event (Optional) </div>
+
+            <ul class="checkbox-list spouse donateDesign">
               <div style="display: flex; gap: 10px;">
                 <li class="checkbox-row">
-                <label class="round-check">
-                  <input type="checkbox" value="stag" class="someone-check">
-                  <span class="circle">Stag</span>
-                </label>
-              </li>
+                  <label class="round-check">
+                    <input id="donateShow" type="checkbox" value="1000" class="donation-check">
+                    <span class="circle">+Rs 1000</span>
+                  </label>
+                </li>
 
-              <li class="checkbox-row">
-                <label class="round-check">
-                  <input type="checkbox" value="noStag" class="someone-check">
-                  <span class="circle">+1</span>
-                </label>
-              </li>
-              </div>
-
-               </ul>
-
-              </div>
-
-              <div style="font-size: 15px; ">Total No. of Attendees: <span style="padding-left: 3px;" id="attend">0</span>
-              </div>
-            </div>
-          
-          </div>
-
-          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
-
-
-          <div style="padding-top: 8px;">
-            <label class="field-label">We are handing out jackets as souvenirs, please tell us your preferred size. <span style="color: red;">*</span></label>
-          
-            <div class="mobile-size">
-              <div>
-               <ul class="checkbox-list spouse">
-
-              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <li class="checkbox-row">
-                <label class="round-check">
-                  <input type="checkbox" value="S" class="size-check">
-                  <span class="circle">S</span>
-                </label>
-              </li>
-              
+                  <label class="round-check">
+                    <input id="donateShow" type="checkbox" value="2500" class="donation-check">
+                    <span class="circle">+Rs 2500</span>
+                  </label>
+                </li>
+
                 <li class="checkbox-row">
-                <label class="round-check">
-                  <input type="checkbox" value="M" class="size-check">
-                  <span class="circle">M</span>
-                </label>
-              </li>
-
-              <li class="checkbox-row">
-                <label class="round-check">
-                  <input type="checkbox" value="L" class="size-check">
-                  <span class="circle">L</span>
-                </label>
-              </li>
-
-              <li class="checkbox-row">
-                <label class="round-check">
-                  <input type="checkbox" value="XL" class="size-check">
-                  <span class="circle">XL</span>
-                </label>
-              </li>
-
-              <li class="checkbox-row">
-                <label class="round-check">
-                  <input type="checkbox" value="XXL" class="size-check">
-                  <span class="circle">XXL</span>
-                </label>
-              </li>
+                  <label class="round-check">
+                    <input id="donateShow" type="checkbox" value="5000" class="donation-check">
+                    <span class="circle">+Rs 5000</span>
+                  </label>
+                </li>
               </div>
+            </ul>
 
-               </ul>
 
-              </div>
+            <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+
+            <div>
+              <h3 style="margin: 0; padding: 0px 5px;">Grand Total: <span id="grandTotal"></span></h3>
             </div>
-          
-          </div>
 
-
-          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
-
-          <div style="padding-top: 8px;">
-            <label class="field-label">Select your 10th standard section</label>
-            <div style="padding-top: 8px;">
-              <ul class="checkbox-list spouse">
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                  <li class="checkbox-row">
-                    <label class="round-check">
-                      <input type="checkbox" value="A" class="section-10-check">
-                      <span class="circle">A</span>
-                    </label>
-                  </li>
-                  <li class="checkbox-row">
-                    <label class="round-check">
-                      <input type="checkbox" value="B" class="section-10-check">
-                      <span class="circle">B</span>
-                    </label>
-                  </li>
-                  <li class="checkbox-row">
-                    <label class="round-check">
-                      <input type="checkbox" value="C" class="section-10-check">
-                      <span class="circle">C</span>
-                    </label>
-                  </li>
-                  <li class="checkbox-row">
-                    <label class="round-check">
-                      <input type="checkbox" value="D" class="section-10-check">
-                      <span class="circle">D</span>
-                    </label>
-                  </li>
-                </div>
-              </ul>
-            </div>
-          </div>
-
-          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
-
-          <div style="padding-top: 8px;">
-            <label class="field-label">Select your 12th standard section (if you passed from Jaipuriya)</label>
-            <div style="padding-top: 8px;">
-              <ul class="checkbox-list spouse">
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                  <li class="checkbox-row">
-                    <label class="round-check">
-                      <input type="checkbox" value="A" class="section-12-check">
-                      <span class="circle">A</span>
-                    </label>
-                  </li>
-                  <li class="checkbox-row">
-                    <label class="round-check">
-                      <input type="checkbox" value="B" class="section-12-check">
-                      <span class="circle">B</span>
-                    </label>
-                  </li>
-                </div>
-              </ul>
-            </div>
-          </div>
-
-
-          <!-- donation part here -->
-
-          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
-
-          <div style="padding-bottom: 12px;">Contributing to the event (Optional) </div>
-
-  <ul class="checkbox-list spouse donateDesign" >
-  <div style="display: flex; gap: 10px;">
-    <li class="checkbox-row">
-      <label class="round-check">
-        <input id="donateShow" type="checkbox" value="1000" class="donation-check">
-        <span class="circle">+Rs 1000</span>
-      </label>
-    </li>
-
-    <li class="checkbox-row">
-      <label class="round-check">
-        <input id="donateShow" type="checkbox" value="2500" class="donation-check">
-        <span class="circle">+Rs 2500</span>
-      </label>
-    </li>
-
-    <li class="checkbox-row">
-      <label class="round-check">
-        <input id="donateShow" type="checkbox" value="5000" class="donation-check">
-        <span class="circle">+Rs 5000</span>
-      </label>
-    </li>
-  </div>
-</ul>
-
-
-          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
-
-          <div>
-            <h3 style="margin: 0; padding: 0px 5px;">Grand Total: <span id="grandTotal" ></span></h3>
-          </div>
-
-          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+            <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
 
 
             <div style="padding-top: 10px; padding-bottom: 0;">
-            <label class="field-label">Do you need support in arranging accommodation in Kanpur?</label>
+              <label class="field-label">Do you need support in arranging accommodation in Kanpur?</label>
 
-            <ul class="checkbox-list">
-              <li class="checkbox-row">
-                <label class="round-check">
-                  <input type="checkbox" value="Yes" class="support-check">
-                  <span class="circle">Yes</span>
-                </label>
-              </li>
+              <ul class="checkbox-list">
+                <li class="checkbox-row">
+                  <label class="round-check">
+                    <input type="checkbox" value="Yes" class="support-check">
+                    <span class="circle">Yes</span>
+                  </label>
+                </li>
 
-              <li class="checkbox-row">
-                <label class="round-check">
-                  <input type="checkbox" value="No" class="support-check">
-                  <span class="circle">No</span>
-                </label>
-              </li>
-            </ul>
-          </div>
-
-
-          <!-- here use below --- id="pay-btn" -->
-          <button id="openPopup" type="submit" class="btn-submit">
-             REGISTER NOW
-           </button>
-        </form>
-
-        <!-- Alert Box -->
-          <div id="toast" class="toast">
-           Thanking For Contributing Rs. <span> </span> <span id="toastAmount"></span> to Reunion Event
-          </div>
-
-            <!-- Pan Alert Box -->
-            <div id="panToast" class="pantoast">
-              The requirement to provide Permanent Account Number (PAN) and Aadhaar for various financial transactions and tax compliance is mandated by the Income Tax Act, 1961, specifically under Section 139AA.
+                <li class="checkbox-row">
+                  <label class="round-check">
+                    <input type="checkbox" value="No" class="support-check">
+                    <span class="circle">No</span>
+                  </label>
+                </li>
+              </ul>
             </div>
 
-      </div>
-      
-    </div>
 
-    
-  </section> 
+            <!-- here use below --- id="pay-btn" -->
+            <button id="openPopup" type="submit" class="btn-submit">
+              REGISTER NOW
+            </button>
+          </form>
 
-  
+          <!-- Alert Box -->
+          <div id="toast" class="toast">
+            Thanking For Contributing Rs. <span> </span> <span id="toastAmount"></span> to Reunion Event
+          </div>
 
-  <!-- registeration confirm Popup  -->
+          <!-- Pan Alert Box -->
+          <div id="panToast" class="pantoast">
+            The requirement to provide Permanent Account Number (PAN) and Aadhaar for various financial transactions and
+            tax compliance is mandated by the Income Tax Act, 1961, specifically under Section 139AA.
+          </div>
 
-<div class="pop-register" id="popup">
-  <div class="popup-content">
-    <span class="close-btn" id="closePop" >&times;</span>
-
-      <div class="billing-container" style="padding: 5px 0;">
-        <!-- <button onclick="paymentRazorpay()" style="background-color: black; color: white; padding: 4px; cursor: pointer;">Reunion</button> -->
-        <div class="billing-header">
-            <h1>Billing Summary</h1>
-            <p>Review your charges</p>
         </div>
 
-        <div class="billing-body">
+      </div>
+
+
+    </section>
+
+
+
+    <!-- registeration confirm Popup  -->
+
+    <div class="pop-register" id="popup">
+      <div class="popup-content">
+        <span class="close-btn" id="closePop">&times;</span>
+
+        <div class="billing-container" style="padding: 5px 0;">
+          <!-- <button onclick="paymentRazorpay()" style="background-color: black; color: white; padding: 4px; cursor: pointer;">Reunion</button> -->
+          <div class="billing-header">
+            <h1>Billing Summary</h1>
+            <p>Review your charges</p>
+          </div>
+
+          <div class="billing-body">
 
             <!-- Temporary Remove -->
             <div class="billing-item">
-                <div class="item-label">
-                    <svg class="item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
-                    </svg>
-                    Pass Fee
-                </div>
-                <div id="totalPass" class="item-amount">NA</div>
+              <div class="item-label">
+                <svg class="item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z">
+                  </path>
+                </svg>
+                Pass Fee
+              </div>
+              <div id="totalPass" class="item-amount">NA</div>
             </div>
 
             <div class="billing-item">
-                <div class="item-label">
-                    <svg class="item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                    Contribution
-                </div>
-                <div id="totalDonate" class="item-amount">NA</div>
+              <div class="item-label">
+                <svg class="item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                  </path>
+                </svg>
+                Contribution
+              </div>
+              <div id="totalDonate" class="item-amount">NA</div>
             </div>
 
             <div class="billing-item">
-                <div class="item-label">
-                    <svg class="item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                    </svg>
-                    GST (5%)
-                </div>
-                <div id="totalTax" class="item-amount">NA</div>
+              <div class="item-label">
+                <svg class="item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                  </path>
+                </svg>
+                GST (5%)
+              </div>
+              <div id="totalTax" class="item-amount">NA</div>
             </div>
 
             <div class="billing-divider"></div>
 
             <div class="billing-total">
-                <div class="total-label">Total Amount</div>
-                <div id="totalPay" class="total-amount">NA</div>
+              <div class="total-label">Total Amount</div>
+              <div id="totalPay" class="total-amount">NA</div>
             </div>
-        </div>
+          </div>
 
-        <div class="billing-footer">
-                  <button onclick="paymentRazorpay()"
-                  id="downloadBtn" class="btn pay-button">
-                    <span id="pay-btn" class="btn-text">Proceed to Payment</span>
-                    <span class="loader"></span>
-                  </button>
+          <div class="billing-footer">
+            <button onclick="paymentRazorpay()" id="downloadBtn" class="btn pay-button">
+              <span id="pay-btn" class="btn-text">Proceed to Payment</span>
+              <span class="loader"></span>
+            </button>
+          </div>
         </div>
+        <!-- </div> -->
+      </div>
     </div>
-	    <!-- </div> -->
-  </div>
-</div>
 
 
 
 
-<!-- QR , UPI POP UP -->
+    <!-- QR , UPI POP UP -->
 
-<!-- <div class="pop-register" id="qrPopup" >
+    <!-- <div class="pop-register" id="qrPopup" >
     <div class="popup-content">
 	  
        <span class="close-btn" id="qrClosePop" >&times;</span>
@@ -2122,75 +2445,77 @@ nav.site-nav { z-index: 100;}
 
 
 
-<!-- Contact Form Section -->
+    <!-- Contact Form Section -->
 
 
-<div class="contact-section">
+    <div class="contact-section">
 
 
-  <div class="contact-right">
+      <div class="contact-right">
 
-    <div class="register-wrap glass-panel">
+        <div class="register-wrap glass-panel">
 
-      <div class="contact-left">
-    
-    <div>
-      <h1>Contact US</h1>
-      <h3>Email Us: <span style="color: rgba(255, 255, 255, 0.747);">ultimatejaipurians@gmail.com</span></h3>
-    
+          <div class="contact-left">
 
-    <div>
-			<h3 style="color: rgba(255, 255, 255, 0.747);">
-				+91-9920908050
-			</h3>
-			<h3 style="color: rgba(255, 255, 255, 0.747);">
-				+91-9120888197
-			</h3>
-		</div>
-   </div>
-
-  </div>
+            <div>
+              <h1>Contact US</h1>
+              <h3>Email Us: <span style="color: rgba(255, 255, 255, 0.747);">ultimatejaipurians@gmail.com</span></h3>
 
 
-      <form id="contactForm">
-         
-          <div>
-            
-            <div class="input-wrap">
-              <span class="input-icon"><i data-lucide="user" style="width:16px;height:16px;color:#9ca3af;"></i></span>
-              <input id="contact-name" type="text" class="form-input" placeholder="Full Name" required>
+              <div>
+                <h3 style="color: rgba(255, 255, 255, 0.747);">
+                  +91-9920908050
+                </h3>
+                <h3 style="color: rgba(255, 255, 255, 0.747);">
+                  +91-9120888197
+                </h3>
+              </div>
             </div>
-          </div>
 
-      
-          <div>
-            <div class="input-wrap">
-              <span class="input-icon"><i data-lucide="phone" style="width:16px;height:16px;color:#9ca3af;"></i></span>
-              <input id="contact-phone" type="tel" class="form-input" placeholder="Phone Number" required>
-            </div>
-          </div>
-
-          <div>
-            <div class="input-wrap">
-              <span class="input-icon"><i data-lucide="mail" style="width:16px;height:16px;color:#9ca3af;"></i></span>
-              <input id="contact-email" type="text" class="form-input" placeholder="Email" required>
-            </div>
           </div>
 
 
-           <div>
-            <div class="input-wrap">
-                <span class="input-icon-txtarea"><i data-lucide="message-square-text" style="width:16px;height:16px;color:#9ca3af;"></i></span>
+          <form id="contactForm">
+
+            <div>
+
+              <div class="input-wrap">
+                <span class="input-icon"><i data-lucide="user" style="width:16px;height:16px;color:#9ca3af;"></i></span>
+                <input id="contact-name" type="text" class="form-input" placeholder="Full Name" required>
+              </div>
+            </div>
+
+
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon"><i data-lucide="phone"
+                    style="width:16px;height:16px;color:#9ca3af;"></i></span>
+                <input id="contact-phone" type="tel" class="form-input" placeholder="Phone Number" required>
+              </div>
+            </div>
+
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon"><i data-lucide="mail" style="width:16px;height:16px;color:#9ca3af;"></i></span>
+                <input id="contact-email" type="text" class="form-input" placeholder="Email" required>
+              </div>
+            </div>
+
+
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon-txtarea"><i data-lucide="message-square-text"
+                    style="width:16px;height:16px;color:#9ca3af;"></i></span>
                 <textarea id="contact-text" class="form-input" placeholder="Write your message"></textarea>
+              </div>
             </div>
-           </div>
 
 
-    </div>
+        </div>
 
 
-    <div style="display: flex; align-items: center; justify-content: center; padding-top: 20px;">
-      <Button id="contact-btn" style="
+        <div style="display: flex; align-items: center; justify-content: center; padding-top: 20px;">
+          <Button id="contact-btn" style="
       padding:8px 16px;
       border-radius:12px;
       border:none;
@@ -2200,226 +2525,289 @@ nav.site-nav { z-index: 100;}
       background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
       color:#000;
       box-shadow: 0 10px 30px rgba(0,243,255,0.12);">
-        Send Message</Button>
+            Send Message</Button>
+        </div>
+
+      </div>
+
     </div>
+
+
+
+
+
+
+
+    <!-- Footer Section -->
+
+    <footer class="premium-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Brand & About -->
+          <div class="footer-brand">
+            <a href="#" class="logo">
+              <img src="img/logo-reunion.png" alt="Jaipuria Reunion Logo">
+            </a>
+            <p>
+              Celebrating 25 years of excellence, friendships, and the unbreakable spirit of the Ultimate Jaipurians
+              Batch of 2001.
+            </p>
+            <div class="footer-social">
+              <a href="#" class="social-btn" aria-label="Instagram">
+                <i data-lucide="instagram"></i>
+              </a>
+              <a href="#" class="social-btn" aria-label="Facebook">
+                <i data-lucide="facebook"></i>
+              </a>
+              <a href="#" class="social-btn" aria-label="Twitter">
+                <i data-lucide="twitter"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="footer-heading">Navigate</h4>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#details">Event Intel</a></li>
+              <li><a href="#memories">Memories</a></li>
+              <li><a href="#register">Register</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Intel -->
+          <div>
+            <h4 class="footer-heading">Contact Intel</h4>
+            <div class="footer-contact-item">
+              <div class="icon"><i data-lucide="map-pin" style="width:18px;height:18px;"></i></div>
+              <div>
+                <strong>KASHI VISHWNATH FOODS</strong><br>
+                Flat No. 404, Anand Laxmi Appartment<br>
+                Shastri Nagar, Kanpur - 208005<br>
+                <span style="font-size: 13px; opacity: 0.8;">GSTIN: 09BECPS5226R1ZR</span>
+              </div>
+            </div>
+            <div class="footer-contact-item">
+              <div class="icon"><i data-lucide="phone" style="width:18px;height:18px;"></i></div>
+              <div>+91-9793080808</div>
+            </div>
+            <div class="footer-contact-item">
+              <div class="icon"><i data-lucide="mail" style="width:18px;height:18px;"></i></div>
+              <div>ultimatejaipurians@gmail.com</div>
+            </div>
+          </div>
+
+          <!-- Meta -->
+          <div>
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+              <li><a href="terms-condition.html">Terms & Conditions</a></li>
+              <li><a href="refund-policy.html">Refund Policy</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="copyright">
+            © 2026 Ultimate Jaipurians Club. All Rights Reserved.
+          </div>
+          <div class="footer-legal">
+            <span style="color: var(--muted); font-size: 14px; display: flex; align-items: center; gap: 8px;">
+              Reconnecting Hearts <i data-lucide="heart" style="width:16px;height:16px;color:#ef4444;"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
 
   </div>
 
-</div>
+
+
+
+  <script src="main.js" defer></script>
+  <script src="carousel.js" defer></script>
+  <script type="application/javascript"
+    src="https://secure.paytmpayments.com/merchantpgpui/checkoutjs/merchants/gfWLtr04448499190835.js"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 
 
 
 
+  <script>
+
+    const BACKEND_URL_INDEX_PAGE = 'https://api.ultimatejaipurians.in'
+    //   const BACKEND_URL_INDEX_PAGE = 'http://localhost:8000'
 
 
+    //-------------------------------------------------
+    //          Popup Open Final Pricing
+    //------------------------------------------------
 
-  <!-- Footer Section -->
+    const openPop = document.getElementById("openPopup");
 
-  <footer class="site-footer">
-    <p style="margin:0;display:flex;align-items:center;justify-content:center;gap:8px;">
-      Reconnecting Hearts <i data-lucide="heart" style="width:16px;height:16px;color:#ef4444;"></i> 
-      <div class="social-links" style="margin-top:10px;">
-    </p>
-    <div class="social-links" style="margin-top:10px;">
+    openPop.addEventListener("click", function (e) {
+      e.preventDefault();
 
-      <a href="#"><i data-lucide="instagram" style="width:18px;height:18px;"></i></a>
-      <a href="#"><i data-lucide="facebook" style="width:18px;height:18px;"></i></a>
-     </div>
-    
-      <div style="margin-top: auto;">
-        <span> © 2026 Ultimate Jaipurians Club.</span>
-         <div style="text-align: end;" >
-         <a href="about.html" style="font-size: small;">About Us</a>
-         <a href="privacy-policy.html" style="font-size: small;">Privacy Policy</a>
-         <a href="terms-condition.html" style="font-size: small;">Terms & Conditions</a>
-         <a href="refund-policy.html" style="font-size: small;">Refund Policy</a>
-        </div>
-       </div>
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("number").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const address = document.getElementById("address").value;
+      const city = document.getElementById("city").value.trim();
+      const adhaar = document.getElementById("adhaar").value.trim();
+      const noPeople = document.getElementById("attend").textContent;
 
-  </footer>
+      const someone = document.querySelector(".someone-check:checked")?.value || "";
+      const support = document.querySelector(".support-check:checked")?.value || "";
+      const donationCheckboxes = document.querySelectorAll(".donation-check");
 
-</div>
+      const size = document.querySelector(".size-check:checked")?.value || "";
+      const section10 =
+        document.querySelector(".section-10-check:checked")?.value || "";
 
+      if (
+        !name ||
+        !phone ||
+        !email ||
+        !address ||
+        !city ||
+        !adhaar ||
+        !someone ||
+        !support ||
+        !size
+      ) {
+        alert("Please fill the form");
+        e.preventDefault();
+      } else {
+        document.getElementById("popup").style.display = "flex";
 
+        function getDonationTotal() {
+          let total = 0;
 
+          donationCheckboxes.forEach((cb) => {
+            if (cb.checked) {
+              total += Number(cb.value);
+            }
+          });
 
-     <script src="main.js" defer></script>
-     <script src="carousel.js" defer></script>
-      <script type="application/javascript" src="https://secure.paytmpayments.com/merchantpgpui/checkoutjs/merchants/gfWLtr04448499190835.js" crossorigin="anonymous"></script>
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-
-
-    
-    
-    <script>
-
-       const BACKEND_URL_INDEX_PAGE = 'https://api.ultimatejaipurians.in'
-      //   const BACKEND_URL_INDEX_PAGE = 'http://localhost:8000'
-
-
-//-------------------------------------------------
-//          Popup Open Final Pricing
-//------------------------------------------------
-
-const openPop = document.getElementById("openPopup");
-
-openPop.addEventListener("click", function (e) {
-  e.preventDefault();
-
-  const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("number").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const address = document.getElementById("address").value;
-  const city = document.getElementById("city").value.trim();
-  const adhaar = document.getElementById("adhaar").value.trim();
-  const noPeople = document.getElementById("attend").textContent;
-
-  const someone = document.querySelector(".someone-check:checked")?.value || "";
-  const support = document.querySelector(".support-check:checked")?.value || "";
-  const donationCheckboxes = document.querySelectorAll(".donation-check");
-
-  const size = document.querySelector(".size-check:checked")?.value || "";
-  const section10 =
-    document.querySelector(".section-10-check:checked")?.value || "";
-
-  if (
-    !name ||
-    !phone ||
-    !email ||
-    !address ||
-    !city ||
-    !adhaar ||
-    !someone ||
-    !support ||
-    !size
-  ) {
-    alert("Please fill the form");
-    e.preventDefault();
-  } else {
-    document.getElementById("popup").style.display = "flex";
-
-    function getDonationTotal() {
-      let total = 0;
-
-      donationCheckboxes.forEach((cb) => {
-        if (cb.checked) {
-          total += Number(cb.value);
+          return total;
         }
-      });
 
-      return total;
-    }
+        let passValue;
+        if (noPeople == 1) {
+          passValue = 5000;
+        } else if (noPeople == 2) {
+          passValue = 7500;
+        } else {
+          passValue = 0;
+        }
 
-    let passValue;
-    if (noPeople == 1) {
-      passValue = 5000;
-    } else if (noPeople == 2) {
-      passValue = 7500;
-    } else {
-      passValue = 0;
-    }
+        const totalValue = passValue + getDonationTotal();
+        const taxValue = (5 * totalValue) / 100;
+        const payPrice = totalValue + taxValue;
 
-    const totalValue = passValue + getDonationTotal();
-    const taxValue = (5 * totalValue) / 100;
-    const payPrice = totalValue + taxValue;
+        document.getElementById("totalPass").innerText = `₹  ${passValue}`;
+        document.getElementById("totalDonate").innerText =
+          `₹  ${getDonationTotal()}`;
+        document.getElementById("totalTax").innerText = `₹  ${taxValue}`;
+        document.getElementById("totalPay").innerText = `₹ ${payPrice}`;
+      }
+    });
 
-    document.getElementById("totalPass").innerText = `₹  ${passValue}`;
-    document.getElementById("totalDonate").innerText =
-      `₹  ${getDonationTotal()}`;
-    document.getElementById("totalTax").innerText = `₹  ${taxValue}`;
-    document.getElementById("totalPay").innerText = `₹ ${payPrice}`;
-  }
-});
-
-document.getElementById("closePop").addEventListener("click", () => {
-  document.getElementById("popup").style.display = "none";
-  location.reload();
-});
-
-
-
-     //Upload Photo Open
-      document.getElementById('uploadPhoto').addEventListener('click', function () {
-	            document.getElementById("popup-upload").style.display = "flex";
-
-	            function closePopup() {
-                document.getElementById("popup-upload").style.display = "none";
-                }
-
-               document.getElementById("close-popup-upload").addEventListener("click", (e) => {
-                if (e.target.id === "close-popup-upload") closePopup();
-               });
-      })
-        
-  
-      
-
-  document.getElementById('uploadForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  console.log('FORM SUBMIT INTERCEPTED');
-
-  const fileInput = document.getElementById('photo');
-  const passKey = document.getElementById('passKey').value.trim();
-  const file = fileInput.files[0];
-
-  if (!file) {
-    alert('Select an image');
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append('photo', file);
-  formData.append('key', passKey)
-  
-
-  try {
-      const res = await fetch(`${BACKEND_URL_INDEX_PAGE}/upload/photos`, {
-      method: 'POST',
-      body: formData
+    document.getElementById("closePop").addEventListener("click", () => {
+      document.getElementById("popup").style.display = "none";
+      location.reload();
     });
 
 
-    if(res.status){
-      window.location.reload();
-    }
 
-    console.log('STATUS:', res.status);
+    //Upload Photo Open
+    document.getElementById('uploadPhoto').addEventListener('click', function () {
+      document.getElementById("popup-upload").style.display = "flex";
 
-    const text = await res.text();   // 👈 IMPORTANT
-    console.log('RAW RESPONSE:', text);
+      function closePopup() {
+        document.getElementById("popup-upload").style.display = "none";
+      }
 
-    const data = JSON.parse(text);
-    console.log('UPLOAD SUCCESS', data);
+      document.getElementById("close-popup-upload").addEventListener("click", (e) => {
+        if (e.target.id === "close-popup-upload") closePopup();
+      });
+    })
 
-  } catch (err) {
-    console.error('UPLOAD FAILED (REAL ERROR):', err);
-  }
-});
+
+
+
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      console.log('FORM SUBMIT INTERCEPTED');
+
+      const fileInput = document.getElementById('photo');
+      const passKey = document.getElementById('passKey').value.trim();
+      const file = fileInput.files[0];
+
+      if (!file) {
+        alert('Select an image');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('photo', file);
+      formData.append('key', passKey)
+
+
+      try {
+        const res = await fetch(`${BACKEND_URL_INDEX_PAGE}/upload/photos`, {
+          method: 'POST',
+          body: formData
+        });
+
+
+        if (res.status) {
+          window.location.reload();
+        }
+
+        console.log('STATUS:', res.status);
+
+        const text = await res.text();   // 👈 IMPORTANT
+        console.log('RAW RESPONSE:', text);
+
+        const data = JSON.parse(text);
+        console.log('UPLOAD SUCCESS', data);
+
+      } catch (err) {
+        console.error('UPLOAD FAILED (REAL ERROR):', err);
+      }
+    });
 
 
 
 
     //================================================================================
-        document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('loader').style.display = 'none';
-        document.getElementById('app').style.display = 'block';
-      });
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+    });
 
-            const video = document.getElementsByTagName('video')
+    const video = document.getElementsByTagName('video')
 
-            document.addEventListener('load', () => {
+    document.addEventListener('load', () => {
 
-          setTimeout(() => {
-            video.load();
-          }, 2000);
-        });
+      setTimeout(() => {
+        video.load();
+      }, 2000);
+    });
 
-     </script>
+  </script>
 
 
 
 
 
 </body>
+
 </html>
