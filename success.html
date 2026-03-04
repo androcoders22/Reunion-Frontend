@@ -1,759 +1,518 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="google-site-verification" content="ugj2HjgmsHuTd4B68VYdCPzIDnvdVQCXWwaqpeGEYlo" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Jaipurian Re-union Pass</title>
-    <link rel="icon" type="image/png" href="img/bg-logo.png">
+<head>
+  <meta charset="utf-8" />
+  <meta name="google-site-verification" content="ugj2HjgmsHuTd4B68VYdCPzIDnvdVQCXWwaqpeGEYlo" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <style>
-      :root {
-        --bg: #071022;
-        --accent-cyan: #00f3ff;
-        --accent-blue: #3b82f6;
-        --card: #0f1724;
-        --accent1: #00d4ff; /* cyan */
-        --accent2: #ff4db8; /* pink */
-        --muted: rgba(255, 255, 255, 0.12);
-        --glass: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.03),
-          rgba(255, 255, 255, 0.01)
-        );
+  <title>Jaipurian Re-union Pass</title>
+  <link rel="icon" type="image/png" href="img/bg-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" async />
+  <link rel="preconnect" href="https://fonts.gstatic.com" async crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Righteous&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet" async />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #071022;
+      --accent-cyan: #00f3ff;
+      --accent-blue: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      font-family: "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(600px 300px at 10% 20%, rgba(0, 212, 255, 0.06), transparent),
+        radial-gradient(600px 300px at 90% 80%, rgba(255, 77, 184, 0.04), transparent),
+        var(--bg);
+      color: #e6eef8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .page-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .pay-success {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px 0;
+    }
+
+    .pay-success h2 {
+      color: #22c55e;
+      font-size: 1.2rem;
+    }
+
+    .header {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+    }
+
+    .header p {
+      margin: 6px 0 0;
+      color: rgba(230, 238, 248, 0.75);
+      font-size: 0.92rem;
+    }
+
+    /* --- Pass Container --- */
+    .pass-wrapper {
+      position: relative;
+      width: 800px;
+      height: 260px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .pass-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* --- Dynamic Overlay Texts --- */
+    .overlay-text {
+      position: absolute;
+      color: #000;
+      font-family: "Courier Prime", monospace;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    /* Image size: 4596 x 1496 */
+    .field-name {
+      top: 38.2%;
+      left: 81.6%;
+      width: 15%;
+      line-height: 1;
+      white-space: nowrap;
+      font-size: 9px;
+      color: #1a1a1a;
+    }
+
+    .field-city {
+      top: 46.5%;
+      left: 81.6%;
+      width: 15%;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .field-phone {
+      top: 55.0%;
+      left: 81.6%;
+      width: 15%;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .field-email {
+      top: 63.5%;
+      left: 81.6%;
+      width: 16%;
+      font-size: 8px;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .field-persons {
+      top: 69.8%;
+      left: 93.3%;
+      width: 25px;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    .field-serial {
+      top: 54.86%;
+      left: 71.5%;
+      width: 100px;
+      transform: translateY(-50%) rotate(-90deg);
+      font-size: 6.5px;
+      text-align: center;
+      letter-spacing: 2px;
+      color: white;
+    }
+
+    .field-serial-2 {
+      top: 54.76%;
+      left: 91.7%;
+      width: 100px;
+      transform: translateY(-50%) rotate(-90deg);
+      font-size: 6.5px;
+      text-align: center;
+      letter-spacing: 2px;
+      color: rgb(112, 102, 102);
+    }
+
+    /* --- Dynamic QR Code --- */
+    .qr-container {
+      position: absolute;
+      left: 81%;
+      top: 4.2%;
+      width: 8.1%;
+      height: 25%;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-container canvas {
+      max-width: 100% !important;
+      max-height: 100% !important;
+    }
+
+    /* --- Buttons --- */
+    .actions-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+      color: #000;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-download:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-download:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #e6eef8;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 850px) {
+      .pass-wrapper {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4596 / 1496;
       }
+    }
 
-      * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-      }
-
-      body {
-        font-family:
-          Inter,
-          Poppins,
-          system-ui,
-          -apple-system,
-          "Segoe UI",
-          Roboto;
-        background:
-          radial-gradient(
-            600px 300px at 10% 20%,
-            rgba(0, 212, 255, 0.06),
-            transparent
-          ),
-          radial-gradient(
-            600px 300px at 90% 80%,
-            rgba(255, 77, 184, 0.04),
-            transparent
-          ),
-          var(--bg);
-        color: #e6eef8;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
+    @media (max-width: 480px) {
       .page-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 30px;
-      }
-
-      .pay-success {
-        width: 100%;
-        height: fit-content;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 20px 0;
-      }
-
-      .container {
-        width: 100%;
-        max-width: 980px;
-        background-color: #ff4db8;
-        display: flex;
-        gap: 24px;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .header {
-        text-align: center;
-        margin: 20px;
+        padding: 16px;
       }
 
       .header h1 {
-        margin: 0;
-        font-size: 1.5rem;
-        font-weight: 700;
-        letter-spacing: 0.6px;
+        font-size: 1.1rem;
       }
+    }
+  </style>
+</head>
 
-      .header p {
-        margin: 6px 0 0;
-        color: rgba(230, 238, 248, 0.75);
-        font-size: 0.92rem;
-      }
+<body>
+  <div class="page-container">
 
-      .ticket-wrap {
-        width: 100%;
-        height: 80%;
-        margin: auto;
-        gap: 20px;
-      }
+    <div class="pay-success">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+        <polyline points="22 4 12 14.01 9 11.01" />
+      </svg>
+      <h2>Payment Successful!</h2>
+    </div>
 
-      .ticket {
-        background-color: yellow;
-        background: var(--glass);
-        border-radius: 18px;
-        padding: 22px;
-        border: 1px solid var(--muted);
-        box-shadow: 0 20px 40px rgba(3, 8, 18, 0.6);
-        position: relative;
-        overflow: hidden;
-      }
-      .ticket::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background: linear-gradient(
-          90deg,
-          rgba(0, 212, 255, 0.06) 0%,
-          transparent 30%,
-          transparent 70%,
-          rgba(255, 77, 184, 0.04) 100%
-        );
-      }
-      .ticket-main {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        position: relative;
-      }
-      .title-row {
-        display: flex;
-        align-items: flex-start;
-        gap: 16px;
-      }
-      .event-badge {
-        min-width: 78px;
-        height: 78px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, var(--accent1), var(--accent2));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        color: #051426;
-        font-size: 0.85rem;
-      }
-      .event-info {
-        flex: 1;
-      }
-      .event-title {
-        font-family: "Orbitron", sans-serif;
-        font-size: 1.3rem;
-        font-weight: 600;
-        margin: 0;
-        text-transform: uppercase;
-        line-height: 1;
-      }
-      .tagline {
-        margin-top: 10px;
-        color: rgba(230, 238, 248, 0.8);
-        font-weight: 600;
-        font-size: 0.9rem;
-      }
+    <div class="header">
+      <h1>Your Reunion Event Pass</h1>
+      <p>Download your pass below or check your email</p>
+    </div>
 
-      .details-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-top: 6px;
-      }
+    <!-- Pass Preview -->
+    <div class="pass-wrapper" id="capture-area">
+      <!-- Background Image -->
+      <img src="img/FINALISED (1).jpg.jpeg" class="pass-bg" alt="Reunion Pass Design" />
 
-      .detail {
-        background: rgba(255, 255, 255, 0.02);
-        padding: 10px;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.03);
-      }
+      <!-- Dynamic Data Fields -->
+      <div id="display-name" class="overlay-text field-name"></div>
+      <div id="display-city" class="overlay-text field-city"></div>
+      <div id="display-phone" class="overlay-text field-phone"></div>
+      <div id="display-email" class="overlay-text field-email"></div>
+      <div id="display-persons" class="overlay-text field-persons"></div>
+      <div id="display-serial" class="overlay-text field-serial"></div>
+      <div id="display-serial-2" class="overlay-text field-serial-2"></div>
 
-      .label {
-        font-size: 0.7rem;
-        color: rgba(230, 238, 248, 0.6);
-      }
-
-      .detail {
-        font-size: 0.9rem;
-        color: white;
-      }
-      .detail .value {
-        margin-top: 2px;
-        font-weight: 500;
-        font-size: 0.7rem;
-      }
-      .footer-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-top: 8px;
-      }
-      .count-pill {
-        background: rgba(255, 255, 255, 0.03);
-        padding: 10px 14px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.04);
-        font-weight: 700;
-      }
-      .actions {
-        display: flex;
-        gap: 12px;
-      }
-      .btn {
-        background: linear-gradient(90deg, var(--accent1), var(--accent2));
-        border: none;
-        padding: 10px 14px;
-        border-radius: 10px;
-        font-weight: 700;
-        cursor: pointer;
-        color: #051426;
-      }
-      .btn:hover {
-        transform: scale(1.05);
-        transition: ease-in-out;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-      }
-      .btn:active {
-        transform: scale(0.97);
-      }
-      .btn.ghost {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        color: rgba(230, 238, 248, 0.9);
-      }
-
-      .details-grid h1 {
-        text-align: end;
-      }
-
-      .back-btn {
-        background: linear-gradient(
-          90deg,
-          var(--accent-cyan),
-          var(--accent-blue)
-        );
-        border: none;
-        padding: 10px 14px;
-        border-radius: 10px;
-        font-weight: 700;
-        cursor: pointer;
-        color: #051426;
-      }
-
-      .back-btn:hover {
-        transform: scale(1.05);
-        transition: ease-in-out;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-      }
-
-      .btn:active {
-        transform: scale(0.97);
-      }
-
-      .stub {
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.02),
-          rgba(255, 255, 255, 0.01)
-        );
-        border-radius: 14px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid var(--muted);
-      }
-      .stub .qr {
-        width: 140px;
-        height: 140px;
-        background: white;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-      /* simple css QR placeholder */
-      .qr::before {
-        content: "";
-        width: 90px;
-        height: 90px;
-        background-image:
-          linear-gradient(
-            45deg,
-            #000 25%,
-            transparent 25%,
-            transparent 75%,
-            #000 75%,
-            #000
-          ),
-          linear-gradient(
-            45deg,
-            #000 25%,
-            transparent 25%,
-            transparent 75%,
-            #000 75%,
-            #000
-          );
-        background-size: 10px 10px;
-        background-position:
-          0 0,
-          5px 5px;
-      }
-      .stub .ticket-no {
-        margin-top: 14px;
-        font-family: Orbitron, monospace;
-        color: var(--accent2);
-        font-weight: 800;
-      }
-
-      /* Notch effect */
-      .notch {
-        position: absolute;
-        right: 320px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 24px;
-        height: 48px;
-        background: transparent;
-        border-radius: 999px;
-        box-shadow: inset 8px 0 0 var(--bg);
-      }
-
-      /* Responsive */
-      @media (max-width: 880px) {
-        .ticket-wrap {
-          grid-template-columns: 1fr 260px;
-        }
-        .notch {
-          right: 260px;
-        }
-      }
-      @media (max-width: 720px) {
-        .page-container {
-          padding: 20px;
-          gap: 30px;
-        }
-
-        .ticket-wrap {
-          grid-template-columns: 1fr;
-          padding: 0 0px;
-        }
-        .notch {
-          display: none;
-        }
-        .ticket {
-          padding: 18px;
-        }
-        .title-row {
-          flex-direction: row;
-          gap: 12px;
-        }
-        .event-badge {
-          width: 64px;
-          height: 64px;
-        }
-        .details-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        .stub {
-          order: 2;
-          width: 100%;
-        }
-      }
-      @media (max-width: 420px) {
-        .header h1 {
-          font-size: 0.98rem;
-        }
-        .event-title {
-          font-size: 0.7rem;
-        }
-        .tagline {
-          font-size: 0.4rem;
-        }
-        .value {
-          font-size: 0.2rem;
-        }
-        .label {
-          font-size: 0.5rem;
-        }
-        #name-local {
-          font-size: 0.7rem;
-        }
-        /* .details-grid {
-          grid-template-columns: 2fr;
-        } */
-        .event-badge {
-          width: 56px;
-          height: 56px;
-        }
-      }
-
-      /* Print */
-      @media print {
-        body {
-          background: white;
-          color: black;
-        }
-        .btn {
-          display: none;
-        }
-        .stub .qr {
-          background: #eee;
-        }
-      }
-
-      .loader {
-        width: 18px;
-        height: 18px;
-        border: 3px solid #fff;
-        border-top-color: transparent;
-        border-radius: 50%;
-        display: none;
-        animation: spin 0.7s linear infinite;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="page-container">
-      <div class="ticket-wrap">
-        <div class="ticket" role="article">
-          <div class="ticket-main">
-            <div class="title-row">
-              <div
-                style="
-                  display: flex;
-                  align-items: start;
-                  justify-content: start;
-                  gap: 50px;
-                "
-              >
-                <div class="event-info" style="padding-top: 10px">
-                  <div class="event-title">
-                    Ultimate Jaipurian
-                    <br />
-                    <div style="padding-top: 10px">Reunion Pass</div>
-                  </div>
-                  <div class="tagline">
-                    Official Batch 2001 · March 28, 2026
-                  </div>
-                </div>
-                <div style="height: 90px; width: 90px">
-                  <img
-                    src="img/bg-logo.png"
-                    alt="No Img"
-                    style="height: 100%; width: 100%"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div>
-              Serial No.
-              <span
-                id="serial-no"
-                style="color: rgb(180, 178, 178); font-size: 12px"
-              ></span>
-            </div>
-
-            <div class="detail">
-              <div class="label">DATE</div>
-              <div id="pass-name" class="value">March 28, 2026</div>
-            </div>
-
-            <div class="details-grid">
-              <div class="detail">
-                <div class="label">LUNCH TIME</div>
-                <div class="value">12:00 to 3:00 PM</div>
-              </div>
-              <div class="detail">
-                <div class="label">DINNER TIME</div>
-                <div class="value">8:00 PM Onwards</div>
-              </div>
-            </div>
-
-            <div class="detail">
-              <div class="label">VENUE</div>
-              <div class="value">
-                Cranberry Lawn, <br />
-                <p style="padding: 6px 0">Mainawati Marg, Kanpur, U.P 208017</p>
-                <!-- <br>Uttar Pradesh 208017 -->
-              </div>
-            </div>
-
-            <div style="margin: auto">
-              <h1 id="name-local">XXXXX XXXXX</h1>
-            </div>
-
-            <div
-              class="qr-box"
-              style="
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <canvas id="partyQR" style="text-align: center"></canvas>
-              <!-- <h4 id="qr-text-show"></h4> -->
-            </div>
-
-            <div class="details-grid">
-              <div class="detail">
-                <div class="label">No. Of People</div>
-                <div id="noPeople-local" class="value">X</div>
-              </div>
-              <div class="detail">
-                <div class="label">City</div>
-                <div id="city-local" class="value">XXXXX</div>
-              </div>
-              <div class="detail">
-                <div class="label">Phone Number</div>
-                <div id="phone-local" class="value">XXXXXXXXXX</div>
-              </div>
-              <div class="detail">
-                <div class="label">Email</div>
-                <div id="email-local" class="value"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-row">
-        <!-- <div class="count-pill">Admit: 1 Person</div> -->
-        <div class="actions">
-          <a href="index.html"
-            ><button class="back-btn">Back To Home</button></a
-          >
-        </div>
-        <div class="actions">
-          <button
-            type="button"
-            class="btn"
-            id="downloadBtn"
-            onclick="downloadTicketClicked()"
-          >
-            Download PDF
-          </button>
-        </div>
+      <!-- Dynamic QR Holder -->
+      <div class="qr-container">
+        <canvas id="qr-canvas"></canvas>
       </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <div class="actions-row">
+      <a href="index.html" class="btn-back">← Back To Home</a>
+      <button class="btn-download" id="downloadBtn" onclick="downloadPass()">
+        Download High-Res PDF
+      </button>
+    </div>
+  </div>
 
-    <script>
-      const BACKEND_URL_OF_SUCCESS = "https://api.ultimatejaipurians.in";
-      //const BACKEND_URL_OF_SUCCESS = "http://localhost:8000";
+  <script>
+    const BACKEND_URL_OF_SUCCESS = "https://api.ultimatejaipurians.in";
 
-      //--------------------------------------
-      //        Manipulate pass value
-      //--------------------------------------
+    // ──────────────────────────────────────
+    //  Read URL params & populate the pass
+    // ──────────────────────────────────────
+    document.addEventListener("DOMContentLoaded", function () {
+      const params = new URLSearchParams(window.location.search);
 
-      document.addEventListener("DOMContentLoaded", function () {
-        const params = new URLSearchParams(window.location.search);
+      const userData = {
+        user_name: params.get("user_name"),
+        user_number: params.get("user_number"),
+        city: params.get("city"),
+        serialNo: params.get("serialNo"),
+        how_many_people: params.get("how_many_people"),
+        user_email: params.get("user_email"),
+        qr_code: params.get("qr_code"),
+        bookId: params.get("bookId"),
+      };
 
-        const userData = {
-          user_name: params.get("user_name"),
-          user_number: params.get("user_number"),
-          city: params.get("city"),
-          serialNo: params.get("serialNo"),
-          how_many_people: params.get("how_many_people"),
-          user_email: params.get("user_email"),
-          qr_code: params.get("qr_code"),
-          bookId: params.get("bookId"),
-        };
+      // Save to localStorage (for email / returning later)
+      localStorage.setItem("no-people", userData.how_many_people);
+      localStorage.setItem("city", userData.city);
+      localStorage.setItem("phone", userData.user_number);
+      localStorage.setItem("email", userData.user_email);
+      localStorage.setItem("name", userData.user_name);
+      localStorage.setItem("serialNo", userData.serialNo);
+      localStorage.setItem("qr-code", userData.qr_code);
+      localStorage.setItem("userSerial", userData.bookId);
 
-        localStorage.setItem("no-people", userData.how_many_people);
-        localStorage.setItem("city", userData.city);
-        localStorage.setItem("phone", userData.user_number);
-        localStorage.setItem("email", userData.user_email);
-        localStorage.setItem("name", userData.user_name);
-        localStorage.setItem("serialNo", userData.serialNo);
-        localStorage.setItem("qr-code", userData.qr_code);
-        localStorage.setItem("userSerial", userData.bookId);
+      // Build serial string
+      const paySerial = userData.serialNo || "";
+      const userSerial = userData.bookId || "";
+      const serialIndex = 8;
+      const fullSerial =
+        paySerial.slice(0, serialIndex + 1) +
+        "S" + userSerial + "N" +
+        paySerial.slice(serialIndex + 1);
 
-        document.getElementById("phone-local").textContent =
-          localStorage.getItem("phone");
-        document.getElementById("noPeople-local").textContent =
-          localStorage.getItem("no-people");
-        document.getElementById("city-local").textContent =
-          localStorage.getItem("city");
-        document.getElementById("email-local").textContent =
-          localStorage.getItem("email");
-        document.getElementById("name-local").textContent =
-          localStorage.getItem("name");
-
-        //-----------------pass serial no. manipulation-------------
-        const paySerial = localStorage.getItem("serialNo");
-        const userSerial = localStorage.getItem("userSerial");
-
-        const index = 8;
-        const result =
-          paySerial.slice(0, index + 1) +
-          `S` +
-          userSerial +
-          `N` +
-          paySerial.slice(index + 1);
-        console.log(result);
-
-        document.getElementById("serial-no").textContent = result;
+      // Inject data into the pass
+      injectData({
+        name: userData.user_name || "",
+        city: userData.city || "",
+        phone: userData.user_number || "",
+        email: userData.user_email || "",
+        persons: String(userData.how_many_people || "1"),
+        serial: fullSerial,
+        qr_code: userData.qr_code || fullSerial,
       });
+    });
 
-      //---------------------------------------------------
-      //             QR Generator
-      //---------------------------------------------------
+    /**
+     * Injecting Data & Generating QR
+     */
+    function injectData(data) {
+      document.getElementById("display-name").innerText = data.name;
+      document.getElementById("display-city").innerText = data.city;
+      document.getElementById("display-phone").innerText = data.phone;
+      document.getElementById("display-email").innerText = data.email;
+      document.getElementById("display-persons").innerText =
+        String(data.persons).padStart(2, "0");
+      document.getElementById("display-serial").innerText = data.serial;
+      document.getElementById("display-serial-2").innerText = data.serial;
 
-      document.addEventListener("DOMContentLoaded", async () => {
-        const qrCode = localStorage.getItem("qr-code");
+      // Generate QR Code
+      const qrData = `Name: ${data.name}\nSerial: ${data.serial}\nPhone: ${data.phone}`;
+      const canvas = document.getElementById("qr-canvas");
+      QRCode.toCanvas(
+        canvas,
+        qrData,
+        {
+          width: 60,
+          margin: 2,
+          color: {
+            dark: "#000000",
+            light: "#ffffff",
+          },
+        },
+        function (error) {
+          if (error) console.error(error);
+          console.log("QR code generated for: " + data.serial);
+        },
+      );
+    }
 
-        QRCode.toCanvas(document.getElementById("partyQR"), qrCode, {
-          width: 100,
-        });
-      });
-
-      //-------------------------------------------------------------
-      //             Download PDF
-      //-------------------------------------------------------------
-
+    // ──────────────────────────────────────
+    //  Download Pass as PDF
+    // ──────────────────────────────────────
+    async function downloadPass() {
+      const area = document.getElementById("capture-area");
       const downloadBtn = document.getElementById("downloadBtn");
+      const originalText = downloadBtn.innerText;
 
-      async function generatePdfBlobFromNode() {
-        console.log("Function Button Clicked....");
-        const node = document.querySelector(".ticket-wrap");
-        if (!node) throw new Error("Ticket element not found");
-        // temporarily remove transition if any
-        const prevTransition = node.style.transition;
-        node.style.transition = "none";
+      downloadBtn.innerText = "Generating PDF...";
+      downloadBtn.disabled = true;
 
-        const canvas = await html2canvas(node, {
-          scale: 2,
+      try {
+        const canvas = await html2canvas(area, {
+          scale: 3,
           useCORS: true,
-          backgroundColor: "#14192D",
-          scrollY: -window.scrollY,
+          logging: false,
+          backgroundColor: null,
         });
-
-        node.style.transition = prevTransition;
 
         const imgData = canvas.toDataURL("image/png");
         const { jsPDF } = window.jspdf;
+
         const pdf = new jsPDF({
-          orientation: "portrait",
-          unit: "pt",
-          format: "a4",
+          orientation: "landscape",
+          unit: "px",
+          format: [canvas.width / 3, canvas.height / 3],
         });
 
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
-
-        // center and size (adjust as needed)
-        const passWidth = 350;
-        const passHeight = 700;
-        const x = (pageWidth - passWidth) / 2;
-        const y = (pageHeight - passHeight) / 2;
-
-        pdf.addImage(imgData, "PNG", x, y, passWidth, passHeight);
-
-        const blob = pdf.output("blob");
-        return blob;
+        pdf.addImage(
+          imgData,
+          "PNG",
+          0,
+          0,
+          canvas.width / 3,
+          canvas.height / 3,
+        );
+        pdf.save(`ReunionPass_${Date.now()}.pdf`);
+      } catch (err) {
+        console.error("PDF Generation failed", err);
+        alert("Failed to generate PDF. Check console for details.");
+      } finally {
+        downloadBtn.innerText = originalText;
+        downloadBtn.disabled = false;
       }
+    }
 
-      async function downloadTicketClicked() {
-        console.log("download function reached out...");
+    // ──────────────────────────────────────
+    //  Generate PDF blob (for emailing)
+    // ──────────────────────────────────────
+    async function generatePdfBlob() {
+      const area = document.getElementById("capture-area");
+      const canvas = await html2canvas(area, {
+        scale: 3,
+        useCORS: true,
+        logging: false,
+        backgroundColor: null,
+      });
 
-        try {
-          downloadBtn.classList.add("loading");
-          const pdfBlob = await generatePdfBlobFromNode();
+      const imgData = canvas.toDataURL("image/png");
+      const { jsPDF } = window.jspdf;
 
-          const filename = `ticket-${new Date()
-            .toISOString()
-            .slice(0, 10)}.pdf`;
-          const url = URL.createObjectURL(pdfBlob);
-          const link = document.createElement("a");
-          link.href = url;
-          link.download = filename;
-          document.body.appendChild(link);
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "px",
+        format: [canvas.width / 3, canvas.height / 3],
+      });
 
-          // trigger download
-          link.click();
+      pdf.addImage(imgData, "PNG", 0, 0, canvas.width / 3, canvas.height / 3);
+      return pdf.output("blob");
+    }
 
-          // cleanup after small delay so browser had time to start download
-          setTimeout(() => {
-            link.remove();
-            URL.revokeObjectURL(url);
-          }, 500);
-        } catch (err) {
-          console.error("Download error:", err);
-          alert("Could not create/download ticket: " + (err.message || err));
-        } finally {
-          downloadBtn.classList.remove("loading");
-        }
-      }
+    // ──────────────────────────────────────
+    //  Auto-send email with PDF on page load
+    // ──────────────────────────────────────
+    if (!localStorage.getItem("fromLogin")) {
+      window.addEventListener("load", () => {
+        setTimeout(sendEmailPDF, 1000);
+      });
+    }
 
-      // Auto-send on page load (upload only, no download)
+    async function sendEmailPDF() {
+      const emailReceiver = localStorage.getItem("email");
 
-      if (!localStorage.getItem("fromLogin")) {
-        window.addEventListener("load", () => {
-          setTimeout(sendEmailPDF, 200);
+      try {
+        const pdfBlob = await generatePdfBlob();
+        const file = new File(
+          [pdfBlob],
+          `ticket-${new Date().toISOString().slice(0, 10)}.pdf`,
+          { type: "application/pdf" },
+        );
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("to", emailReceiver);
+        formData.append("subject", "Your Event Ticket");
+        formData.append("text", "Please find your ticket attached.");
+
+        const resp = await fetch(`${BACKEND_URL_OF_SUCCESS}/api/upload-pdf`, {
+          method: "POST",
+          body: formData,
         });
-      }
 
-      async function sendEmailPDF() {
-        const emailReceiver = localStorage.getItem("email");
-
-        try {
-          const pdfBlob = await generatePdfBlobFromNode();
-          const file = new File(
-            [pdfBlob],
-            `ticket-${new Date().toISOString().slice(0, 10)}.pdf`,
-            { type: "application/pdf" },
-          );
-          const formData = new FormData();
-          formData.append("file", file);
-          formData.append("to", emailReceiver);
-          formData.append("subject", "Your Event Ticket");
-          formData.append("text", "Please find your ticket attached.");
-
-          const resp = await fetch(`${BACKEND_URL_OF_SUCCESS}/api/upload-pdf`, {
-            method: "POST",
-            body: formData,
-          });
-
-          if (!resp.ok) {
-            const json = await resp.json().catch(() => ({}));
-            console.error("Upload failed", json);
-          } else {
-            console.log("Uploaded & emailed successfully");
-          }
-        } catch (err) {
-          console.error("sendEmailPDF error:", err);
+        if (!resp.ok) {
+          const json = await resp.json().catch(() => ({}));
+          console.error("Upload failed", json);
+        } else {
+          console.log("Uploaded & emailed successfully");
         }
+      } catch (err) {
+        console.error("sendEmailPDF error:", err);
       }
-    </script>
-  </body>
+    }
+  </script>
+</body>
+
 </html>

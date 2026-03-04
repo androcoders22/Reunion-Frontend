@@ -399,8 +399,7 @@ async function paymentRazorpay() {
         return;
       }
 
-      //----- use paytm docs code ----------------//
-
+      // Production Paytm checkout logic
       async function onScriptLoad() {
         var config = {
           root: "",
@@ -434,6 +433,8 @@ async function paymentRazorpay() {
       }
 
       onScriptLoad();
+
+      document.getElementById("downloadBtn").classList.remove("loading");
     } catch (error) {
       console.error("Payment initiation error:", error);
       alert("Error connecting to server. Please check your internet or try again.");
