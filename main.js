@@ -179,7 +179,7 @@ donationCheckboxes.forEach((cb) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   // ===== DEADLINE CHECK =====
-  const registrationDeadline = new Date('2026-03-08T23:59:59'); // March 8, 2026
+  const registrationDeadline = new Date('2026-03-28T23:59:59'); // March 8, 2026
   const now = new Date();
 
   if (now > registrationDeadline) {

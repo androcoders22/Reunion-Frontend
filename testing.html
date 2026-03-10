@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="google-site-verification" content="ugj2HjgmsHuTd4B68VYdCPzIDnvdVQCXWwaqpeGEYlo" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+    <title>TESTING - Reunion Event 26</title>
+    <link rel="icon" type="image/png" href="img/bg-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" async />
+    <link rel="preconnect" href="https://fonts.gstatic.com" async crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Righteous&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet" async />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="production-carousel-claude.css" />
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="contactForm.css" />
+    <link rel="stylesheet" href="photoPopup.css" />
+    <link rel="stylesheet" href="photoUpload.css" />
+
+    <!-- CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+    <style>
+        /* testing purpose color */
+        .red {
+            background-color: red;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .purple {
+            background-color: purple;
+        }
+
+        :root {
+            --bg: #050505;
+            --text: #ffffff;
+            --muted: #9ca3af;
+            --panel-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-cyan: #00f3ff;
+            --accent-purple: #7c3aed;
+            --accent-pink: #f472b6;
+            --accent-blue: #3b82f6;
+            --party-dark: #0a0a12;
+            --card-radius: 24px;
+            --max-width: 1200px;
+            --container-pad: 16px;
+            --nav-height: 64px;
+            --shadow-accent: 0 0 20px rgba(0, 243, 255, 0.2);
+            --glass-blur: blur(10px);
+            font-synthesis: none;
+        }
+
+        html,
+        body {
+            scroll-behavior: smooth;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family:
+                "Outfit",
+                system-ui,
+                -apple-system,
+                "Segoe UI",
+                Roboto,
+                "Helvetica Neue",
+                Arial;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* --------------------------
+      Background Gradient
+     ------------------------- */
+
+        .gradient-bg {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .g-ball {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.95;
+            animation: float 10s infinite ease-in-out;
+            will-change: transform, opacity;
+            mix-blend-mode: screen;
+        }
+
+        .g-1 {
+            width: 620px;
+            height: 620px;
+            top: -160px;
+            left: -160px;
+            background: radial-gradient(circle at 30% 30%,
+                    rgba(124, 58, 237, 0.14) 60%,
+                    transparent 85%);
+            animation-delay: 0s;
+        }
+
+        .g-2 {
+            width: 520px;
+            height: 520px;
+            bottom: 6%;
+            right: -120px;
+            background: radial-gradient(circle at 60% 40%,
+                    rgba(0, 243, 255, 0.98) 0%,
+                    rgba(0, 243, 255, 0.55) 10%,
+                    rgba(0, 243, 255, 0.1) 60%,
+                    transparent 88%);
+            animation-delay: 2s;
+        }
+
+        .g-3 {
+            width: 360px;
+            height: 360px;
+            top: 38%;
+            left: 26%;
+            background: radial-gradient(circle at 40% 50%,
+                    rgba(244, 114, 182, 0.98) 0%,
+                    rgba(244, 114, 182, 0.52) 30%,
+                    rgba(244, 114, 182, 0.1) 60%,
+                    transparent 88%);
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, 50px) scale(1.03);
+            }
+        }
+
+        body>*:not(.gradient-bg):not(.pop-register) {
+            position: relative;
+            z-index: 1;
+        }
+
+        nav.site-nav {
+            z-index: 100;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--container-pad);
+            box-sizing: border-box;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--card-radius);
+        }
+
+        .glass-panel-photos {
+            background: var(--panel-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--card-radius);
+        }
+
+        .text-glow {
+            text-shadow:
+                0 0 10px rgba(124, 58, 237, 0.5),
+                0 0 20px rgba(124, 58, 237, 0.3),
+                0 0 30px rgba(124, 58, 237, 0.1);
+        }
+
+        .marquee-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 101;
+            background: rgba(5, 5, 5, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            color: var(--muted);
+            padding: 0;
+            font-size: 13px;
+            font-weight: 400;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .marquee-content {
+            display: flex;
+            white-space: nowrap;
+            width: max-content;
+            animation: marquee-scroll 60s linear infinite;
+            will-change: transform;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-right: 80px;
+            letter-spacing: 0.5px;
+        }
+
+        .deadline-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .highlight-pink {
+            color: var(--accent-pink);
+            font-weight: 600;
+        }
+
+        @keyframes marquee-scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .marquee-item:not(.deadline-only) {
+                display: none;
+            }
+
+            .marquee-content {
+                animation-duration: 20s;
+            }
+
+            .marquee-item {
+                padding-right: 50px;
+            }
+        }
+
+        nav.site-nav {
+            position: fixed;
+            inset: 36px auto auto 0;
+            top: 36px;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.02),
+                    rgba(255, 255, 255, 0.01));
+            padding: 8px 0;
+            box-sizing: border-box;
+            border-bottom: 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--container-pad);
+            gap: 12px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .brand .logo {
+            width: auto;
+            height: 34px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .brand .title {
+            font-family: "Righteous", cursive;
+            font-size: 20px;
+            letter-spacing: 0.6px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .nav-links a.active {
+            background: transparent;
+            color: var(--accent-cyan);
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-cyan);
+            color: #000;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 999px;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu-btn {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border-radius: 8px;
+            border: none;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+
+        .nav-deadline {
+            background: rgba(244, 114, 182, 0.1);
+            border: 1px solid rgba(244, 114, 182, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: var(--accent-pink);
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+
+        #mobile-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            background: rgba(0, 0, 0, 0.98);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            transition: transform 0.25s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        #mobile-menu.open {
+            display: flex;
+        }
+
+        #mobile-menu .close {
+            position: absolute;
+            top: 45px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        #mobile-menu a {
+            color: #fff;
+            font-family: "Righteous", cursive;
+            font-size: 28px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        /* --- Pass Container --- */
+        #pass-section {
+            display: none;
+            /* Hidden until "API" returns data */
+            margin-top: 50px;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .pass-wrapper {
+            position: relative;
+            width: 800px;
+            /* Adjust according to your image aspect ratio */
+            height: 260px;
+            /* Approximately match banner aspect ratio 3:1 */
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .pass-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- Dynamic Overlay Texts --- */
+        .overlay-text {
+            position: absolute;
+            color: #000;
+            font-family: "Courier Prime", monospace;
+            font-weight: 700;
+            font-size: 14px;
+            /* Scaled down for 800px width */
+            text-align: left;
+        }
+
+        /* Adjust these percentages based on your image layout 
+           Image size: 4596 x 1496
+        */
+        .field-name {
+            top: 32.9%;
+            /* Y: ~510 */
+            left: 86.2%;
+            /* X: ~3962 */
+            width: 13.8%;
+            font-size: 10px;
+            color: #1a1a1a;
+        }
+
+        .field-city {
+            top: 38.5%;
+            /* Y: ~590 */
+            left: 85.92%;
+            /* X: ~3949 */
+            width: 14%;
+            font-size: 10px;
+        }
+
+        .field-phone {
+            top: 43.5%;
+            /* Y: ~665 */
+            left: 87.35%;
+            /* X: ~4015 */
+            width: 12.6%;
+            font-size: 10px;
+        }
+
+        .field-email {
+            top: 48.7%;
+            /* Y: ~753 */
+            left: 86.1%;
+            /* X: ~3900 average left align */
+            width: 14%;
+            font-size: 10px;
+            line-height: 1.2;
+            word-wrap: break-word;
+            /* Allows long email to wrap to second line */
+        }
+
+        .field-persons {
+            top: 59.2%;
+            /* Y: ~915 */
+            left: 93.66%;
+            /* X: ~4351 */
+            width: 25px;
+            text-align: center;
+        }
+
+        .field-serial {
+            top: 24%;
+            /* Y: 600 */
+            left: 72.5%;
+            /* X: 3600 */
+            width: 100px;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 6.5px;
+            text-align: center;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .field-serial-2 {
+            top: 24%;
+            left: 92.7%;
+            /* X: 4511 (Center is ~98%, minus 50px/6.25% half-width) */
+            width: 100px;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 6.5px;
+            text-align: center;
+            letter-spacing: 2px;
+            color: rgb(112, 102, 102);
+        }
+
+        /* --- Dynamic QR Code --- */
+        .qr-container {
+            position: absolute;
+            left: 80%;
+            /* Start X: 3766px */
+            top: 5%;
+            /* Start Y: 92px */
+            width: 11.1%;
+            /* Width: 273px */
+            height: 28%;
+            /* Height: 336px */
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-container canvas {
+            max-width: 100% !important;
+            max-height: 100% !important;
+        }
+
+        /* TESTING BANNER */
+        .test-banner {
+            background: #ff5f6d;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-weight: bold;
+            position: fixed;
+            top: 100px;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            font-size: 14px;
+        }
+    </style>
+
+    <!-- Reuse existing styles -->
+    <link rel="stylesheet" href="production-carousel-claude.css" />
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="contactForm.css" />
+    <link rel="stylesheet" href="photoPopup.css" />
+    <link rel="stylesheet" href="photoUpload.css" />
+</head>
+
+<body>
+    <div class="test-banner">TESTING MODE: PAYTM PAYMENT BYPASSED</div>
+
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <div id="app" style="display: none">
+        <div class="gradient-bg" aria-hidden="true">
+            <div class="g-ball g-1"></div>
+            <div class="g-ball g-2"></div>
+            <div class="g-ball g-3"></div>
+        </div>
+
+        <!-- Nav -->
+        <div class="marquee-bar">
+            <div class="marquee-content">
+                <div class="marquee-item deadline-only">
+                    <div class="deadline-dot"></div>
+                    Registration Deadline:
+                    <span class="highlight-pink">March 8, 2026</span>
+                </div>
+            </div>
+        </div>
+
+        <nav class="site-nav">
+            <div class="nav-inner">
+                <a href="#" class="brand">
+                    <div class="logo">
+                        <img src="img/bg-logo.png" alt="Logo" />
+                    </div>
+                    <span class="title">REUNION '26</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#home" class="active">Home</a>
+                    <a href="#details">Details</a>
+                    <a href="#register">Register</a>
+                </div>
+                <div class="nav-cta">
+                    <a href="#register" class="btn-primary">
+                        <i data-lucide="ticket" style="width: 18px; height: 18px"></i>
+                        Register
+                    </a>
+                    <button class="menu-btn" id="menu-btn">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="label">BATCH OF 2001</div>
+                <h1>
+                    The Ultimate <br /><span class="gradient-text">Jaipurian Reunion</span>
+                </h1>
+                <p class="lead">
+                    Celebrating 25 years of memories, madness, and unbreakable bonds.
+                    Join us for the biggest comeback of the decade.
+                </p>
+                <div class="actions">
+                    <a href="#register" class="btn-primary">Secure My Spot</a>
+                    <a href="#details" class="btn-secondary">View Intel</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simplified Form for Testing -->
+        <section id="register" class="section">
+            <div class="container">
+                <div class="register-wrap glass-panel">
+                    <div class="title center">
+                        <h2>
+                            <span style="color: var(--accent-pink)">Test</span> Registration
+                        </h2>
+                        <p>Fill the form to test success redirection</p>
+                    </div>
+                    <form id="contactForm">
+                        <div class="input-wrap">
+                            <input id="name" type="text" class="form-input" placeholder="Full Name"
+                                value="John Doe Test" required />
+                        </div>
+                        <div class="input-wrap">
+                            <input id="number" type="tel" class="form-input" placeholder="Phone Number"
+                                value="9876543210" required />
+                        </div>
+                        <div class="input-wrap">
+                            <input id="email" type="email" class="form-input" placeholder="Email"
+                                value="test@example.com" required />
+                        </div>
+                        <div class="input-wrap">
+                            <input id="address" type="text" class="form-input" placeholder="Address"
+                                value="123 Test Street" required />
+                        </div>
+                        <div class="input-wrap">
+                            <input id="city" type="text" class="form-input" placeholder="City" value="Kanpur"
+                                required />
+                        </div>
+                        <div class="input-wrap">
+                            <input id="adhaar" type="text" class="form-input" placeholder="Adhaar/PAN"
+                                value="ABCDE1234F" required />
+                        </div>
+
+                        <div class="mobile-size">
+                            <label class="round-check">
+                                <input type="checkbox" value="stag" class="someone-check" checked />
+                                <span class="circle">Stag</span>
+                            </label>
+                            <div>Attendees: <span id="attend">1</span></div>
+                        </div>
+
+                        <div class="mobile-size">
+                            <label class="round-check">
+                                <input type="checkbox" value="L" class="size-check" checked />
+                                <span class="circle">L (Size)</span>
+                            </label>
+                        </div>
+
+                        <div class="mobile-size">
+                            <label class="round-check">
+                                <input type="checkbox" value="No" class="support-check" checked />
+                                <span class="circle">No Accommodation Support</span>
+                            </label>
+                        </div>
+
+                        <h3 class="center">
+                            Grand Total: ₹ <span id="grandTotal">5000</span>
+                        </h3>
+
+                        <button id="openPopup" type="submit" class="btn-submit">
+                            REGISTER (TEST)
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Billing Popup -->
+        <div class="pop-register" id="popup" style="
+          display: none;
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.8);
+          z-index: 2000;
+          align-items: center;
+          justify-content: center;
+        ">
+            <div class="glass-panel" style="
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+          ">
+                <span id="closePop" style="
+              position: absolute;
+              right: 15px;
+              top: 10px;
+              cursor: pointer;
+              font-size: 24px;
+            ">&times;</span>
+                <h2 class="center">Billing Summary</h2>
+                <div style="
+              margin: 20px 0;
+              border-top: 1px solid #333;
+              padding-top: 10px;
+            ">
+                    <p>Pass Fee: <span id="totalPass">₹ 5000</span></p>
+                    <p>Contribution: <span id="totalDonate">₹ 0</span></p>
+                    <p>GST (5%): <span id="totalTax">₹ 250</span></p>
+                    <hr />
+                    <h3 class="center">Total: <span id="totalPay">₹ 5250</span></h3>
+                </div>
+                <!-- BYPASSED BUTTON -->
+                <button onclick="testingPayment()" class="btn-submit" id="processBtn">
+                    Generate Dynamic Event Pass (BYPASS PAYTM)
+                </button>
+            </div>
+        </div>
+
+        <!-- Generated Pass Preview -->
+        <div id="pass-section">
+            <h3 style="margin-bottom: 20px">Your Event Pass</h3>
+            <div class="pass-wrapper" id="capture-area">
+                <!-- Background Image -->
+                <img src="img/FINALISED.jpg" class="pass-bg" alt="Reunion Pass Design" />
+
+                <!-- Dynamic Data Fields -->
+                <div id="display-name" class="overlay-text field-name"></div>
+                <div id="display-city" class="overlay-text field-city"></div>
+                <div id="display-phone" class="overlay-text field-phone"></div>
+                <div id="display-email" class="overlay-text field-email"></div>
+                <div id="display-persons" class="overlay-text field-persons"></div>
+                <div id="display-serial" class="overlay-text field-serial"></div>
+                <div id="display-serial-2" class="overlay-text field-serial-2"></div>
+
+                <!-- Dynamic QR Holder -->
+                <div class="qr-container">
+                    <canvas id="qr-canvas"></canvas>
+                </div>
+            </div>
+
+            <button class="btn-submit" onclick="downloadPass()" style="max-width: 400px; margin-top: 30px">
+                Download High-Res PDF
+            </button>
+        </div>
+
+        <!-- Scripts -->
+        <script src="main.js"></script>
+        <script>
+            // Override or define testing logic
+            document
+                .getElementById("openPopup")
+                .addEventListener("click", function (e) {
+                    e.preventDefault();
+                    // Basic Validation before opening
+                    if (!document.getElementById("name").value.trim()) {
+                        alert("Please enter a name");
+                        return;
+                    }
+                    document.getElementById("popup").style.display = "flex";
+                });
+
+            document
+                .getElementById("closePop")
+                .addEventListener("click", function () {
+                    document.getElementById("popup").style.display = "none";
+                });
+
+            async function testingPayment() {
+                const name = document.getElementById("name").value.trim();
+                const phone = document.getElementById("number").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const city = document.getElementById("city").value.trim();
+                const noPeople = document.getElementById("attend").textContent;
+
+                // Artificial delay for realism
+                const btn = document.getElementById("processBtn");
+                const originalText = btn.innerText;
+                btn.innerText = "Processing & Generating Pass...";
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    // MOCK API SUCCESS RESPONSE
+                    const bookId = "B" + Math.floor(Math.random() * 999);
+                    const mockApiResponse = {
+                        name: name,
+                        city: city,
+                        phone: phone,
+                        email: email,
+                        persons: noPeople,
+                        serial:
+                            "PAY_" +
+                            Math.random().toString(36).substr(2, 6).toUpperCase() +
+                            "_" +
+                            bookId,
+                    };
+
+                    console.log("Mock API Response:", mockApiResponse);
+
+                    // Stop form processing state
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+
+                    // Hide Modals/Forms
+                    document.getElementById("popup").style.display = "none";
+                    document.getElementById("register").style.display = "none";
+                    document.getElementById("home").style.display = "none";
+                    document.querySelector(".hero").style.display = "none";
+
+                    // Show Pass section and inject data
+                    injectData(mockApiResponse);
+                }, 1500);
+            }
+
+            /**
+             * Injecting Data & Generating QR
+             */
+            function injectData(data) {
+                // Inject text values
+                document.getElementById("display-name").innerText = data.name;
+                document.getElementById("display-city").innerText = data.city;
+                document.getElementById("display-phone").innerText = data.phone;
+                document.getElementById("display-email").innerText = data.email;
+                document.getElementById("display-persons").innerText =
+                    data.persons.padStart(2, "0");
+                document.getElementById("display-serial").innerText = data.serial;
+                document.getElementById("display-serial-2").innerText = data.serial;
+
+                // Generate QR Code from Details
+                const qrData = `Name: ${data.name}\nSerial: ${data.serial}\nPhone: ${data.phone}`;
+                const canvas = document.getElementById("qr-canvas");
+                QRCode.toCanvas(
+                    canvas,
+                    qrData,
+                    {
+                        width: 60,
+                        margin: 2,
+                        color: {
+                            dark: "#000000",
+                            light: "#ffffff",
+                        },
+                    },
+                    function (error) {
+                        if (error) console.error(error);
+                        console.log("QR code generated for: " + data.serial);
+                    },
+                );
+
+                // Show the pass section
+                const passSection = document.getElementById("pass-section");
+                passSection.style.display = "block";
+
+                // Scroll to preview safely
+                setTimeout(() => {
+                    passSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                }, 100);
+            }
+
+            /**
+             * Download Pass as PDF (html2canvas + jsPDF)
+             */
+            async function downloadPass() {
+                const area = document.getElementById("capture-area");
+                const downloadBtn = event.target;
+                const originalText = downloadBtn.innerText;
+
+                downloadBtn.innerText = "Generating PDF...";
+                downloadBtn.disabled = true;
+
+                try {
+                    // Capture the div as a canvas
+                    const canvas = await html2canvas(area, {
+                        scale: 3, // High quality
+                        useCORS: true,
+                        logging: false,
+                        backgroundColor: null,
+                    });
+
+                    const imgData = canvas.toDataURL("image/png");
+                    const { jsPDF } = window.jspdf;
+
+                    // Create PDF (Auto-matches image orientation)
+                    const pdf = new jsPDF({
+                        orientation: "landscape",
+                        unit: "px",
+                        format: [canvas.width / 3, canvas.height / 3],
+                    });
+
+                    pdf.addImage(
+                        imgData,
+                        "PNG",
+                        0,
+                        0,
+                        canvas.width / 3,
+                        canvas.height / 3,
+                    );
+                    pdf.save(`ReunionPass_${Date.now()}.pdf`);
+                } catch (err) {
+                    console.error("PDF Generation failed", err);
+                    alert("Failed to generate PDF. Check console for details.");
+                } finally {
+                    downloadBtn.innerText = originalText;
+                    downloadBtn.disabled = false;
+                }
+            }
+
+            // Show the app
+            window.onload = () => {
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("app").style.display = "block";
+            };
+        </script>
+    </div>
+</body>
+
+</html>

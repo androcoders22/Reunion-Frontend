@@ -207,95 +207,22 @@
 
     /* -------------------------
        Navigation
-       ------------------------- */
-    .marquee-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 101;
-      background: rgba(5, 5, 5, 0.9);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      color: var(--muted);
-      padding: 0;
-      font-size: 13px;
-      font-weight: 400;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .marquee-content {
-      display: flex;
-      white-space: nowrap;
-      width: max-content;
-      animation: marquee-scroll 60s linear infinite;
-      will-change: transform;
-    }
-
-    .marquee-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-right: 80px;
-      /* Space between each message block */
-      letter-spacing: 0.5px;
-    }
-
-    .deadline-dot {
-      width: 5px;
-      height: 5px;
-      background: var(--accent-cyan);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--accent-cyan);
-    }
-
-    .highlight-pink {
-      color: var(--accent-pink);
-      font-weight: 600;
-    }
-
-    @keyframes marquee-scroll {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-
-    @media (max-width: 767px) {
-      .marquee-item:not(.deadline-only) {
-        display: none;
-      }
-
-      .marquee-content {
-        animation-duration: 20s;
-      }
-
-      .marquee-item {
-        padding-right: 50px;
-      }
-    }
-
+       ------------------------- */ 
     nav.site-nav {
       position: fixed;
-      inset: 36px auto auto 0;
-      top: 36px;
+      top: 0;
       left: 0;
       right: 0;
       z-index: 100;
       height: var(--nav-height);
       display: flex;
       align-items: center;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      background: rgba(10, 10, 10, 0.8) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       padding: 8px 0;
       box-sizing: border-box;
-      border-bottom: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .nav-inner {
@@ -841,6 +768,43 @@
     .btn-submit:disabled {
       opacity: .6;
       cursor: default;
+    }
+
+    .notice-popup-card {
+      width: min(92vw, 720px);
+      max-height: 84vh;
+      overflow-y: auto;
+      background: #101014;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      padding: 28px 24px;
+      color: var(--text);
+      position: relative;
+    }
+
+    .notice-popup-card h2 {
+      margin: 0 0 16px;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    .notice-popup-card p {
+      margin: 0 0 14px;
+      color: #e5e7eb;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .notice-popup-card .notice-signoff {
+      margin-top: 22px;
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+
+    .notice-popup-card .notice-close {
+      margin-top: 18px;
+      width: 100%;
     }
 
     .donateDesign {
@@ -1767,28 +1731,7 @@
 
 
     <!-- HTML: place this where you want the hero section -->
-    <div class="marquee-bar">
-      <div class="marquee-content">
-        <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span
-            class="highlight-pink">Registration Deadline: 8th of March</span></div>
-        <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
-        <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
-        <!-- Duplicates for seamless loop -->
-        <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span
-            class="highlight-pink">Registration Deadline: 8th of March</span></div>
-        <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
-        <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
-        <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span
-            class="highlight-pink">Registration Deadline: 8th of March</span></div>
-        <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
-        <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
-        <div class="marquee-item deadline-only"><span class="deadline-dot"></span> <span
-            class="highlight-pink">Registration Deadline: 8th of March</span></div>
-        <div class="marquee-item"><span class="deadline-dot"></span> Ultimate Jaipurians '2001 Batch Reunion Event</div>
-        <div class="marquee-item"><span class="deadline-dot"></span> Join the 25-Year Celebration</div>
-      </div>
-    </div>
-    <nav class="site-nav" style="background-color: rgba(10, 10, 10, 0.87); z-index: 20; position: fixed; top: 36px;">
+    <nav class="site-nav">
       <div class="nav-inner container">
         <a class="brand" href="#">
           <span class="logo" aria-hidden="true">
@@ -2387,7 +2330,7 @@
 
 
             <!-- here use below --- id="pay-btn" -->
-            <button id="openPopup" type="submit" class="btn-submit">
+            <button id="openPopup" type="button" class="btn-submit">
               REGISTER NOW
             </button>
           </form>
@@ -2413,6 +2356,26 @@
 
 
     <!-- registeration confirm Popup  -->
+
+    <div class="pop-register" id="registrationNotice" aria-hidden="true">
+      <div class="notice-popup-card">
+        <span class="close-btn" id="closeRegistrationNotice">&times;</span>
+        <h2>Dear Batchmates,</h2>
+        <p>
+          Due to shortened working days in March, due to Holi and Eid festivals, our vendors have refused to take any
+          further additions in souvenirs as they are customised and they need time to make the same and deliver us
+          before Eid holidays (20th), to avoid disruption.
+        </p>
+        <p>
+          Therefore, we welcome you with all our heart, but won't be able to guarantee souvenirs.
+        </p>
+        <p>
+          Hope you understand the issue at hand.
+        </p>
+        <p class="notice-signoff">Thanks<br>Reunion Team</p>
+        <button id="closeRegistrationNoticeButton" type="button" class="btn-submit notice-close">Close</button>
+      </div>
+    </div>
 
     <div class="pop-register" id="popup">
       <div class="popup-content">
@@ -2798,72 +2761,25 @@
     //------------------------------------------------
 
     const openPop = document.getElementById("openPopup");
+    const registrationNotice = document.getElementById("registrationNotice");
+    const closeRegistrationNotice = document.getElementById("closeRegistrationNotice");
+    const closeRegistrationNoticeButton = document.getElementById("closeRegistrationNoticeButton");
 
-    openPop.addEventListener("click", function (e) {
-      e.preventDefault();
+    openPop.addEventListener("click", function () {
+      registrationNotice.style.display = "flex";
+      registrationNotice.setAttribute("aria-hidden", "false");
+    });
 
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("number").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const address = document.getElementById("address").value;
-      const city = document.getElementById("city").value.trim();
-      const adhaar = document.getElementById("adhaar").value.trim();
-      const noPeople = document.getElementById("attend").textContent;
+    function hideRegistrationNotice() {
+      registrationNotice.style.display = "none";
+      registrationNotice.setAttribute("aria-hidden", "true");
+    }
 
-      const someone = document.querySelector(".someone-check:checked")?.value || "";
-      const support = document.querySelector(".support-check:checked")?.value || "";
-      const donationCheckboxes = document.querySelectorAll(".donation-check");
-
-      const size = document.querySelector(".size-check:checked")?.value || "";
-      const section10 =
-        document.querySelector(".section-10-check:checked")?.value || "";
-
-      if (
-        !name ||
-        !phone ||
-        !email ||
-        !address ||
-        !city ||
-        !adhaar ||
-        !someone ||
-        !support ||
-        !size
-      ) {
-        alert("Please fill the form");
-        e.preventDefault();
-      } else {
-        document.getElementById("popup").style.display = "flex";
-
-        function getDonationTotal() {
-          let total = 0;
-
-          donationCheckboxes.forEach((cb) => {
-            if (cb.checked) {
-              total += Number(cb.value);
-            }
-          });
-
-          return total;
-        }
-
-        let passValue;
-        if (noPeople == 1) {
-          passValue = 5000;
-        } else if (noPeople == 2) {
-          passValue = 7500;
-        } else {
-          passValue = 0;
-        }
-
-        const totalValue = passValue + getDonationTotal();
-        const taxValue = (5 * totalValue) / 100;
-        const payPrice = totalValue + taxValue;
-
-        document.getElementById("totalPass").innerText = `₹  ${passValue}`;
-        document.getElementById("totalDonate").innerText =
-          `₹  ${getDonationTotal()}`;
-        document.getElementById("totalTax").innerText = `₹  ${taxValue}`;
-        document.getElementById("totalPay").innerText = `₹ ${payPrice}`;
+    closeRegistrationNotice.addEventListener("click", hideRegistrationNotice);
+    closeRegistrationNoticeButton.addEventListener("click", hideRegistrationNotice);
+    registrationNotice.addEventListener("click", function (event) {
+      if (event.target === registrationNotice) {
+        hideRegistrationNotice();
       }
     });
 
