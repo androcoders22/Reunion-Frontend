@@ -2359,7 +2359,6 @@
 
     <div class="pop-register" id="registrationNotice" aria-hidden="true">
       <div class="notice-popup-card">
-        <span class="close-btn" id="closeRegistrationNotice">&times;</span>
         <h2>Dear Batchmates,</h2>
         <p>
           Due to shortened working days in March, due to Holi and Eid festivals, our vendors have refused to take any
@@ -2373,7 +2372,10 @@
           Hope you understand the issue at hand.
         </p>
         <p class="notice-signoff">Thanks<br>Reunion Team</p>
-        <button id="closeRegistrationNoticeButton" type="button" class="btn-submit notice-close">Close</button>
+        <button onclick="paymentRazorpay()" id="downloadBtn" type="button" class="btn btn-submit pay-button notice-close" style="width: 100%; margin-top: 18px; display:flex; justify-content:center; align-items:center;">
+          <span class="btn-text">Proceed to Payment</span>
+          <span class="loader"></span>
+        </button>
       </div>
     </div>
 
@@ -2436,7 +2438,7 @@
           </div>
 
           <div class="billing-footer">
-            <button onclick="paymentRazorpay()" id="downloadBtn" class="btn pay-button">
+            <button onclick="paymentRazorpay()" id="downloadBtnLegacy" class="btn pay-button">
               <span id="pay-btn" class="btn-text">Proceed to Payment</span>
               <span class="loader"></span>
             </button>
@@ -2775,8 +2777,13 @@
       registrationNotice.setAttribute("aria-hidden", "true");
     }
 
-    closeRegistrationNotice.addEventListener("click", hideRegistrationNotice);
-    closeRegistrationNoticeButton.addEventListener("click", hideRegistrationNotice);
+    if (closeRegistrationNotice) {
+      closeRegistrationNotice.addEventListener("click", hideRegistrationNotice);
+    }
+    if (closeRegistrationNoticeButton) {
+      closeRegistrationNoticeButton.addEventListener("click", hideRegistrationNotice);
+    }
+    
     registrationNotice.addEventListener("click", function (event) {
       if (event.target === registrationNotice) {
         hideRegistrationNotice();
