@@ -2767,7 +2767,54 @@
     const closeRegistrationNotice = document.getElementById("closeRegistrationNotice");
     const closeRegistrationNoticeButton = document.getElementById("closeRegistrationNoticeButton");
 
-    openPop.addEventListener("click", function () {
+    function validateRegistrationForm() {
+      const requiredFields = [
+        { id: "name", label: "full name" },
+        { id: "number", label: "phone number" },
+        { id: "email", label: "email" },
+        { id: "address", label: "address" },
+        { id: "city", label: "city" },
+        { id: "adhaar", label: "Aadhaar/PAN details" },
+      ];
+
+      for (const field of requiredFields) {
+        const element = document.getElementById(field.id);
+        const value = element?.value.trim();
+        if (!value) {
+          alert(`Please enter your ${field.label}.`);
+          element?.focus();
+          return false;
+        }
+      }
+
+      const someone = document.querySelector(".someone-check:checked");
+      if (!someone) {
+        alert("Please select how many people are attending.");
+        return false;
+      }
+
+      const support = document.querySelector(".support-check:checked");
+      if (!support) {
+        alert("Please let us know if you need accommodation support.");
+        return false;
+      }
+
+      const size = document.querySelector(".size-check:checked");
+      if (!size) {
+        alert("Please select your jacket size.");
+        return false;
+      }
+
+      return true;
+    }
+
+    openPop.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      if (!validateRegistrationForm()) {
+        return;
+      }
+
       registrationNotice.style.display = "flex";
       registrationNotice.setAttribute("aria-hidden", "false");
     });
