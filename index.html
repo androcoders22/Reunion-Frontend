@@ -2743,9 +2743,9 @@
 
   <script src="main.js" defer></script>
   <script src="carousel.js" defer></script>
-  <script type="application/javascript"
+  <!-- <script type="application/javascript"
     src="https://secure.paytmpayments.com/merchantpgpui/checkoutjs/merchants/gfWLtr04448499190835.js"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 
@@ -2929,20 +2929,20 @@
      * Called by backend redirect or after Paytm success callback.
      * Shows the pass inline on the page.
      */
-    function showPassAfterPayment(responseData) {
-      // responseData = { name, city, phone, email, persons, serial }
+    // function showPassAfterPayment(responseData) {
+    //   // responseData = { name, city, phone, email, persons, serial }
 
-      // Hide registration form, popup, hero
-      const registerSection = document.getElementById('register');
-      if (registerSection) registerSection.style.display = 'none';
-      const popup = document.getElementById('popup');
-      if (popup) popup.style.display = 'none';
-      const heroSection = document.querySelector('.hero');
-      if (heroSection) heroSection.style.display = 'none';
+    //   // Hide registration form, popup, hero
+    //   const registerSection = document.getElementById('register');
+    //   if (registerSection) registerSection.style.display = 'none';
+    //   const popup = document.getElementById('popup');
+    //   if (popup) popup.style.display = 'none';
+    //   const heroSection = document.querySelector('.hero');
+    //   if (heroSection) heroSection.style.display = 'none';
 
-      // Inject data into the pass
-      injectPassData(responseData);
-    }
+    //   // Inject data into the pass
+    //   injectPassData(responseData);
+    // }
 
     function injectPassData(data) {
       document.getElementById('display-name').innerText = data.name || '';
