@@ -217,11 +217,19 @@
       height: var(--nav-height);
       display: flex;
       align-items: center;
+      background: transparent !important;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      padding: 8px 0;
+      box-sizing: border-box;
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+    }
+
+    nav.site-nav.scrolled {
       background: rgba(10, 10, 10, 0.8) !important;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      padding: 8px 0;
-      box-sizing: border-box;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -1123,7 +1131,7 @@
       z-index: -1;
       transform: translate(-50%, -50%);
       pointer-events: none;
-      filter: brightness(30%);
+      filter: brightness(58%) saturate(1.06) contrast(1.03);
       border: none;
     }
 
@@ -1750,7 +1758,6 @@
         </div>
 
         <div class="nav-cta">
-          <a class="btn-primary" href="#register">Join The Re-Union</a>
           <button id="menu-btn" class="menu-btn" aria-controls="mobile-menu" aria-expanded="false">
             <i data-lucide="menu" style="width:20px;height:20px;"></i>
           </button>
@@ -1857,7 +1864,7 @@
 
   <!-- Event Details Section -->
 
-  <section id="details" class="section">
+  <!-- <section id="details" class="section">
     <div class="container">
       <h2 class="title center " style="padding-bottom: 40px;"><span style="color:var(--accent-pink)">EVENT</span>
         INTEL</h2>
@@ -1914,7 +1921,7 @@
 
 
     </div>
-  </section>
+  </section> -->
 
 
 
@@ -1968,7 +1975,7 @@
 
       <div id="stage-pro" class="production-container">
 
-        <h1>Jaipurian's <span style="color: #f472b6;">Memories</span></h1>
+        <h1>Forever <span style="color: #f472b6;">Memories</span></h1>
 
         <div id="track-pro" class="production-track">
         </div>
@@ -2045,8 +2052,8 @@
 
   <!-- form section -->
 
-  <section id="register" class="section">
-    <div class="container">
+  <!-- <section id="register" class="section">
+    <!-- <div class="container">
       <div class="register-wrap glass-panel">
         <div class="panel-deco" aria-hidden="true"></div>
 
@@ -2272,11 +2279,11 @@
 
           <!-- donation part here -->
 
-          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+          <!-- <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
 
-          <div style="padding-bottom: 12px;">Contributing to the event (Optional) </div>
+          <div style="padding-bottom: 12px;">Contributing to the event (Optional) </div> -->
 
-          <ul class="checkbox-list spouse donateDesign">
+          <!-- <ul class="checkbox-list spouse donateDesign">
             <div style="display: flex; gap: 10px;">
               <li class="checkbox-row">
                 <label class="round-check">
@@ -2299,18 +2306,18 @@
                 </label>
               </li>
             </div>
-          </ul>
+          </ul> -->
 
 
-          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+          <!-- <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div> -->
 
-          <div>
+          <!-- <div>
             <h3 style="margin: 0; padding: 0px 5px;">Grand Total: <span id="grandTotal"></span></h3>
-          </div>
+          </div> -->
 
-          <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+          <!-- <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747); margin: 0 5px; padding: 0;"></div> -->
 
-
+          <!-- Accommodation support + register button section hidden intentionally
           <div style="padding-top: 10px; padding-bottom: 0;">
             <label class="field-label">Do you need support in arranging accommodation in Kanpur?</label>
 
@@ -2331,23 +2338,23 @@
             </ul>
           </div>
 
-
-          <!-- here use below --- id="pay-btn" -->
           <button id="openPopup" type="button" class="btn-submit">
             REGISTER NOW
           </button>
-        </form>
+          -->
 
-        <!-- Alert Box -->
+        <!-- </form> -->
+
+        <!-- Alert Box
         <div id="toast" class="toast">
           Thanking For Contributing Rs. <span> </span> <span id="toastAmount"></span> to Reunion Event
         </div>
 
-        <!-- Pan Alert Box -->
         <div id="panToast" class="pantoast">
           The requirement to provide Permanent Account Number (PAN) and Aadhaar for various financial transactions and
           tax compliance is mandated by the Income Tax Act, 1961, specifically under Section 139AA.
         </div>
+        -->
 
       </div>
 
@@ -2360,7 +2367,7 @@
 
   <!-- registeration confirm Popup  -->
 
-  <div class="pop-register" id="registrationNotice" aria-hidden="true">
+  <!-- <div class="pop-register" id="registrationNotice" aria-hidden="true">
     <div class="notice-popup-card">
       <h2>Dear Batchmates,</h2>
       <p>
@@ -2381,15 +2388,15 @@
         <span class="loader"></span>
       </button>
     </div>
-  </div>
+  </div> -->
 
-  <div class="pop-register" id="popup">
+  <!-- <div class="pop-register" id="popup">
     <div class="popup-content">
       <span class="close-btn" id="closePop">&times;</span>
 
       <div class="billing-container" style="padding: 5px 0;">
         <!-- <button onclick="paymentRazorpay()" style="background-color: black; color: white; padding: 4px; cursor: pointer;">Reunion</button> -->
-        <div class="billing-header">
+        <!-- <div class="billing-header">
           <h1>Billing Summary</h1>
           <p>Review your charges</p>
         </div>
@@ -2397,7 +2404,7 @@
         <div class="billing-body">
 
           <!-- Temporary Remove -->
-          <div class="billing-item">
+          <!-- <div class="billing-item">
             <div class="item-label">
               <svg class="item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -2439,21 +2446,21 @@
             <div class="total-label">Total Amount</div>
             <div id="totalPay" class="total-amount">NA</div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="billing-footer">
+        <!-- <div class="billing-footer">
           <button onclick="paymentRazorpay()" id="downloadBtnLegacy" class="btn pay-button">
             <span id="pay-btn" class="btn-text">Proceed to Payment</span>
             <span class="loader"></span>
           </button>
         </div>
-      </div>
+      <!-- </div>
       <!-- </div> -->
-    </div>
-  </div>
+    <!-- </div>
+  </div> -->
 
   <!-- Generated Pass Preview (hidden until payment success) -->
-  <div id="pass-section">
+  <!-- <div id="pass-section">
     <h3 style="margin-bottom: 20px; color: #22c55e;">✓ Payment Successful! Here's Your Event Pass</h3>
     <div class="pass-wrapper" id="capture-area">
       <img src="img/FINALISED (1).jpg.jpeg" class="pass-bg" alt="Reunion Pass Design" />
@@ -2471,7 +2478,7 @@
     <button class="btn-submit" onclick="downloadPass()" style="max-width: 400px; margin-top: 30px;">
       Download High-Res PDF
     </button>
-  </div>
+  </div> -->
 
 
 
@@ -2753,6 +2760,44 @@
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 
 
+  <script>
+    (function () {
+      const siteNav = document.querySelector('nav.site-nav');
+      if (!siteNav) return;
+
+      function applyTopStyle() {
+        siteNav.classList.remove('scrolled');
+        siteNav.style.background = 'transparent';
+        siteNav.style.backdropFilter = 'none';
+        siteNav.style.webkitBackdropFilter = 'none';
+        siteNav.style.borderBottom = '1px solid transparent';
+      }
+
+      function applyScrolledStyle() {
+        siteNav.classList.add('scrolled');
+        siteNav.style.background = 'rgba(10, 10, 10, 0.8)';
+        siteNav.style.backdropFilter = 'blur(10px)';
+        siteNav.style.webkitBackdropFilter = 'blur(10px)';
+        siteNav.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+      }
+
+      function syncNavState() {
+        const y = window.scrollY || document.documentElement.scrollTop || 0;
+        if (y > 10) {
+          applyScrolledStyle();
+        } else {
+          applyTopStyle();
+        }
+      }
+
+      syncNavState();
+      window.addEventListener('scroll', syncNavState, { passive: true });
+      window.addEventListener('touchmove', syncNavState, { passive: true });
+      window.addEventListener('resize', syncNavState, { passive: true });
+    })();
+  </script>
+
+
 
 
   <script>
@@ -2811,18 +2856,21 @@
       return true;
     }
 
-    openPop.addEventListener("click", function (event) {
-      event.preventDefault();
+    if (openPop && registrationNotice) {
+      openPop.addEventListener("click", function (event) {
+        event.preventDefault();
 
-      if (!validateRegistrationForm()) {
-        return;
-      }
+        if (!validateRegistrationForm()) {
+          return;
+        }
 
-      registrationNotice.style.display = "flex";
-      registrationNotice.setAttribute("aria-hidden", "false");
-    });
+        registrationNotice.style.display = "flex";
+        registrationNotice.setAttribute("aria-hidden", "false");
+      });
+    }
 
     function hideRegistrationNotice() {
+      if (!registrationNotice) return;
       registrationNotice.style.display = "none";
       registrationNotice.setAttribute("aria-hidden", "true");
     }
@@ -2834,16 +2882,22 @@
       closeRegistrationNoticeButton.addEventListener("click", hideRegistrationNotice);
     }
 
-    registrationNotice.addEventListener("click", function (event) {
-      if (event.target === registrationNotice) {
-        hideRegistrationNotice();
-      }
-    });
+    if (registrationNotice) {
+      registrationNotice.addEventListener("click", function (event) {
+        if (event.target === registrationNotice) {
+          hideRegistrationNotice();
+        }
+      });
+    }
 
-    document.getElementById("closePop").addEventListener("click", () => {
-      document.getElementById("popup").style.display = "none";
-      location.reload();
-    });
+    const closePopBtn = document.getElementById("closePop");
+    const popupEl = document.getElementById("popup");
+    if (closePopBtn && popupEl) {
+      closePopBtn.addEventListener("click", () => {
+        popupEl.style.display = "none";
+        location.reload();
+      });
+    }
 
 
 
