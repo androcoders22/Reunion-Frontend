@@ -3,6 +3,26 @@ const BACKEND_URL_OF_INDEX = "https://api.ultimatejaipurians.in";
 // const BACKEND_URL_OF_INDEX = "http://localhost:8000";
 
 //-------------------------------
+//       Navbar Scroll State
+//-------------------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+  const siteNav = document.querySelector("nav.site-nav");
+  if (!siteNav) return;
+
+  const syncNavState = () => {
+    if (window.scrollY > 10) {
+      siteNav.classList.add("scrolled");
+    } else {
+      siteNav.classList.remove("scrolled");
+    }
+  };
+
+  syncNavState();
+  window.addEventListener("scroll", syncNavState, { passive: true });
+});
+
+//-------------------------------
 //       Venue Cards PopUp
 //-------------------------------
 

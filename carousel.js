@@ -1,67 +1,75 @@
 
 
-    document.addEventListener('DOMContentLoaded', async () => {
-          console.log('it is woring....')
+document.addEventListener('DOMContentLoaded', async () => {
+  console.log('it is woring....');
 
-          const res = await fetch('https://api.ultimatejaipurians.in/upload/images')
-                 
-          const data = await res.json();
+  const track = document.getElementById('track-pro');
+  track.innerHTML = '';
 
-          // console.log(data);
+  // Keep local memories in strict order: image 1 -> image 19.
+  const localImages = Array.from({ length: 19 }, (_, i) => ({
+    imageUrl: `image 2/image ${i + 1}.jpeg`,
+    _id: null
+  }));
 
-
-          const track = document.getElementById('track-pro');
-                track.innerHTML = '';
-      let index = 0;
-      data.images.forEach(img => {
-      const card = document.createElement('div');
-      card.className = 'production-carousel-card';
-
-      card.dataset.image = img.imageUrl;
-
-      card.innerHTML = `
-        <div class="production-in-card">
-          <span id=${img._id} class="cross-icon"> x </span>
-          <div class="production-img">
-            <img src="${img.imageUrl}" />
-          </div>
-        </div>
-      `;
-
-      track.appendChild(card);
-    });
-
-
-
-
-const images = track.querySelectorAll('img');
-
-let loaded = 0;
-images.forEach(img => {
-  if (img.complete) {
-    loaded++;
-  } else {
-    img.onload = () => {
-      loaded++;
-      if (loaded === images.length) {
-        initProductionCarousel(); // 🔥 build AFTER images load
-      }
-    };
-    img.onerror = () => {
-      loaded++;
-      if (loaded === images.length) {
-        initProductionCarousel();
-      }
-    };
+  let uploadedImages = [];
+  try {
+    const res = await fetch('https://api.ultimatejaipurians.in/upload/images');
+    const data = await res.json();
+    uploadedImages = Array.isArray(data.images) ? data.images : [];
+  } catch (error) {
+    console.warn('Could not load uploaded images, showing local images only.', error);
   }
-});
 
-// In case all images already cached
-if (loaded === images.length) {
-  initProductionCarousel();
-}
+  const allImages = [...localImages, ...uploadedImages];
 
-          
+  allImages.forEach((img) => {
+    const card = document.createElement('div');
+    card.className = 'production-carousel-card';
+    card.dataset.image = img.imageUrl;
+
+    const deleteButton = img._id ? `<span id="${img._id}" class="cross-icon"> x </span>` : '';
+
+    card.innerHTML = `
+      <div class="production-in-card">
+        ${deleteButton}
+        <div class="production-img">
+          <img src="${img.imageUrl}" />
+        </div>
+      </div>
+    `;
+
+    track.appendChild(card);
+  });
+
+  const images = track.querySelectorAll('img');
+
+  let loaded = 0;
+  images.forEach(img => {
+    if (img.complete) {
+      loaded++;
+    } else {
+      img.onload = () => {
+        loaded++;
+        if (loaded === images.length) {
+          initProductionCarousel(); // build AFTER images load
+        }
+      };
+      img.onerror = () => {
+        loaded++;
+        if (loaded === images.length) {
+          initProductionCarousel();
+        }
+      };
+    }
+  });
+
+  // In case all images are already cached.
+  if (loaded === images.length) {
+    initProductionCarousel();
+  }
+
+  
 });
 
 
@@ -170,7 +178,6 @@ function initProductionCarousel() {
   let isTransitioning = false;
   let cardWidth = 0;
   let gap = 0;
-  let autoSlide = null;
 
   function getVisibleCount() {
     if (window.matchMedia('(max-width:520px)').matches) return 1;
@@ -253,7 +260,33 @@ function initProductionCarousel() {
       ? `transform ${transitionMs}ms cubic-bezier(.25,.8,.25,1)`
       : 'none';
 
-    track.style.transform = `translateX(-${positionIndex * (cardWidth + gap)}px)`;
+    const activeIndex = getActiveSlideIndex();
+    const stageWidth = stage.getBoundingClientRect().width;
+    const activeCenterX = (activeIndex * (cardWidth + gap)) + (cardWidth / 2);
+    const translateX = activeCenterX - (stageWidth / 2);
+
+    track.style.transform = `translateX(-${translateX}px)`;
+    applyCardFocusStates();
+  }
+
+  function getActiveSlideIndex() {
+    return positionIndex;
+  }
+
+  function applyCardFocusStates() {
+    if (!slides.length) return;
+
+    const activeIndex = getActiveSlideIndex();
+
+    slides.forEach((slide, idx) => {
+      if (idx === activeIndex) {
+        slide.classList.add('is-active');
+        slide.classList.remove('is-background');
+      } else {
+        slide.classList.remove('is-active');
+        slide.classList.add('is-background');
+      }
+    });
   }
 
   function onTransitionEnd() {
@@ -262,11 +295,15 @@ function initProductionCarousel() {
     if (positionIndex >= visibleCount + slideCount) {
       positionIndex -= slideCount;
       updateTrack(false);
+      return;
     }
     if (positionIndex < visibleCount) {
       positionIndex += slideCount;
       updateTrack(false);
+      return;
     }
+
+    applyCardFocusStates();
   }
 
   function next() {
@@ -286,23 +323,9 @@ function initProductionCarousel() {
   prevBtn.addEventListener('click', prev);
   nextBtn.addEventListener('click', next);
 
-  function startAuto() {
-    stopAuto();
-    autoSlide = setInterval(next, 2000);
-  }
-
-  function stopAuto() {
-    if (autoSlide) clearInterval(autoSlide);
-    autoSlide = null;
-  }
-
-  stage.addEventListener('mouseenter', stopAuto);
-  stage.addEventListener('mouseleave', startAuto);
-
   window.addEventListener('resize', () => build());
 
   build();
-  startAuto();
 
 
 }
