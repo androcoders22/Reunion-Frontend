@@ -13,8 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const syncNavState = () => {
     if (window.scrollY > 10) {
       siteNav.classList.add("scrolled");
+      siteNav.style.setProperty("background", "rgb(10, 10, 10)", "important");
+      siteNav.style.setProperty("backdrop-filter", "none", "important");
+      siteNav.style.setProperty("-webkit-backdrop-filter", "none", "important");
+      siteNav.style.setProperty("border-bottom", "1px solid rgba(255, 255, 255, 0.1)", "important");
     } else {
       siteNav.classList.remove("scrolled");
+      siteNav.style.setProperty("background", "transparent", "important");
+      siteNav.style.setProperty("backdrop-filter", "none", "important");
+      siteNav.style.setProperty("-webkit-backdrop-filter", "none", "important");
+      siteNav.style.setProperty("border-bottom", "1px solid transparent", "important");
     }
   };
 
