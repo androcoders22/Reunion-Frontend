@@ -217,7 +217,7 @@
       height: var(--nav-height);
       display: flex;
       align-items: center;
-      background: transparent !important;
+      background: transparent;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
       padding: 8px 0;
@@ -227,9 +227,9 @@
     }
 
     nav.site-nav.scrolled {
-      background: rgba(10, 10, 10, 0.8) !important;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgb(10, 10, 10) !important;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -1975,7 +1975,7 @@
 
       <div id="stage-pro" class="production-container">
 
-        <h1>Forever <span style="color: #f472b6;">Memories</span></h1>
+        <h1>Jaipurian's <span style="color: #f472b6;">Memories</span></h1>
 
         <div id="track-pro" class="production-track">
         </div>
@@ -2693,9 +2693,9 @@
           <h4 class="footer-heading">Navigate</h4>
           <ul class="footer-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#details">Event Intel</a></li>
+           
             <li><a href="#memories">Memories</a></li>
-            <li><a href="#register">Register</a></li>
+            
           </ul>
         </div>
 
@@ -2722,7 +2722,7 @@
         </div>
 
         <!-- Meta -->
-        <div>
+        <!-- <div>
           <h4 class="footer-heading">Legal</h4>
           <ul class="footer-links">
             <li><a href="about.html">About Us</a></li>
@@ -2730,7 +2730,7 @@
             <li><a href="terms-condition.html">Terms & Conditions</a></li>
             <li><a href="refund-policy.html">Refund Policy</a></li>
           </ul>
-        </div>
+        </div> -->
       </div>
 
       <div class="footer-bottom">
@@ -2767,18 +2767,18 @@
 
       function applyTopStyle() {
         siteNav.classList.remove('scrolled');
-        siteNav.style.background = 'transparent';
-        siteNav.style.backdropFilter = 'none';
-        siteNav.style.webkitBackdropFilter = 'none';
-        siteNav.style.borderBottom = '1px solid transparent';
+        siteNav.style.setProperty('background', 'transparent', 'important');
+        siteNav.style.setProperty('backdrop-filter', 'none', 'important');
+        siteNav.style.setProperty('-webkit-backdrop-filter', 'none', 'important');
+        siteNav.style.setProperty('border-bottom', '1px solid transparent', 'important');
       }
 
       function applyScrolledStyle() {
         siteNav.classList.add('scrolled');
-        siteNav.style.background = 'rgba(10, 10, 10, 0.8)';
-        siteNav.style.backdropFilter = 'blur(10px)';
-        siteNav.style.webkitBackdropFilter = 'blur(10px)';
-        siteNav.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+        siteNav.style.setProperty('background', 'rgb(10, 10, 10)', 'important');
+        siteNav.style.setProperty('backdrop-filter', 'none', 'important');
+        siteNav.style.setProperty('-webkit-backdrop-filter', 'none', 'important');
+        siteNav.style.setProperty('border-bottom', '1px solid rgba(255, 255, 255, 0.1)', 'important');
       }
 
       function syncNavState() {

@@ -128,9 +128,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   }
 
-
-
-    // Card clicked logic
   const card = e.target.closest('.production-carousel-card');
   if (!card) return;
 
@@ -144,18 +141,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 function openPopPhoto(imageUrl) {
   const popup = document.getElementById('popup-photo');
   const img = document.getElementById('popup-photo-img');
+  if (!popup || !img) return;
 
   img.src = imageUrl;
   popup.style.display = 'flex';
 
-  function closePopup() {
-    document.getElementById("popup-photo").style.display = "none";
+  popup.onclick = (e) => {
+    if (e.target.id === 'popup-photo') {
+      popup.style.display = 'none';
     }
-
-  document.getElementById("popup-photo").addEventListener("click", (e) => {
-   if (e.target.id === "popup-photo") closePopup();
-  });
-
+  };
 }
 
 
