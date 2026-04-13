@@ -13,11 +13,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" async />
   <link rel="preconnect" href="https://fonts.gstatic.com" async crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Righteous&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Righteous&family=Cinzel:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet" async>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <link rel="stylesheet" href="production-carousel-claude.css">
   <link rel="stylesheet" href="popup.css">
   <link rel="stylesheet" href="contactForm.css">
@@ -1382,7 +1384,278 @@
       }
 
     }
+
+    /* ══════════════════════════════════════════════════════
+       PROFESSIONAL BRIGHT ARCHITECTURAL GALLERY
+    ══════════════════════════════════════════════════════ */
+    :root {
+      --gallery-bg: #f8f5f0;
+      --marble-white: #ffffff;
+      --gold-accent: #c5a059;
+      --slate-dark: #2c3e50;
+      --professional-blue: #34495e;
+    }
+
+    #tribute-section {
+      width: 100vw;
+      padding: 0;
+      margin: 0;
+      background-color: var(--gallery-bg);
+      background-image:
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+        url('intricate_stone_pattern_1776078501486.png');
+      background-size: cover, 800px;
+      background-blend-mode: overlay;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wall-wrapper {
+      position: relative;
+      z-index: 10;
+      padding-bottom: 100px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       ANCIENT ARCHED SANCTUARY · REFINED UI/UX
+    ══════════════════════════════════════════════════════ */
+    :root {
+      --ancient-stone: #e2d2b5;
+      --ancient-dark: #3d2b1f;
+      --peace-gold: #c5a059;
+      --golden-hour: rgba(255, 230, 180, 0.4);
+      --inner-shadow: rgba(0, 0, 0, 0.5);
+    }
+
+    #tribute-section {
+      width: 100vw;
+      padding: 0;
+      margin: 0;
+      background-color: #1a140b;
+      background-image:
+        radial-gradient(circle at 50% 10%, var(--golden-hour) 0%, transparent 60%),
+        url('intricate_stone_pattern_1776078501486.png');
+      background-size: cover, 1200px;
+      background-attachment: fixed;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wall-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 150px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       THE MONUMENTAL MONOLITH · SEAMLESS PEACE
+    ══════════════════════════════════════════════════════ */
+    :root {
+      --wall-stone: #d3b47f;
+      --etch-dark: #3a2e21;
+      --sunlight: rgba(231, 183, 8, 0.4);
+    }
+
+    #tribute-section {
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      background-color: #1a140b;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* The Continuous Architectural Wall */
+    .monolith-surface {
+      width: 100%;
+      background-color: var(--wall-stone);
+      background-image:
+        /* Sunlight Sweep Animation */
+        linear-gradient(115deg, transparent 40%, var(--sunlight) 50%, transparent 60%),
+        /* Texture Overlay */
+        url('intricate_stone_pattern_1776078501486.png');
+      background-size: 200% 100%, 1200px;
+      background-attachment: fixed;
+      padding: 120px 0;
+      box-shadow:
+        inset 0 100px 150px rgba(0, 0, 0, 0.4),
+        inset 0 -100px 150px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: sunlightScroll 15s ease-in-out infinite;
+    }
+
+    @keyframes sunlightScroll {
+      0% {
+        background-position: 100% 0, 0 0;
+      }
+
+      100% {
+        background-position: -100% 0, 0 0;
+      }
+    }
+
+    .monolith-wrapper {
+      max-width: 1400px;
+      width: 90%;
+      position: relative;
+    }
+
+    /* Seamless Header */
+    .wall-header {
+      text-align: center;
+      margin-bottom: 100px;
+    }
+
+    .wall-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3rem, 12vw, 10rem);
+      color: var(--etch-dark);
+      letter-spacing: clamp(10px, 3vw, 40px);
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin: 0;
+      text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
+    }
+
+    /* Wall Sections - No Boxes, Just Pure Architecture */
+    .wall-section {
+      margin-top: 80px;
+      position: relative;
+    }
+
+    .wall-section::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--etch-dark), transparent);
+      opacity: 0.2;
+      margin-bottom: 40px;
+    }
+
+    .wall-section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: var(--etch-dark);
+      text-align: center;
+      letter-spacing: 15px;
+      text-transform: uppercase;
+      opacity: 0;
+      margin-bottom: 60px;
+      transform: translateY(30px);
+    }
+
+    /* The "Etched" Memorial Names */
+    .tribute-flow {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 100px 40px;
+    }
+
+    .memorial-entry {
+      flex: 1 1 350px;
+      max-width: 450px;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      transition: transform 0.6s ease;
+      /* GSAP Initialize */
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .memorial-entry:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Live Animated Blooms (Subtle & Peaceful) */
+    .bloom-anchor {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      animation: gentleBloom 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes gentleBloom {
+      0% {
+        transform: scale(1) rotate(-3deg);
+        filter: opacity(0.7);
+      }
+
+      100% {
+        transform: scale(1.05) rotate(3deg);
+        filter: opacity(1);
+      }
+    }
+
+    .memorial-entry h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: var(--etch-dark);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin: 10px 0;
+      /* Inset Engraving Effect */
+      text-shadow:
+        1px 1px 1px rgba(255, 255, 255, 0.6),
+        -1px -1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .memorial-entry strong {
+      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      color: var(--etch-dark);
+      opacity: 0.5;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .memorial-entry p {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--etch-dark);
+      opacity: 0.7;
+      font-style: italic;
+      margin-top: 10px;
+    }
+
+    /* Edge-to-Edge Architectural Details */
+    .wall-crown,
+    .wall-base {
+      width: 100%;
+      height: 40px;
+      background: linear-gradient(to bottom, #2a1b14, #1a140b);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .monolith-surface {
+        padding: 80px 0;
+      }
+
+      .wall-header h1 {
+        letter-spacing: 12px;
+      }
+
+      .tribute-flow {
+        gap: 60px 20px;
+      }
+
+      .memorial-entry h3 {
+        font-size: 1.4rem;
+      }
+    }
   </style>
+
+
+
 
   <style>
     .toast {
@@ -1497,7 +1770,6 @@
     }
 
     .thankBelowHead {
-      font-size: 16px;
       color: #555;
       font-weight: 400;
       padding: 0px 30px;
@@ -1822,49 +2094,189 @@
           </div> -->
 
       </div>
+    </section>
+
+    <section id="tribute-section">
+
+      <div class="monolith-surface">
+        <div class="monolith-wrapper">
+          <div class="wall-header">
+            <h1>Eternal Wall</h1>
+          </div>
+
+          <!-- FACULTY & MENTORS -->
+          <div class="wall-section">
+            <h2>Faculty &amp; Mentors</h2>
+            <div class="tribute-flow">
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>Principal</strong>
+                <h3>Sir Dinkar Singh</h3>
+                <p>"The captain of our ship who steered us toward our future."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>Vice Principal</strong>
+                <h3>Sir Ram Das Pawar</h3>
+                <p>"A steady hand and a firm foundation for Batch 2001."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>Music Teacher</strong>
+                <h3>Sir Rajkumar</h3>
+                <p>"The melody of our school days lives on in your honor."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>Geography</strong>
+                <h3>Sir JP Mishra</h3>
+                <p>"You showed us the world; today, you are our North Star."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>Hindi Teacher</strong>
+                <h3>Sir MC Gupta</h3>
+                <p>"Words fail to describe the depth of your impact on each of us."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>Guitar</strong>
+                <h3>Sir Danny Silas</h3>
+                <p>"Every chord we hear reminds us of your gentle spirit."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>Musical Head</strong>
+                <h3>Sir Chatterjee</h3>
+                <p>"The maestro of our memories; your rhythm stays with us."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>English Teacher</strong>
+                <h3>Ma'am Minoti Guha</h3>
+                <p>"You taught us the beauty of language and the grace of life itself."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>Biology</strong>
+                <h3>Sir P.C. Agarwal</h3>
+                <p>"A mentor who taught us the wonder of life."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>Art &amp; Craft</strong>
+                <h3>Sir Nanak Verma</h3>
+                <p>"You added the color to our childhood canvases."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <strong>Class Teacher</strong>
+                <h3>Ma'am Aloma Das</h3>
+                <p>"For the warmth and care that started our journey."</p>
+              </article>
+            </div>
+          </div>
+
+          <!-- BATCH MATES -->
+          <div class="wall-section">
+            <h2>Our Batch Mates</h2>
+            <div class="tribute-flow">
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <h3>Pureesh Shah</h3>
+                <p>"A heart of gold; the most caring soul our batch ever knew."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <h3>Gaurav Tiwari</h3>
+                <p>"A true friend whose kindness was a comfort to us all."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <h3>Abhishek Goel</h3>
+                <p>"The spark of the room; your playful spirit is missed every day."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <h3>Sharad Agarwal</h3>
+                <p>"From the very first class to the very last breath—forever a brother."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <h3>Markose Thomas</h3>
+                <p>"A brilliant mind and a beautiful soul, gone far too soon."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <h3>Faiza</h3>
+                <p>"A steady light in our school memories."</p>
+              </article>
+
+              <article class="memorial-entry">
+                <div class="bloom-anchor">🌹 🌷</div>
+                <h3>Ankita</h3>
+                <p>"Forever remembered with love and grace."</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
-  </div>
-  </section>
 
 
 
-
-  <div id="mobile-menu" aria-hidden="true">
-    <button id="close-menu" class="close" aria-label="Close menu"><i data-lucide="x"
-        style="width:28px;height:28px;"></i></button>
-    <div
-      style="color:var(--accent-pink); font-weight:700; margin-bottom:24px; font-size:16px; text-align:center; padding: 0 20px;">
-      The Last date of registration is 8th of March
+    <div id="mobile-menu" aria-hidden="true">
+      <button id="close-menu" class="close" aria-label="Close menu"><i data-lucide="x"
+          style="width:28px;height:28px;"></i></button>
+      <div
+        style="color:var(--accent-pink); font-weight:700; margin-bottom:24px; font-size:16px; text-align:center; padding: 0 20px;">
+        The Last date of registration is 8th of March
+      </div>
+      <a class="mobile-link" href="#home">Home</a>
+      <a class="mobile-link" href="#details">Details</a>
+      <a class="mobile-link" href="#memories">Memories</a>
+      <a class="mobile-link" href="#register">Register Now</a>
     </div>
-    <a class="mobile-link" href="#home">Home</a>
-    <a class="mobile-link" href="#details">Details</a>
-    <a class="mobile-link" href="#memories">Memories</a>
-    <a class="mobile-link" href="#register">Register Now</a>
-  </div>
 
 
 
-  <div class="gradient-bg">
-    <div class="g-ball g-1"></div>
-    <div class="g-ball g-2"></div>
-    <div id="g3" class="g-ball g-3"></div>
-  </div>
+    <div class="gradient-bg">
+      <div class="g-ball g-1"></div>
+      <div class="g-ball g-2"></div>
+      <div id="g3" class="g-ball g-3"></div>
+    </div>
 
-  <div class="gradient-bg">
-    <div style="width: 100%; height: 100%; 
+    <div class="gradient-bg">
+      <div style="width: 100%; height: 100%; 
                 display: flex; align-items: center; justify-content: center;">
-      <img class="bg-logo-section" src="img/bg-logo.png" alt="">
+        <img class="bg-logo-section" src="img/bg-logo.png" alt="">
+      </div>
+
     </div>
 
-  </div>
 
 
 
+    <!-- Event Details Section -->
 
-  <!-- Event Details Section -->
-
-  <!-- <section id="details" class="section">
+    <!-- <section id="details" class="section">
     <div class="container">
       <h2 class="title center " style="padding-bottom: 40px;"><span style="color:var(--accent-pink)">EVENT</span>
         INTEL</h2>
@@ -1925,122 +2337,122 @@
 
 
 
-  <div id="eventPopupOverlay">
-    <div id="eventPopupBox">
+    <div id="eventPopupOverlay">
+      <div id="eventPopupBox">
 
-      <div class="icon-wrap"
-        style="background: rgba(124,58,237,0.12); color:var(--accent-purple); display: flex; align-items: center; justify-content: center;">
-        <div
-          style="background-color: rgba(245, 245, 11, 0.87); height: 40px; width: 40px; display: flex; justify-content: center; align-items: center; border-radius: 50%;">
-          <img id="popupIcon" alt="" style="height: 70%; width: 70%;">
+        <div class="icon-wrap"
+          style="background: rgba(124,58,237,0.12); color:var(--accent-purple); display: flex; align-items: center; justify-content: center;">
+          <div
+            style="background-color: rgba(245, 245, 11, 0.87); height: 40px; width: 40px; display: flex; justify-content: center; align-items: center; border-radius: 50%;">
+            <img id="popupIcon" alt="" style="height: 70%; width: 70%;">
+          </div>
         </div>
-      </div>
 
-      <div style="font-size: 18px;" id="popupTitle"></div>
-      <div style="color: #9ca3af; 
+        <div style="font-size: 18px;" id="popupTitle"></div>
+        <div style="color: #9ca3af; 
       font-size:13px;" id="popupDate"></div>
 
-      <div>
-        <div style="margin-bottom: 2px; font-size: 23px;">Venue</div>
-        <div style="margin-top: 5px; color: #cbd5e1; font-size: 14px;" class="sub-muted" id="event-address"></div>
-      </div>
-
-      <div>
-        <div style="margin-bottom: 2px; font-size: 16px;">Dress Code</div>
-        <div class="sub-muted" id="dress-code"></div>
-      </div>
-
-      <a id="openMap"><i data-lucide="arrow-up-right"></i></a>
-
-      <button id="eventPopupClose">Close</button>
-
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
-  <!-- //50 photos here in carousel -->
-
-  <section id="memories" class="production-carousel">
-
-    <div class="production-wrapper">
-
-      <button id="prev-pro" class="prev-btn">&#10094;</button>
-
-      <div id="stage-pro" class="production-container">
-
-        <h1>Jaipurian's <span style="color: #f472b6;">Memories</span></h1>
-
-        <div id="track-pro" class="production-track">
+        <div>
+          <div style="margin-bottom: 2px; font-size: 23px;">Venue</div>
+          <div style="margin-top: 5px; color: #cbd5e1; font-size: 14px;" class="sub-muted" id="event-address"></div>
         </div>
-
-      </div>
-
-      <button id="next-pro" class="next-btn">&#10095;</button>
-    </div>
-  </section>
-
-
-
-
-  <div class="nav-cta" style="display: flex; justify-content: center; align-items: center;">
-    <a id="uploadPhoto" class="btn-primary">Upload</a>
-  </div>
-
-
-
-
-
-  <div class="popup-upload" id="popup-upload">
-    <div class="popup-photo-upload">
-      <span class="close-photo-btn" id="close-popup-upload">&times;</span>
-      <div class="upload-photo-above">
 
         <div>
-          <div>
-            <h1>Upload Image In Carousel</h1>
+          <div style="margin-bottom: 2px; font-size: 16px;">Dress Code</div>
+          <div class="sub-muted" id="dress-code"></div>
+        </div>
+
+        <a id="openMap"><i data-lucide="arrow-up-right"></i></a>
+
+        <button id="eventPopupClose">Close</button>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- //50 photos here in carousel -->
+
+    <section id="memories" class="production-carousel">
+
+      <div class="production-wrapper">
+
+        <button id="prev-pro" class="prev-btn">&#10094;</button>
+
+        <div id="stage-pro" class="production-container">
+
+          <h1>Jaipurian's <span style="color: #f472b6;">Memories</span></h1>
+
+          <div id="track-pro" class="production-track">
           </div>
 
-          <form id="uploadForm"
-            style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap:20px">
-            <input type="file" id="photo" accept="image/*" />
-
-            <input id="passKey" type="text">
-            <button class="btn-primary" type="submit">Upload</button>
-
-          </form>
-
         </div>
 
+        <button id="next-pro" class="next-btn">&#10095;</button>
+      </div>
+    </section>
 
+
+
+
+    <div class="nav-cta" style="display: flex; justify-content: center; align-items: center;">
+      <a id="uploadPhoto" class="btn-primary">Upload</a>
+    </div>
+
+
+
+
+
+    <div class="popup-upload" id="popup-upload">
+      <div class="popup-photo-upload">
+        <span class="close-photo-btn" id="close-popup-upload">&times;</span>
+        <div class="upload-photo-above">
+
+          <div>
+            <div>
+              <h1>Upload Image In Carousel</h1>
+            </div>
+
+            <form id="uploadForm"
+              style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap:20px">
+              <input type="file" id="photo" accept="image/*" />
+
+              <input id="passKey" type="text">
+              <button class="btn-primary" type="submit">Upload</button>
+
+            </form>
+
+          </div>
+
+
+        </div>
       </div>
     </div>
-  </div>
 
 
 
 
 
-  <!-- Carousel Photos on PopUp -->
-  <div class="popup-photo" id="popup-photo">
-    <div class="popup-photo-content glass-panel-photos">
-      <span class="close-photo-btn" id="popup-photo">&times;</span>
-      <div class="pop-photo-above">
-        <div class="pop-photo-content">
-          <h1>Batch <span style="color: #00f3ff">2001</span></h1>
-        </div>
-        <div class="pop-photo-style">
-          <img id="popup-photo-img" src="">
+    <!-- Carousel Photos on PopUp -->
+    <div class="popup-photo" id="popup-photo">
+      <div class="popup-photo-content glass-panel-photos">
+        <span class="close-photo-btn" id="popup-photo">&times;</span>
+        <div class="pop-photo-above">
+          <div class="pop-photo-content">
+            <h1>Batch <span style="color: #00f3ff">2001</span></h1>
+          </div>
+          <div class="pop-photo-style">
+            <img id="popup-photo-img" src="">
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 
 
@@ -2050,9 +2462,9 @@
 
 
 
-  <!-- form section -->
+    <!-- form section -->
 
-  <!-- <section id="register" class="section">
+    <!-- <section id="register" class="section">
     <!-- <div class="container">
       <div class="register-wrap glass-panel">
         <div class="panel-deco" aria-hidden="true"></div>
@@ -2279,11 +2691,11 @@
 
           <!-- donation part here -->
 
-          <!-- <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
+    <!-- <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div>
 
           <div style="padding-bottom: 12px;">Contributing to the event (Optional) </div> -->
 
-          <!-- <ul class="checkbox-list spouse donateDesign">
+    <!-- <ul class="checkbox-list spouse donateDesign">
             <div style="display: flex; gap: 10px;">
               <li class="checkbox-row">
                 <label class="round-check">
@@ -2309,15 +2721,15 @@
           </ul> -->
 
 
-          <!-- <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div> -->
+    <!-- <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747);; margin: 0 5px; padding: 0;"></div> -->
 
-          <!-- <div>
+    <!-- <div>
             <h3 style="margin: 0; padding: 0px 5px;">Grand Total: <span id="grandTotal"></span></h3>
           </div> -->
 
-          <!-- <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747); margin: 0 5px; padding: 0;"></div> -->
+    <!-- <div style="border-top: 0.5px solid rgba(255, 255, 255, 0.747); margin: 0 5px; padding: 0;"></div> -->
 
-          <!-- Accommodation support + register button section hidden intentionally
+    <!-- Accommodation support + register button section hidden intentionally
           <div style="padding-top: 10px; padding-bottom: 0;">
             <label class="field-label">Do you need support in arranging accommodation in Kanpur?</label>
 
@@ -2343,9 +2755,9 @@
           </button>
           -->
 
-        <!-- </form> -->
+    <!-- </form> -->
 
-        <!-- Alert Box
+    <!-- Alert Box
         <div id="toast" class="toast">
           Thanking For Contributing Rs. <span> </span> <span id="toastAmount"></span> to Reunion Event
         </div>
@@ -2356,9 +2768,9 @@
         </div>
         -->
 
-      </div>
+  </div>
 
-    </div>
+  </div>
 
 
   </section>
@@ -2396,7 +2808,7 @@
 
       <div class="billing-container" style="padding: 5px 0;">
         <!-- <button onclick="paymentRazorpay()" style="background-color: black; color: white; padding: 4px; cursor: pointer;">Reunion</button> -->
-        <!-- <div class="billing-header">
+  <!-- <div class="billing-header">
           <h1>Billing Summary</h1>
           <p>Review your charges</p>
         </div>
@@ -2404,7 +2816,7 @@
         <div class="billing-body">
 
           <!-- Temporary Remove -->
-          <!-- <div class="billing-item">
+  <!-- <div class="billing-item">
             <div class="item-label">
               <svg class="item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -2448,7 +2860,7 @@
           </div>
         </div> -->
 
-        <!-- <div class="billing-footer">
+  <!-- <div class="billing-footer">
           <button onclick="paymentRazorpay()" id="downloadBtnLegacy" class="btn pay-button">
             <span id="pay-btn" class="btn-text">Proceed to Payment</span>
             <span class="loader"></span>
@@ -2456,7 +2868,7 @@
         </div>
       <!-- </div>
       <!-- </div> -->
-    <!-- </div>
+  <!-- </div>
   </div> -->
 
   <!-- Generated Pass Preview (hidden until payment success) -->
@@ -2693,9 +3105,9 @@
           <h4 class="footer-heading">Navigate</h4>
           <ul class="footer-links">
             <li><a href="#home">Home</a></li>
-           
+
             <li><a href="#memories">Memories</a></li>
-            
+
           </ul>
         </div>
 
@@ -3159,6 +3571,41 @@
       }
     })();
 
+    // ──────────────────────────────────────
+    //  GSAP - PEACEFUL SCROLL REVEAL
+    // ──────────────────────────────────────
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate Section Headers
+    gsap.utils.toArray('.wall-section h2').forEach(header => {
+      gsap.to(header, {
+        scrollTrigger: {
+          trigger: header,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0.6,
+        y: 0,
+        duration: 1.5,
+        ease: "power2.out"
+      });
+    });
+
+    // Animate Memorial Entries with Stagger
+    gsap.utils.toArray('.tribute-flow').forEach(flow => {
+      gsap.to(flow.querySelectorAll('.memorial-entry'), {
+        scrollTrigger: {
+          trigger: flow,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power3.out"
+      });
+    });
   </script>
 
 

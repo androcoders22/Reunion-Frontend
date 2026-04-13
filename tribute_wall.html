@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ancient Architectural Tribute Wall</title>
+    <!-- Google Fonts: Cinzel for that ancient roman/greek vibe -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root {
+            --stone-base: #c2b280; /* Desert sand */
+            --stone-dark: #8c7b50;
+            --stone-light: #e0d5b0;
+            --stone-edge: rgba(255, 255, 255, 0.4);
+            --stone-shadow: rgba(0, 0, 0, 0.5);
+            --engraving: rgba(60, 50, 30, 0.8);
+            --gap: 15px;
+            --bg-color: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--engraving);
+            font-family: 'Cinzel', serif;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 60px 20px;
+            perspective: 2000px;
+        }
+
+        /* The Stone Texture Overlay */
+        .stone-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+            background-image: url('sandstone_texture_1776076573346.png'); /* Using generated texture */
+            background-size: 800px;
+            background-repeat: repeat;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            transform-style: preserve-3d;
+        }
+
+        .wall-wrapper {
+            transform-style: preserve-3d;
+            width: 100%;
+        }
+
+        .wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-auto-rows: 240px;
+            grid-auto-flow: dense;
+            gap: var(--gap);
+            width: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .stone-block {
+            position: relative;
+            background-color: var(--stone-base);
+            /* Complex background for realistic stone */
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--stone-light) 0%, transparent 50%, var(--stone-dark) 100%);
+            background-size: cover;
+            border-radius: 2px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 
+                inset 1px 1px 3px var(--stone-light),
+                inset -1px -1px 3px var(--stone-shadow),
+                0 15px 35px rgba(0,0,0,0.6);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            border: 1px solid rgba(0,0,0,0.15);
+        }
+
+        /* Beveled Edges */
+        .stone-block::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+
+        /* Grid Variations for Masonry Look */
+        .block--large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+        .block--wide {
+            grid-column: span 2;
+        }
+        .block--tall {
+            grid-row: span 2;
+        }
+
+        .stone-block h2 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--engraving);
+            /* The "Inner-Carved" Engraving Effect */
+            text-shadow: 
+                -1px -1px 1px rgba(0,0,0,0.7), 
+                1px 1px 1px rgba(255,255,255,0.4);
+        }
+
+        .stone-block p {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 300;
+            color: var(--engraving);
+            text-shadow: 
+                -0.5px -0.5px 0.5px rgba(0,0,0,0.4), 
+                0.5px 0.5px 0.5px rgba(255,255,255,0.2);
+            opacity: 0.9;
+        }
+
+        .stone-block strong {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            opacity: 0.7;
+            text-transform: uppercase;
+        }
+
+        /* Header block */
+        .header-block {
+            background-color: #a69666;
+            grid-column: 1 / -1;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+            transform: translateZ(30px);
+        }
+
+        .header-block h1 {
+            font-size: 3.5rem;
+            letter-spacing: 12px;
+            color: var(--engraving);
+            text-shadow: 
+                -2px -2px 2px rgba(0,0,0,0.8), 
+                2px 2px 2px rgba(255,255,255,0.5);
+        }
+
+        /* Hover Effect Deepening */
+        .stone-block:hover {
+            /* Shadow deepening is handled via GSAP for smoothness */
+        }
+
+        /* Selection removal */
+        ::selection {
+            background: rgba(0,0,0,0.2);
+            color: inherit;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 900px) {
+            .wall {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 600px) {
+            .wall {
+                grid-template-columns: 1fr;
+                grid-auto-rows: auto;
+            }
+            .block--large, .block--wide, .block--tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+            .header-block {
+                height: 120px;
+            }
+            .header-block h1 {
+                font-size: 1.5rem;
+                letter-spacing: 5px;
+            }
+            .stone-block {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stone-texture"></div>
+
+    <div class="container">
+        <div class="wall-wrapper" id="wallWrapper">
+            
+            <div class="header-block stone-block">
+                <h1>TRIBUTE WALL</h1>
+            </div>
+
+            <main class="wall" id="tributeWall">
+                <!-- Batch Members -->
+                <article class="stone-block block--large">
+                    <h2>Pureesh Shah</h2>
+                    <p>"A heart of gold; the most caring soul our batch ever knew."</p>
+                </article>
+
+                <article class="stone-block">
+                    <h2>Gaurav Tiwari</h2>
+                    <p>"A true friend whose kindness was a comfort to us all."</p>
+                </article>
+
+                <article class="stone-block block--wide">
+                    <strong>Principal</strong>
+                    <h2>Sir Dinkar Singh</h2>
+                    <p>"The captain of our ship who steered us toward our future."</p>
+                </article>
+
+                <article class="stone-block">
+                    <h2>Abhishek Goel</h2>
+                    <p>"The spark of the room; your playful spirit is missed every day."</p>
+                </article>
+
+                <article class="stone-block block--tall">
+                    <strong>Vice Principal</strong>
+                    <h2>Sir Ram Das Pawar</h2>
+                    <p>"A steady hand and a firm foundation for Batch 2001."</p>
+                </article>
+
+                <article class="stone-block">
+                    <h2>Sharad Agarwal</h2>
+                    <p>"From the very first class to the very last breath—forever a brother."</p>
+                </article>
+
+                <article class="stone-block">
+                    <h2>Markose Thomas</h2>
+                    <p>"A brilliant mind and a beautiful soul, gone far too soon."</p>
+                </article>
+
+                <article class="stone-block">
+                    <h2>Faiza</h2>
+                    <p>"A steady light in our school memories."</p>
+                </article>
+
+                <article class="stone-block block--wide">
+                    <strong>Music Teacher</strong>
+                    <h2>Sir Rajkumar</h2>
+                    <p>"The melody of our school days lives on in your honor."</p>
+                </article>
+
+                <article class="stone-block">
+                    <h2>Ankita</h2>
+                    <p>"Forever remembered with love and grace."</p>
+                </article>
+
+                <article class="stone-block">
+                    <strong>Geography</strong>
+                    <h2>Sir JP Mishra</h2>
+                    <p>"You showed us the world; today, you are our North Star."</p>
+                </article>
+
+                <article class="stone-block block--large">
+                    <strong>Hindi Teacher</strong>
+                    <h2>Sir MC Gupta</h2>
+                    <p>"Words fail to describe the depth of your impact on each of us."</p>
+                </article>
+
+                <article class="stone-block">
+                    <strong>Guitar</strong>
+                    <h2>Sir Danny Silas</h2>
+                    <p>"Every chord we hear reminds us of your gentle spirit."</p>
+                </article>
+
+                <article class="stone-block">
+                    <strong>Musical Head</strong>
+                    <h2>Sir Chatterjee</h2>
+                    <p>"The maestro of our memories; your rhythm stays with us."</p>
+                </article>
+
+                <article class="stone-block block--wide">
+                    <strong>English Teacher</strong>
+                    <h2>Ma'am Minoti Guha</h2>
+                    <p>"You taught us the beauty of language and the grace of life itself."</p>
+                </article>
+
+                <article class="stone-block">
+                    <strong>Biology</strong>
+                    <h2>Sir P.C. Agarwal</h2>
+                    <p>"A mentor who taught us the wonder of life."</p>
+                </article>
+
+                <article class="stone-block">
+                    <strong>Art & Craft</strong>
+                    <h2>Sir Nanak Verma</h2>
+                    <p>"You added the color to our childhood canvases."</p>
+                </article>
+
+                <article class="stone-block">
+                    <strong>Class Teacher</strong>
+                    <h2>Ma'am Aloma Das</h2>
+                    <p>"For the warmth and care that started our journey."</p>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const wallWrapper = document.getElementById('wallWrapper');
+            const blocks = document.querySelectorAll('.stone-block');
+
+            // Set initial 3D state
+            gsap.set(wallWrapper, { transformPerspective: 2000 });
+
+            // 1. Entrance Animation: Pieces "assembling" from distance
+            gsap.from(blocks, {
+                opacity: 0,
+                scale: 0.5,
+                z: -1000,
+                y: 200,
+                rotationX: 30,
+                stagger: {
+                    amount: 2,
+                    from: "random"
+                },
+                duration: 2.5,
+                ease: "power4.out"
+            });
+
+            // 2. 3D Parallax Wall Tracking
+            window.addEventListener('mousemove', (e) => {
+                const xPos = (e.clientX / window.innerWidth) - 0.5;
+                const yPos = (e.clientY / window.innerHeight) - 0.5;
+
+                gsap.to(wallWrapper, {
+                    rotationY: xPos * 12, // Tilt up to 12 degrees
+                    rotationX: -yPos * 12,
+                    duration: 1.2,
+                    ease: "power2.out"
+                });
+            });
+
+            // 3. Plaque Interaction: Hover "Lift"
+            blocks.forEach(block => {
+                block.addEventListener('mouseenter', () => {
+                    gsap.to(block, {
+                        z: 60,
+                        scale: 1.05,
+                        boxShadow: "0 40px 100px rgba(0,0,0,0.8)",
+                        duration: 0.5,
+                        ease: "power3.out"
+                    });
+                });
+
+                block.addEventListener('mouseleave', () => {
+                    gsap.to(block, {
+                        z: 0,
+                        scale: 1,
+                        boxShadow: "inset 1px 1px 3px var(--stone-light), inset -1px -1px 3px var(--stone-shadow), 0 15px 35px rgba(0,0,0,0.6)",
+                        duration: 0.5,
+                        ease: "power3.inOut"
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
