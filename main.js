@@ -258,7 +258,6 @@ document.addEventListener("DOMContentLoaded", () => {
       deadlineMsg.style.textAlign = "center";
       deadlineMsg.style.marginTop = "20px";
       deadlineMsg.style.fontWeight = "bold";
-      deadlineMsg.textContent = "Registration is now closed.";
       contactForm.prepend(deadlineMsg);
     }
   }
