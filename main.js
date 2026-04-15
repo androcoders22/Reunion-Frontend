@@ -107,16 +107,30 @@ overlay.addEventListener("click", (e) => {
 //------------------------------------
 
 function openPopPhoto(imgSrc) {
-  document.getElementById("popup-photo-img").src = imgSrc;
-  document.getElementById("popup-photo").style.display = "flex";
+  const popup = document.getElementById("popup-photo");
+  const popupImage = document.getElementById("popup-photo-img");
+  const closeButton = document.getElementById("popup-photo-close");
+
+  if (!popup || !popupImage) return;
+
+  popupImage.src = imgSrc;
+  popup.style.display = "flex";
 
   function closePopup() {
-    document.getElementById("popup-photo").style.display = "none";
+    popup.style.display = "none";
   }
 
-  document.getElementById("popup-photo").addEventListener("click", (e) => {
-    if (e.target.id === "popup-photo") closePopup();
-  });
+  if (closeButton) {
+    closeButton.addEventListener("click", closePopup, { once: true });
+  }
+
+  popup.addEventListener(
+    "click",
+    (e) => {
+      if (e.target === popup) closePopup();
+    },
+    { once: true },
+  );
 }
 
 // ---------------------------
@@ -124,10 +138,12 @@ function openPopPhoto(imgSrc) {
 //--------------------------
 const button = document.getElementById("downloadBtn");
 
-button.addEventListener("click", () => {
-  // show loader
-  button.classList.add("loading");
-});
+if (button) {
+  button.addEventListener("click", () => {
+    // show loader
+    button.classList.add("loading");
+  });
+}
 
 //----------------------------------------------
 //      Change No. of People Compilation
@@ -159,16 +175,18 @@ const panToast = document.getElementById("panToast");
 
 let pantoastTimer = null;
 
-infoBtn.addEventListener("click", () => {
-  // Show the toast
-  panToast.classList.add("show");
+if (infoBtn && panToast) {
+  infoBtn.addEventListener("click", () => {
+    // Show the toast
+    panToast.classList.add("show");
 
-  if (pantoastTimer) clearTimeout(pantoastTimer);
+    if (pantoastTimer) clearTimeout(pantoastTimer);
 
-  pantoastTimer = setTimeout(() => {
-    panToast.classList.remove("show");
-  }, 5000);
-});
+    pantoastTimer = setTimeout(() => {
+      panToast.classList.remove("show");
+    }, 5000);
+  });
+}
 
 //----------------------------------------
 //       Donation Pop Up open
@@ -622,6 +640,18 @@ const mobileMenu = document.getElementById("mobile-menu");
 const closeMenuBtn = document.getElementById("close-menu");
 const mobileLinks = document.querySelectorAll(".mobile-link");
 
+function initLucideIcons() {
+  if (window.lucide && typeof window.lucide.createIcons === "function") {
+    window.lucide.createIcons();
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initLucideIcons, { once: true });
+} else {
+  initLucideIcons();
+}
+
 function toggleMenu() {
   const open = mobileMenu.classList.contains("open");
   if (!open) {
@@ -644,30 +674,33 @@ const form = document.getElementById("contactForm");
 const toast = document.getElementById("toast");
 
 //COntact form whatsapp send
+const contactBtn = document.getElementById("contact-btn");
 
-document.getElementById("contact-btn").addEventListener("click", function (e) {
-  e.preventDefault();
+if (contactBtn) {
+  contactBtn.addEventListener("click", function (e) {
+    e.preventDefault();
 
-  const name = document.getElementById("contact-name").value;
-  const phone = document.getElementById("contact-phone").value;
-  const email = document.getElementById("contact-email").value;
-  const message = document.getElementById("contact-text").value;
+    const name = document.getElementById("contact-name").value;
+    const phone = document.getElementById("contact-phone").value;
+    const email = document.getElementById("contact-email").value;
+    const message = document.getElementById("contact-text").value;
 
-  const whatsappNumber = "916388505758"; // with country code
+    const whatsappNumber = "916388505758"; // with country code
 
-  const text = `
+    const text = `
 Name: ${name}
 Phone: ${phone}
 email: ${email}
 message: ${message}
   `;
 
-  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    text,
-  )}`;
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      text,
+    )}`;
 
-  window.open(url, "_blank");
-});
+    window.open(url, "_blank");
+  });
+}
 
 // Stop Music Logic
 
@@ -675,16 +708,18 @@ const music = document.getElementById("music");
 const noMusic = document.getElementsByClassName("stop-music");
 const audio = document.getElementById("bgMusic");
 
-audio.volume = 0.01;
-let checkMusic;
-music.addEventListener("click", () => {
-  if (!checkMusic) {
-    noMusic[0].style.display = "block";
-    audio.pause();
-    checkMusic = true;
-  } else {
-    noMusic[0].style.display = "none";
-    audio.play();
-    checkMusic = false;
-  }
-});
+if (music && audio && noMusic.length > 0) {
+  audio.volume = 0.01;
+  let checkMusic;
+  music.addEventListener("click", () => {
+    if (!checkMusic) {
+      noMusic[0].style.display = "block";
+      audio.pause();
+      checkMusic = true;
+    } else {
+      noMusic[0].style.display = "none";
+      audio.play();
+      checkMusic = false;
+    }
+  });
+}

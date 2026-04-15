@@ -141,13 +141,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 function openPopPhoto(imageUrl) {
   const popup = document.getElementById('popup-photo');
   const img = document.getElementById('popup-photo-img');
+  const closeButton = document.getElementById('popup-photo-close');
   if (!popup || !img) return;
 
   img.src = imageUrl;
   popup.style.display = 'flex';
 
+  if (closeButton) {
+    closeButton.onclick = () => {
+      popup.style.display = 'none';
+    };
+  }
+
   popup.onclick = (e) => {
-    if (e.target.id === 'popup-photo') {
+    if (e.target === popup) {
       popup.style.display = 'none';
     }
   };
