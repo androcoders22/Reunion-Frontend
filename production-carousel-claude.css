@@ -285,19 +285,30 @@
 
     .production-wrapper {
         width: 100%;
-        padding: 10px 60px;
+        padding: 10px 12px;
         gap: 10px;
     }
 
     .production-container {
-        padding: 20px 10px;
+        width: 100%;
+        padding: 18px 0 10px;
     }
 
     .production-carousel-card {
-        height: 350px;
-        width: calc(100vw - 48px);
-        min-width: 330px;
-        max-width: 600px;
+        width: min(calc(100vw - 18px), 350px);
+        min-width: 0;
+        height: 68vw;
+        max-height: 380px;
+        max-width: 350px;
+    }
+
+    .production-carousel-card.is-active {
+        transform: translateY(-6px) scale(1.06);
+    }
+
+    .production-carousel-card.is-background {
+        transform: scale(0.94);
+        opacity: 0.34;
     }
 
     .production-container h1 {
@@ -326,14 +337,18 @@
 /* Very small mobile screens (390px and below) */
 @media (max-width: 400px) {
     .production-wrapper {
-        padding: 10px 45px;
+        padding: 10px 10px;
     }
 
     .production-carousel-card {
-        height: 320px;
-        width: calc(100vw - 40px);
-        min-width: 300px;
-        max-width: 500px;
+        width: min(calc(100vw - 14px), 330px);
+        height: 70vw;
+        max-height: 360px;
+        max-width: 330px;
+    }
+
+    .production-carousel-card.is-active {
+        transform: translateY(-4px) scale(1.03);
     }
 
     .production-container h1 {
@@ -361,14 +376,19 @@
 /* Extra small screens (360px and below) */
 @media (max-width: 360px) {
     .production-wrapper {
-        padding: 10px 40px;
+        padding: 10px 8px;
     }
 
     .production-carousel-card {
-        height: 300px;
-        width: calc(100vw - 34px);
-        min-width: 270px;
-        max-width: 420px;
+        width: calc(100vw - 12px);
+        min-width: 0;
+        height: 72vw;
+        max-height: 340px;
+        max-width: 310px;
+    }
+
+    .production-carousel-card.is-active {
+        transform: translateY(-3px) scale(1.02);
     }
 
     .production-container h1 {
